@@ -2,7 +2,7 @@ var currentPage = '#page5'
 
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
-    console.log('P5 setup kaldt')
+    console.log('P5 setup kaldt inshallah')
     //Sæt event listeners op på menu
     select('#menu-side1').mousePressed(
         function(){
