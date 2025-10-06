@@ -4,9 +4,14 @@ var currentPage = '#page5'
 function setup(){
     console.log('P5 setup kaldt inshallah')
     //Sæt event listeners op på menu
-    select('#menu-side1').mousePressed(
-        function(){
-            shiftPage('#page1')
+    var allMenuItems = selectAll('.sidebar a')
+    allMenuItems.map( 
+        function(item){
+            item.mousePressed(
+                function(){
+                    shiftPage(item.attribute('action'))
+                }
+            )
         }
     )
 }
