@@ -3,18 +3,28 @@ var currentPage = '#page5'
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
     console.log('P5 setup kaldt inshallah')
-    //Sæt event listeners op på menu
-    var allMenuItems = selectAll('.sidebar a')
-    allMenuItems.map( 
-        function(item){
-            item.mousePressed(
-                function(){
-                    shiftPage(item.attribute('action'))
-                }
-            )
-        }
+    //Sæt menu op
+    //Hent alle sider som et array
+    var allPages = selectAll('.page')
+    //Løb listen igennem en for en 
+    allPages.map(
+       page => {
+        //Lav et nyt <a> element 
+        var menuItem = createElement('a')
+        //Sæt a taggets html til sidens titel
+        menuItem.html(page.attribute('title'))
+        //sæt eventlistener på a tagget
+        menuItem.mousePressed(
+            () => shiftPage('#' + page.attribute('id'))
+        )
+        //sæt a tagget ind i sidebaren
+        select('.sidebar').child(menuItem)
+       }
     )
+
 }
+
+Some line
 
 
 function shiftPage(newPage){
