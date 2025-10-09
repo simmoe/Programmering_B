@@ -77,12 +77,11 @@ body,
 .page {
     width: 100vw;
     height: 100vh;
-    border: 1px solid lawngreen;
     overflow: hidden;
     /* grid layout */
     display: grid;
     place-items: center;
-    /* position fixed shows class enter */
+    /* vises først med klasen "show" */
     position: fixed;
     left: -100vw;
     transition: all .6s ease-in-out;
@@ -99,6 +98,14 @@ body,
     display: grid;
     place-items: center;
 
+}
+
+.page div.box{
+    width:60%;
+    height:60%;
+    padding:4rem;
+    border:1px solid lightskyblue;
+    place-items: center start;
 }
 
 h1 {
@@ -119,7 +126,7 @@ h1 {
 
 #page2 .bottom {
     background-color: green;
-    background-image: url(./assets/fjord.jpeg.jpg);
+    background-image: url(./assets/skies.jpg);
     background-size: cover;
 }
 
@@ -145,7 +152,7 @@ h1 {
 }
 
 #page3 .right .box .bottom {
-    background-image: url(./assets/fjord.jpeg.jpg);
+    background-image: url(./assets/skies.jpg);
 
 }
 

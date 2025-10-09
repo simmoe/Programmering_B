@@ -1,4 +1,4 @@
-var currentPage = '#page5'
+var currentPage = '#page1'
 
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
@@ -23,9 +23,6 @@ function setup(){
     )
 
 }
-
-Some line
-
 
 function shiftPage(newPage){
     select(currentPage).removeClass('show')
