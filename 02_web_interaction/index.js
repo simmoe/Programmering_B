@@ -1,4 +1,4 @@
-var currentPage = '#page2'
+var currentPage = '#page5'
 
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
@@ -16,6 +16,15 @@ function setup(){
         }else{
             theButton.html('I am not sure who I am')
         }
+    })
+
+    //P5 button
+    var myButton = createButton('Button created with javascript')
+    //Læg den ind i side 5
+    select('#page5').child(myButton)
+    //Lav en event listener
+    myButton.mousePressed(()=>{
+        shiftPage('#page1')
     })
 
     //Drop Downs 
