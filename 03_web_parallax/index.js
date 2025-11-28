@@ -38,7 +38,17 @@ function shiftPage(newPage){
     currentPage = newPage
 }
 
-document.addEventListener('mousemove', (e)=>{
+function mouseMoved(){
+    //P5 giver os variabler om musen og vinduet: 
+    //console.log('P5 mus: ', mouseX, mouseY, windowWidth, windowHeight)
+    //selectAll vælger alle elementer med en klasse - .map() looper igennem dem
+    selectAll('.parallaxMouse').map( div => {
+        const speed = div.attribute('data-speed')
+        div.style('transform', `translate(${(mouseX - windowWidth/2) * speed }px, ${(mouseY - windowHeight/2) * speed}px)`)
+    })
+}
+
+/*document.addEventListener('mousemove', (e)=>{
     mouseX = e.clientX
     mouseY = e.clientY
     //console.log(mouseX, mouseY)
@@ -47,7 +57,8 @@ document.addEventListener('mousemove', (e)=>{
     var screenHeight = window.innerHeight
 
     document.querySelectorAll('.parallaxMouse').forEach( (elem) => {
-        elem.style.transform = `translate(${mouseX - screenWidth/2}px, ${mouseY - screenHeight/2}px)`
+        const speed = elem.getAttribute('data-speed')
+        elem.style.transform = `translate(${(mouseX - screenWidth/2) * speed }px, ${(mouseY - screenHeight/2) * speed}px)`
     } )
 
-})
+})*/

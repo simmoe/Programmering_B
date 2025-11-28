@@ -1,5 +1,10 @@
-var currentPage = '#page1'
+var currentPage = '#page2'
 var capture 
+var otterSound
+
+function preload(){
+    otterSound = loadSound('./assets/ottersound.mp3') 
+}
 
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
@@ -11,6 +16,12 @@ function setup(){
     capture = createCapture(VIDEO, {flipped:true})
     capture.size(720,468)
     select('#page1').child(capture)
+
+    //SOUND 
+    select('#otter').mousePressed(()=>{
+        otterSound.play()
+    })
+
     
     //Sæt menu op
     //Hent alle sider som et array
