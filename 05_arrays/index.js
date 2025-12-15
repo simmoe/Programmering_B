@@ -59,7 +59,7 @@ function setup(){
             confirm('Du er blevet til ingenting')
         }else{
             klassen2T.push(listeInput.value())
-            createElever(klassen2T, listeContainer)
+            createList(klassen2T, listeContainer, 'elev')
             listeContainer.elt.scrollTop = listeContainer.elt.scrollHeight
         }
         listeInput.value('')
