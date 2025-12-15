@@ -1,4 +1,5 @@
-var currentPage = '#page1'
+var currentPage = '#page2'
+var listeInput, listeHeader, listeButton, listeContainer
 
 function preload(){
 }
@@ -12,6 +13,7 @@ function setup(){
 
     //Vi opretter et array med firkantede paranteser
     var klassen2T = ["Balder", "Asta", "Viggo", "Bertram", "Tobias", "Selma", "Toke", "Victor"]
+    
 
     //Hvor mange elementer?
     console.log(klassen2T.length, " elementer i listen")
@@ -35,10 +37,32 @@ function setup(){
     console.log(klassen2T, klassen2T.length)
 
     //Sådan looper vi igennem et array:
-    klassen2T.map((hans)=>{
-        console.log('Denne person i klassen hedder ' + hans)
+    klassen2T.map((e)=>{
+        console.log('Denne person i klassen hedder ' + e)
     })
 
+
+    //Page 2 - liste basics 
+    //DOM BINDING 
+    listeButton = select('#listeButton')
+    listeHeader = select('#listeHeader')
+    listeInput = select('#listeInput')
+    listeContainer = select('#listeContainer')
+
+    //der er et input felt en container og en knap til at tilføje nye elemnter på siden 
+    createElever(klassen2T, listeContainer)
+
+    //Sørg for at indsætte Astrid når der trykkes på knappen
+    listeButton.mousePressed( () => {
+        if(listeInput.value() == ''){
+            confirm('Du er blevet til ingenting')
+        }else{
+            klassen2T.push(listeInput.value())
+            createElever(klassen2T, listeContainer)
+            listeContainer.elt.scrollTop = listeContainer.elt.scrollHeight
+        }
+        listeInput.value('')
+    })
     
     //Sæt menu op
     //Hent alle sider som et array
@@ -65,4 +89,15 @@ function shiftPage(newPage){
     select(currentPage).removeClass('show')
     select(newPage).addClass('show')
     currentPage = newPage
+}
+
+//tager to argumenter - hvilken liste den skal gøre noget med og hvor den skal gøre af resultatet
+function createElever(list, dest){
+    //Først søger vi for at der er tomt i containeren 
+    dest.html('')
+    list.map( e => {
+        var div = createDiv(e)
+        div.addClass('elev')
+        dest.child(div)
+    })
 }
