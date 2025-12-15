@@ -1,5 +1,6 @@
-var currentPage = '#page2'
+var currentPage = '#page3'
 var listeInput, listeHeader, listeButton, listeContainer
+var removeListe 
 
 function preload(){
 }
@@ -50,9 +51,9 @@ function setup(){
     listeContainer = select('#listeContainer')
 
     //der er et input felt en container og en knap til at tilføje nye elemnter på siden 
-    createElever(klassen2T, listeContainer)
+    createList(klassen2T, listeContainer, 'elev')
 
-    //Sørg for at indsætte Astrid når der trykkes på knappen
+        //Sørg for at indsætte input value() når der trykkes på knappen
     listeButton.mousePressed( () => {
         if(listeInput.value() == ''){
             confirm('Du er blevet til ingenting')
@@ -63,6 +64,18 @@ function setup(){
         }
         listeInput.value('')
     })
+
+
+    //Page 3 
+    //DOM binding 
+    removeListe = select('#removeListe')
+    //make a list 
+    var elements = ["hest", "dog", "hamster", "php", "cangaroo", "fuck", "subway sandwich", "group rat", "any bird"]
+    //call the geneic function that makes new html elements 
+    createList(elements, removeListe, 'rapeVictim', rape)
+
+
+
     
     //Sæt menu op
     //Hent alle sider som et array
@@ -92,12 +105,24 @@ function shiftPage(newPage){
 }
 
 //tager to argumenter - hvilken liste den skal gøre noget med og hvor den skal gøre af resultatet
-function createElever(list, dest){
+function createList(list, dest, className, action){
     //Først søger vi for at der er tomt i containeren 
     dest.html('')
     list.map( e => {
         var div = createDiv(e)
-        div.addClass('elev')
+        div.addClass(className)
+        //Hvis der er en action i argrumenterne - så gør noget
+        if(action){
+            div.mousePressed(() => { 
+                action(div)
+            })
+        }
         dest.child(div)
+
     })
+}
+
+function rape(who){
+    console.log('Rape was called - Sebastians fault', who)
+    who.style('background-image', `url("./assets/consent.jpg")`)
 }

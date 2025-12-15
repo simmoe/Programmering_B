@@ -111,7 +111,7 @@ h1 {
     grid-template-rows: 1fr 1fr 8fr;
 }
 
-#listeContainer{
+.page .container{
     width:60vw;
     height:40vh;
     border:1px solid lightblue;
@@ -121,13 +121,19 @@ h1 {
     scroll-behavior: smooth;
 }
 
-.elev{
+.elev, .rapeVictim{
     min-width:300px;
     min-height:300px;
     border:1px solid lightblue;
     display:grid;
     place-items:center;
     transition: .8s ease-in-out all;
+    background-size:cover;
+}
+
+
+.rapeVictim:hover{
+
 }
 .elev:hover{
     transform:scale(0.8);
