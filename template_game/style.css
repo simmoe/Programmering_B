@@ -4,6 +4,7 @@ body{
     padding:0;
     margin:0;
     background-color: black;
+    color:white;
 }
 
 #game-container{
@@ -21,7 +22,10 @@ body{
 
 .asta{
     position:absolute;
-    top:50px;
-    left:50px;
     width:50px;
+}
+
+.stats{
+    position:absolute;
+    left:0;
 }
