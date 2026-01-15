@@ -13,6 +13,22 @@ var images = [
 function setup(){
     noCanvas() // Vi bruger HTML elementer, så vi behøver ikke et canvas   
     shiftPage(currentPage) // Skift til startsiden
+    select('#startGame').mousePressed(()=>{
+        setupGame()
+    })
+}
+
+function setupGame(){
+    //Lad os blande kortene
+    images = shuffle(images)
+    //console.log(images)
+    images.map( i => {
+        //DOM binding til spil containeren
+        var container = select('#gameContainer')
+        //Opret spillekort div, læg ddem ind i game containeren og put et billede ind i div'erne
+        var card = createElement('div').addClass('card').attribute('img-source', i).parent(container).child(createImg(i))
+    } )
+    shiftPage('#page2')
 }
 
 // Funktion til at skifte mellem sider (skjuler den gamle, viser den nye)
