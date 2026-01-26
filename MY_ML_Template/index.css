@@ -1,0 +1,59 @@
+/* Global styling */
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h3 {
+    margin-top: 0;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    color: #333;
+}
+
+/* SEKTION 1: Data Tabel Styling */
+#data-container {
+    height: 200px; /* Fast højde */
+    overflow-y: scroll; /* Gør det muligt at scrolle */
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f8f8f8;
+    position: sticky;
+    top: 0;
+}
+
+/* SEKTION 2: Controls styling */
+.controls {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* SEKTION 3: Canvas styling */
+#canvas-container {
+    display: flex;
+    justify-content: center;
+}
