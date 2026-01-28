@@ -12,11 +12,23 @@
 
 <body>
 
+    <div class="top-container">
     <!-- SEKTION 1: DATA TABEL -->
     <section id="section-data">
         <h3>1. Rå Data (Old Faithful Geyser)</h3>
         <div id="data-container">
-            <!-- Tabellen bliver indsat her af Javascript -->
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Eruptions (min)</th>
+                        <th>Waiting (min)</th>
+                    </tr>
+                </thead>
+                <tbody id="data-tbody">
+                    <!-- Data rows inserted by JS -->
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -38,16 +50,18 @@
             
             <button id="run-btn">Kør Clustering</button>
         </div>
+    </div>
     </section>
 
     <!-- SEKTION 3: VISUALISERING -->
     <section id="section-viz">
         <h3>3. Resultat</h3>
         <div id="canvas-container">
-            <!-- Grafen bliver indsat her af p5.js -->
         </div>
+        <!-- Info boksen ligger fast her -->
+        <div id="info-box">Hold musen over et punkt...</div>
     </section>
-
+    
     <script src="./index.js"></script>
 </body>
 
