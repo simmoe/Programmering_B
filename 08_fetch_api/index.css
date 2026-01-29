@@ -92,3 +92,25 @@ body,
     left: 0;
 }
 
+#page1{
+    grid-template-columns: 1fr 1fr;
+}
+
+#player, #dealer{
+    width:80%;
+    height:80%;
+    position:relative;
+    display:grid;
+    justify-items:center;
+}
+
+.cards{
+    height:40vh;
+    width:80%;
+    background:lightgray;
+    position:relative;
+}
+
+.cards img{
+    position:absolute;
+}
