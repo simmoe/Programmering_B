@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web template with p5.js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+</head>
+
+<body>
+
+    <div class="top-container">
+    <!-- SEKTION 1: DATA TABEL -->
+    <section id="section-data">
+        <h3>1. Træningsdata (Pingviner)</h3>
+        <p>Her er et eksempel på de pingviner algoritmen allerede kender "svaret" på.</p>
+        <div id="data-container">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Næb Længde (mm)</th>
+                        <th>Næb Dybde (mm)</th>
+                        <th>Pingvin Art (Label)</th>
+                    </tr>
+                </thead>
+                <tbody id="data-tbody">
+                    <!-- Data rows inserted by JS -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SEKTION 2: KONFIGURATION & TEST -->
+    <section id="section-config">
+        <h3>2. Test en ukendt pingvin</h3>
+        <p>Indtast mål på en pingvin og lad maskinen gætte arten.</p>
+        
+        <div class="controls">
+            <!-- INPUT TIL NY PINGVIN -->
+            <label>
+                Ny Næb Længde (X): <span id="val-x">45</span> mm
+                <br>
+                <input type="range" id="input-x" min="30" max="60" value="45" step="0.1">
+            </label>
+            
+            <label>
+                Ny Næb Dybde (Y): <span id="val-y">15</span> mm
+                <br>
+                <input type="range" id="input-y" min="10" max="25" value="15" step="0.1">
+            </label>
+
+            <!-- INDSTILLINGER FOR K -->
+            <hr>
+            <label>
+                Antal Naboer (k): <span id="k-value">3</span>
+                <br>
+                <input type="range" id="k-slider" min="1" max="15" value="3" step="2">
+                <small>Vælg gerne et ulige tal for at undgå stemmelighed.</small>
+            </label>
+            
+            <button id="predict-btn" class="button-primary">GÆT ART</button>
+
+            <!-- RESULTAT -->
+            <div id="result-box" style="margin-top: 20px; padding: 10px; border: 2px solid #333; background: #eee; text-align: center;">
+                <h4>Resultat: <span id="prediction-text">?</span></h4>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- SEKTION 3: VISUALISERING -->
+    <section id="section-viz">
+        <h3>3. Resultat</h3>
+        <div id="canvas-container">
+        </div>
+        <!-- Info boksen ligger fast her -->
+        <div id="info-box">Hold musen over et punkt...</div>
+    </section>
+    
+    <script src="./index.js"></script>
+</body>
+
+</html>
