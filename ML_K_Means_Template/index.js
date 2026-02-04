@@ -1,5 +1,5 @@
 /*
- * MACHINE LEARNING: K-MEANS CLUSTERING (SVG VERSION)
+ * MACHINE LEARNING: K-MEANS CLUSTERING 
  * 
  * Dette eksempel viser hvordan K-means algoritmen virker uden brug af p5.js canvas.
  * Vi bruger almindelig HTML og SVG til at tegne resultatet.
@@ -27,16 +27,14 @@ function preload() {
     tbl = loadTable(url, 'csv', 'header');
 }
 
-function windowResized() {
-    // Ændre canvas størrelse når vinduet ændres
-    resizeCanvas(windowWidth - 40, 400); 
-    runKmeans(); // Kør algoritmen igen for at opdatere positioner
-}
-
 function setup() {
     // 1. OPRET P5 CANVAS
-    // Vi laver det ligeså stort som vinduet, men trækker lidt fra til margen
-    let canvas = createCanvas(windowWidth - 40, 400); 
+    // Vi finder størrelsen på containeren, som styres af CSS Grid layoutet
+    let container = select('#canvas-container');
+    let w = container.width;
+    let h = container.height;
+
+    let canvas = createCanvas(w, h); 
     canvas.parent('canvas-container');
 
     // VÆLG KOLONNER AUTOMATISK (Vigtig ændring!)
@@ -56,27 +54,14 @@ function setup() {
         };
     });
 
-    // 3. GENERER HTML DATA TABEL
-    generateDataTable();
+    // 3. LOG DATA EKSEMPEL
+    console.log("Eksempel på datapunkt:", geyserData[0]);
 
     // 4. FORBIND KONTROLKNAPPER
     setupControls();
 
     // 5. KØR
     runKmeans();
-}
-
-function generateDataTable() {
-    let tbody = select('#data-tbody');
-    tbody.html(''); // Ryd evt. gammelt indhold
-
-    geyserData.map((p, i) => {
-        let tr = createElement('tr');
-        tr.parent(tbody);
-        createElement('td', String(i + 1)).parent(tr);
-        createElement('td', String(p.duration)).parent(tr);
-        createElement('td', String(p.waiting)).parent(tr);
-    });
 }
 
 function setupControls() {
@@ -265,17 +250,36 @@ function drawToCanvas() {
     let container = select('#canvas-container');
     let infoBox = select('#info-box');
 
-    container.html("")
-    clear()
+    // Ryd divs (men ikke canvas)
+    // Bemærk: removeElements() sletter alle p5 elementer, så vi skal passe på.
+    // Vi sletter kun dem med klassen 'dot' eller 'centroid'.
+    let dots = selectAll('.dot');
+    dots.map(d => d.remove());
+    let ctrs = selectAll('.centroid');
+    ctrs.map(c => c.remove());
 
     // 2. Tegn akser på canvas (baggrund)
     background(255); 
-    drawAxes(); 
+
+    // OPRET LOKALT KOORDINATSYSTEM
+    // PÆDAGOGISK NOTE:
+    // push() gemmer de nuværende indstillinger (f.eks. hvor (0,0) er).
+    // translate(x, y) flytter startpunktet (0,0) ind på skærmen, så vi har 'padding' i kanten.
+    // pop() gendanner indstillingerne, så de ikke påvirker resten af koden.
+    push();
+    translate(padding, padding);
+
+    // Beregn grafens indre bredde og højde
+    let w = width - (padding * 2);
+    let h = height - (padding * 2);
+
+    drawAxes(dataRanges, w, h); 
+    pop();
 
     // ---------------------------------------------------------
     // TRIN F: GENERER ANALYSE OG STATISTIK
     // Vi bygger en HTML-streng der opsummerer hvad modellen har fundet
-    let statsHTML = `<strong>📊 Model Analyse (${k} grupper)</strong><br><br>`;
+    let statsHTML = '';
     
     centroids.map((c, i) => {
         // Find alle punkter i denne gruppe
@@ -311,8 +315,7 @@ function drawToCanvas() {
             .mouseOver(() => {
                 // Når man peger: Vis detaljer for punktet
                 infoBox.html(`
-                    <strong>📍 Datapunkt Info</strong><br>
-                    Gruppe: ${p.label + 1}<br>
+                    Gruppe: <b>${p.label + 1}</b><br>
                     Varighed: ${p.duration} min<br>
                     Ventetid: ${p.waiting} min
                 `);
@@ -342,41 +345,32 @@ function drawToCanvas() {
     });
 }
 
-function drawAxes() {
-    let { minD, maxD, minW, maxW } = dataRanges;
+function drawAxes(ranges, w, h) {
+    let { minD, maxD, minW, maxW } = ranges;
     
     stroke(0);
+    // X-akse
+    line(0, h, w, h);
+    // Y-akse
+    line(0, h, 0, 0);
+    
     fill(0);
-    textSize(10);
-    
-    // X-akse (Varighed)
-    line(padding, height - padding, width - padding, height - padding);
+    noStroke();
     textAlign(CENTER);
-    text(dataX, width / 2, height - 5);
     
-    // Y-akse (Ventetid)
-    line(padding, height - padding, padding, padding);
+    text(`${dataX} (${minD.toFixed(1)} - ${maxD.toFixed(1)})`, w / 2, h + 30);
+    
     push();
-    translate(15, height / 2);
+    translate(-30, h / 2);
     rotate(-HALF_PI);
-    textAlign(CENTER);
-    text(dataY, 0, 0);
+    text(`${dataY} (${minW.toFixed(1)} - ${maxW.toFixed(1)})`, 0, 0);
     pop();
+}
 
-    // Tegn 5 "ticks" på hver akse
-    for(let i = 0; i <= 5; i++) {
-        // X-akse ticks
-        let xVal = lerp(minD, maxD, i/5);
-        let xPos = map(xVal, minD, maxD, padding, width - padding);
-        line(xPos, height - padding, xPos, height - padding + 5);
-        text(xVal.toFixed(1), xPos, height - padding + 20);
-        
-        // Y-akse ticks
-        let yVal = lerp(minW, maxW, i/5);
-        let yPos = map(yVal, minW, maxW, height - padding, padding);
-        line(padding, yPos, padding - 5, yPos);
-        textAlign(RIGHT, CENTER);
-        text(yVal.toFixed(0), padding - 8, yPos);
-        textAlign(CENTER); // Nulstil til næste loop
-    }
+
+function windowResized() {
+    // Ændre canvas størrelse når vinduet ændres
+    let container = select('#canvas-container');
+    resizeCanvas(container.width, container.height); 
+    runKmeans(); // Kør algoritmen igen for at opdatere positioner
 }
