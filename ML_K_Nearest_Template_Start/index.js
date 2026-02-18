@@ -1,256 +1,103 @@
-/*
- * SUPERVISED LEARNING: K-NEAREST NEIGHBORS (KNN)
- * 
- * Dette eksempel viser hvordan K-Nearest Neighbor algoritmen virker.
- * Vi har et datasæt med kendte pingviner (Træningsdata).
- * Vi skal kunne klassificere en NY ukendt pingvin baseret på de nærmeste naboer.
- */
+// ------------------------------------------------------------------
+// UNDERVISNINGS-MANUSKRIPT: ML & KNN (Chart.js Version)
+// ------------------------------------------------------------------
+// MÅL FOR TIMEN:
+// 1. Indlæse data fra CSV
+// 2. Rense data og konvertere til objekter
+// 3. Visualisere data med Chart.js (Scatter plot)
+// 4. Implementere KNN algoritmen (Afstand, Sortering, Afgørelse)
+// ------------------------------------------------------------------
 
-// GLOBALE VARIABLER
-let tbl            // Data-objektet
-let penguins = []  // Listen af rensede pingvin-data
-let k = 3          // Hvor mange naboer kigger vi på?
-let padding = 40   // Luft rundt om grafen
+// -------------------------------------------------------------
+// TRIN 1: GLOBALE VARIABLER OG INDSTILLINGER
+// (Start her: Vi skal definere hvad vores program skal kunne huske)
+// -------------------------------------------------------------
+var table           // Her gemmer vi den rå CSV fil fra p5's loadTable
+var data = []       // Her gemmer vi vores rensede data (objekter med x, y, label)
+var myChart         // Her gemmer vi selve graf-objektet fra Chart.js
 
-// Globale variabler til aksernes min/max værdier (bliver beregnet ud fra data)
-let minX, maxX, minY, maxY
+// INDSTILLINGER FOR DATA
+var filename = 'assets/work_from_home_burnout_dataset.csv'
+var colX = 'breaks_taken'     // X-aksen: Variabel 1 (input)
+var colY = 'sleep_hours'      // Y-aksen: Variabel 2 (input)
+var colLabel = 'burnout_risk' // Facit: Hvilken gruppe hører man til?
 
-// Farver til de forskellige arter (Adelie, Gentoo, Chinstrap)
-let speciesColors = {
-    'Adelie': 'red',
-    'Gentoo': 'teal',
-    'Chinstrap': 'orange'
-}
+// GUI Overskrifter (Gør det pænt for brugeren)
+var mainTitle = "Burnout Risk Predictor"
+var sectionTitle1 = "1. Indtast dine tal"
+var instructionText = "Angiv antal pauser og søvntimer:"
+var sectionTitle2 = "2. Se Resultat i Grafen"
 
-// DATA INDSTILLINGER
-const url = 'https://vincentarelbundock.github.io/Rdatasets/csv/palmerpenguins/penguins.csv'
-// Vi bruger disse kolonner:
-// X: bill_length_mm (Næb længde)
-// Y: bill_depth_mm (Næb dybde)
-// Label: species (Arten)
-
+// Farver til vores grupper (Labels) - Chart.js bruger disse
+var colorList = ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 'teal']
 
 function preload() {
-    // p5.js loadTable sikrer at filen er hentet FØR setup() kører.
-    // Vi gemmer den i en midlertidig variabel 'tbl'.
-    tbl = loadTable(url, 'csv', 'header')
+    // Indlæs data fil før programmet starter
+    table = loadTable(filename, 'csv', 'header')
 }
 
 function setup() {
-    // 1. OPRET P5 CANVAS
-    // Vi finder størrelsen på containeren, som styres af CSS Grid layoutet
-    let container = select('#canvas-container')
-    let w = container.width
-    let h = container.height 
-    
-    let canvas = createCanvas(w, h) 
-    canvas.parent(container)
+    // 0. SÆT TITLER I HTML
+    select('#main-header').html(mainTitle)
+    select('#section-1-title').html(sectionTitle1)
+    select('#instruction-text').html(instructionText)
+    select('#section-2-title').html(sectionTitle2)
+    select('#label-x').html(colX)
+    select('#label-y').html(colY)
 
-    // 2. FORBEHANDL DATA (Nu er vi sikre på 'tbl' er loaded)
-    // Vi renser data og gemmer det i vores simple 'penguins' liste med objekter 
-    penguins = tbl.rows.map(r => {
-        let x = float(r.get('bill_length_mm'))
-        let y = float(r.get('bill_depth_mm'))
-        let label = r.get('species')
-        return { x, y, label }
-    }).filter(p => !isNaN(p.x) && !isNaN(p.y) && p.label)
-    
-    console.log(`Data processeret. Antal pingviner:`, penguins.length)
+    // -------------------------------------------------------------
+    // TRIN 2: RENS DATA
+    // (Forklar: Vi konverterer tekst-rækker til rigtige Javascript-objekter)
+    // -------------------------------------------------------------
+    var rows = table.rows
+    rows = shuffle(rows).slice(0, 1000) // Vi begrænser til 1000 punkter for hastighedens skyld
 
-    // BEREGN AKSE-VÆRDIER (MIN/MAX) UD FRA DATA
-    // Her bruger vi .map() til at lave en ny liste, der KUN indeholder tallene for x (eller y). Fx [12, 35, 3]
-    // Det er nødvendigt, fordi p5's min() og max() funktioner kun virker på rene talserier, ikke objekter.
-    let xValues = penguins.map(p => p.x)
-    let yValues = penguins.map(p => p.y)
-    minX = min(xValues)
-    maxX = max(xValues)
-    minY = min(yValues)
-    maxY = max(yValues)
-
-    // 3. LOG DATA EKSEMPEL
-    console.log("Eksempel på en pingvin:", penguins[0])
-
-    // 4. FORBIND KONTROLKNAPPER
-    setupControls()
-
-    // 5. TEGN GRAFEN FØRSTE GANG
-    drawToCanvas()
-}
-
-function drawToCanvas() {
-
-    // 2. Tegn akser på canvas (Ligger bagved html-punkterne)
-    
-    // NOTE:
-    // push() gemmer de nuværende indstillinger (f.eks. hvor (0,0) er).
-    // translate(x, y) flytter startpunktet (0,0) ind på skærmen, så vi har 'padding' i kanten.
-    // pop() gendanner indstillingerne, så de ikke påvirker resten af koden.
-    push()
-    translate(padding, padding)
-    
-    let w = width - (padding * 2)
-    let h = height - (padding * 2)
-
-    drawAxes(minX, maxX, minY, maxY, w, h)
-    pop() // Gendan (0,0) til øverste venstre hjørne
-
-    // 4. GENERER HTML-PUNKTER FOR ALLE PINGVINER
-    drawDataPoints()
-}
-
-function drawDataPoints() {
-    let container = select('#canvas-container')
-    let infoBox = select('#info-box')
-
-    penguins.map(p => {
-        // Beregn position i forhold til hele containeren (inkl. padding)
-        let px = map(p.x, minX, maxX, padding, width - padding)
-        let py = map(p.y, minY, maxY, height - padding, padding)
-
-        createDiv('')
-            .parent(container)
-            .class('dot')
-            .style('background-color', speciesColors[p.label])
-            .position(px, py)
-            .mouseOver(() => {
-                infoBox.html(`
-                    Art: <b><span style="color:${speciesColors[p.label]}">${p.label}</span></b><br>
-                    Næb Længde: ${p.x} mm<br>
-                    Næb Dybde: ${p.y} mm
-                `)
-            })
-            .mouseOut(() => {
-                infoBox.html('Hold musen over et punkt...')
-            })
-    })
-}
-
-function drawUserGuess(x, y) {
-    // Fjern evt. tidligere gæt (så vi ikke får flere prikker)
-    selectAll('.user-guess').map(el => el.remove())
-
-    let container = select('#canvas-container')
-    let infoBox = select('#info-box')
-    
-    let px = map(x, minX, maxX, padding, width - padding)
-    let py = map(y, minY, maxY, height - padding, padding)
-
-    createDiv('')
-        .parent(container)
-        .class('user-guess') 
-        .position(px, py)
-        .style('background-color', '#333')
-        .mouseOver(() => {
-            infoBox.html(`
-                <strong>❓ Ukendt Pingvin</strong><br>
-                Dine input værdier:<br>
-                Længde: ${x} mm<br>
-                Dybde: ${y} mm
-            `)
-        })
-}
-
-// -------------------------------------------------------------
-// DEN VIGTIGSTE FUNKTION: KNN ALGORITMEN
-// -------------------------------------------------------------
-function classifyPenguin() {
-    // 1. Hent den nye pingvins data fra input-felterne
-    let inputX = float(select('#input-x').value())
-    let inputY = float(select('#input-y').value())
-
-    // 2. Beregn afstand til ALLE andre pingviner
-    // Vi bruger map til at opdatere hver pingvin med afstanden
-    penguins.map(p => {
-        p.distance = dist(inputX, inputY, p.x, p.y)
-        return p
-    })
-
-    // 3. Sorter pingvinerne, så dem med mindst afstand kommer først
-    penguins.sort((a, b) => a.distance - b.distance)
-
-    // 4. Udvælg de 'k' nærmeste
-    let neighbors = penguins.slice(0, k)
-
-    // 5. Lad naboerne stemme (Tæl forekomster af hver art)
-    let votes = {}
-    neighbors.map(n => {
-        if (!votes[n.label]) votes[n.label] = 0
-        votes[n.label]++
-    })
-
-    // 6. Find vinderen
-    let winnerLabel = ""
-    let maxVotes = 0
-
-    Object.keys(votes).map(label => {
-        if (votes[label] > maxVotes) {
-            maxVotes = votes[label]
-            winnerLabel = label
+    data = rows.map(row => {
+        // Hent værdier fra de kolonner vi valgte i toppen
+        // HUSK: Alt fra CSV er tekst, så vi bruger Number() til tallene
+        var x = Number(row.get(colX))
+        var y = Number(row.get(colY))
+        var label = row.get(colLabel)
+        
+        // Tjek om data er gyldig (ikke NaN og har en label)
+        if (!isNaN(x) && !isNaN(y) && label) {
+            return { x, y, label }
         }
-    })
+    }).filter(p => p) // Fjern tomme pladser i arrayet
 
-    console.log("Naboer:", neighbors)
-    console.log("Stemmer:", votes)
-    console.log("Vinder:", winnerLabel)
+    console.log("Data klar:", data.length, "punkter")
+    console.log(data, "her er det færdige array")
 
-    // 7. Vis resultatet på skærmen
-    let resultSpan = select('#prediction-text')
-    resultSpan.html(winnerLabel)
-    resultSpan.style('color', speciesColors[winnerLabel] || 'black')
+    //Nu skal vi forberede data til at blive vist med chart.js 
+    //Vi skal have fat i de unikke labels for hver gruppe i data
+    var uniqueLabels = []
+    data.map( point => {
+        //Vi kigger på punktets label. HVIS vi ikke har set det label før., så må det bre et UNIKT NYT ET
+        if(!uniqueLabels.includes(point.label)){
+            uniqueLabels.push(point.label)
+        } 
+    } )
+    console.log('vi kiggede alle punkter igennem og fandt disse labels', uniqueLabels)
+    //Man kunne sortere labels alfabetisk
+    //uniqueLabels.sort()
 
-    // 8. Tegn vores nye gæt (De andre punkter bliver stående)
-    drawUserGuess(inputX, inputY)
+    //Omdan data til grupper ud fra de forskellige labels 
+    var datasets = uniqueLabels.map( (label, index) =>{
+        //Filter funktionen giver os en gruppe med et bestemt label
+        var groupData = data.filter( point => {
+            return point.label == label
+        })
+        var col = colorList[index]
+
+        //returner den FÆRDIGE gruppe med alle datapunkterne for hvert label til DATASETS
+        return {
+            label:label,
+            data: groupData,
+            backgroundColor: col,
+            pointRadius: 5,
+            pointHoverRadius: 8
+        }
+    } )
+    console.log('Så fik vi lavet dataset grupperne', datasets)
 }
 
-// -------------------------------------------------------------
-// HJÆLPE FUNKTIONER (GUI og tegning)
-// -------------------------------------------------------------
-
-function setupControls() {
-    // Opdater tallet ved siden af slideren, når man trækker
-    let xSlider = select('#input-x')
-    xSlider.input(() => select('#val-x').html(xSlider.value()))
-
-    let ySlider = select('#input-y')
-    ySlider.input(() => select('#val-y').html(ySlider.value()))
-
-    let kSlider = select('#k-slider')
-    kSlider.input(() => {
-        k = int(kSlider.value())
-        select('#k-value').html(k)
-    })
-
-    // Knappen der starter klassifikationen
-    select('#predict-btn').mousePressed(classifyPenguin)
-}
-
-function drawAxes(xMin, xMax, yMin, yMax, w, h) {
-    stroke(0)
-    // X-akse (tegnes i bunden af vores 'w' og 'h' område)
-    line(0, h, w, h)
-    // Y-akse
-    line(0, h, 0, 0)
-    
-    fill(0)
-    noStroke()
-    textAlign(CENTER)
-    text(`Næb Længde (${xMin}-${xMax} mm)`, w/2, h + 30)
-    
-    // For at skrive tekst på højkant, skal vi rotere koordinatsystemet
-    push()
-    translate(-30, h/2) // Flyt hen hvor teksten skal stå
-    rotate(-HALF_PI)    // Roter 90 grader mod uret
-    text(`Næb Dybde (${yMin}-${yMax} mm)`, 0, 0)
-    pop()
-}
-
-function windowResized() {
-    let container = select('#canvas-container')
-    // 1. Ryd op (Fjern lærredet og gamle HTML-elementer)
-    background(255)
-    selectAll('.dot').map(el => el.remove())
-    selectAll('.user-guess').map(el => el.remove())
-    resizeCanvas(container.width, container.height) 
-
-    drawToCanvas()
-}
