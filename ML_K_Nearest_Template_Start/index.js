@@ -99,5 +99,21 @@ function setup() {
         }
     } )
     console.log('Så fik vi lavet dataset grupperne', datasets)
+
+    //Vi vil nu oprette grafen med chart.js
+    const canvasChart = document.getElementById('chartCanvas')
+    //Så kommer vi til noget lidt objektorienteret 
+    myChart = new Chart(canvasChart, {
+        //Scatter er et punktdiagram i 2D (x,y)
+        type: 'scatter',
+        data: { datasets:datasets },
+        options:{
+            //scales styrer hvad x og y akserne HEDDER
+            scales:{
+                x:{title:{display:true,text:colX}},
+                y:{title:{display:true,text:colY}}
+            } 
+        }
+    })
 }
 
