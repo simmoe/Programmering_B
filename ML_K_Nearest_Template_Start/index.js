@@ -98,6 +98,18 @@ function setup() {
             pointHoverRadius: 8
         }
     } )
+
+    //Nu indsætter vi et enkelt dataset med brugerens gæt 
+    datasets.push({
+        label: "Dit gæt",
+        data:[],
+        pointStyle:"crossRot",
+        pointRadius: 12,
+        backgroundColor: 'black',
+        borderColor: 'black',
+        borderWidth: 4
+    })
+
     console.log('Så fik vi lavet dataset grupperne', datasets)
 
     //Vi vil nu oprette grafen med chart.js
@@ -115,5 +127,61 @@ function setup() {
             } 
         }
     })
+
+    setupControls()
 }
 
+function setupControls(){
+    //1) Find alle x og y værdierne i data 
+    //2) FORDI vi skal bruge dem til at bestemme hvad de der sliderre skal gå fra og til
+    //Det her betyder map data arrayet og returner alle point.x værdier
+    var xValues = data.map( point => point.x )
+    var yValues = data.map( point => point.y )
+    //Beregn mindste og største værdier 
+    var minX = Math.min(...xValues)
+    var minY = Math.min(...yValues)
+    var maxX = Math.max(...xValues)
+    var maxY = Math.max(...yValues)
+    console.log('her er min og max for alle data', minX, maxX, minY,maxY)
+
+    var xSlider = select("#input-x")
+    var ySlider = select("#input-y")
+
+    xSlider.attribute('min', Math.floor(minX))
+    xSlider.attribute('max', Math.ceil(maxX))
+    
+    xSlider.attribute('step', (maxX - minX) / 100 )
+
+    xSlider.value(minX + maxX / 2)
+    //gør det samme med y slideren 
+    ySlider.attribute('min', Math.floor(minY))
+    ySlider.attribute('max', Math.ceil(maxY))
+    ySlider.attribute('step', (maxY - minY) / 100 )
+    ySlider.value(minY + maxY / 2)
+
+    //input er sliderens "on change" event, altså når man flytter den kaldes input funktionen
+    xSlider.input( () => select('#val-x').html( xSlider.value() ))
+    ySlider.input( () => select('#val-y').html( ySlider.value() ))
+    
+    select('#val-x').html( xSlider.value())
+    select('#val-y').html( ySlider.value() )
+
+
+    //DOM binding til k-slider 
+    var kSlider = select('#k-slider') 
+    kSlider.input( ()=> select('#k-value').html( kSlider.value() ))    
+
+
+    select('#predict-btn').mousePressed(classifyUnknown)
+}
+
+function classifyUnknown(){
+    //Aflæs værdierne fra sliderne og gem dem i to variabler 
+    //Indsæt punktet fra sliderne i grafen
+    //Løb data igennem - altså ALLE datapunkterne - og find hver og ens afstand til vores gæt
+    //Så sorterer vi dem så dem med mindst afstand til gættet kommer først
+    //Spørg de [k] nærmeste hvilken gruppe de hører til 
+    //De stemmer om resultatet og vinderen er fundet 
+    //Vis i resultat feltet hvilken klasse gætte tilhører   
+
+}
