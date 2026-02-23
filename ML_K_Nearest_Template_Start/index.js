@@ -102,7 +102,7 @@ function setup() {
     //Nu indsætter vi et enkelt dataset med brugerens gæt 
     datasets.push({
         label: "Dit gæt",
-        data:[],
+        data:[{x:0, y:0}],
         pointStyle:"crossRot",
         pointRadius: 12,
         backgroundColor: 'black',
@@ -177,11 +177,62 @@ function setupControls(){
 
 function classifyUnknown(){
     //Aflæs værdierne fra sliderne og gem dem i to variabler 
+    var inputX = select('#input-x').value()
+    var inputY = select('#input-y').value()
+
     //Indsæt punktet fra sliderne i grafen
+    var guessDataset = myChart.data.datasets[myChart.data.datasets.length - 1]
+    guessDataset.data = [{x: inputX, y:inputY}]
+    myChart.update()
+
     //Løb data igennem - altså ALLE datapunkterne - og find hver og ens afstand til vores gæt
+    data = data.map( p => {
+        //dist ligger i p5.js og den laver pythagoras for os 
+        p.distance = dist(inputX,inputY, p.x,p.y)
+        return p
+    })
+    //console.log(data)
+
     //Så sorterer vi dem så dem med mindst afstand til gættet kommer først
+    //Sort (a,b) => tag hvert punkt og sammenlign deres distance og sæt den mindste forrest
+    data.sort((a,b) => a.distance - b.distance)
+
+    console.log(data)
     //Spørg de [k] nærmeste hvilken gruppe de hører til 
+    var k = select('#k-slider').value()
+    //neighbours er nu de første k elementer i data arrayet 
+    var neighbours = data.slice(0, k)
+
     //De stemmer om resultatet og vinderen er fundet 
+    //Votes er et tomt objekt 
+    var votes = {}
+    neighbours.map( n => {
+        //Vi kigger nu på hvert punkts label 
+        //Hvis det er et nyt label for os, er vi nødt til lige at sætte dets værdi til nul
+        //Ellers kan vi ikke lægge point til bagefter 
+        if(votes[n.label] === undefined){
+            votes[n.label] = 0
+        }
+        votes[n.label] += 1
+    })
+
+    console.log(votes, 'Her er votes')
+    //Object.keys giver os navnene på nøglerne i et objekt, idette tilfælde er det jo vores labels 
+    var allLabels = Object.keys(votes)
+
+    //Start med bare at sige at vinderen er den første label 
+    var winner = allLabels[0]
+
+    //Løb alle labelsne igennem og se hverm der så virkelig er vinderen 
+    allLabels.map( l => {
+        if(votes[l] > votes[winner]){
+            winner = l
+        }
+    })
+
     //Vis i resultat feltet hvilken klasse gætte tilhører   
 
+    console.log('Og vinderen er', winner)
+
+    select('#winner').html(winner)
 }
