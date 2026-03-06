@@ -34,6 +34,7 @@ var colorList = ['red', 'green', 'blue', 'orange', 'purple', 'cyan', 'magenta', 
 function preload() {
     // Indlæs data fil før programmet starter
     table = loadTable(filename, 'csv', 'header')
+    console.log(table)
 }
 
 function setup() {

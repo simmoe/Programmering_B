@@ -22,6 +22,9 @@ function setup(){
 
     getDeck()
 
+    select('#playerDrawBtn').mousePressed(drawCard)
+    select('#playerStandBtn').mousePressed(drawCard)
+
 
     
     //Sæt menu op
@@ -63,29 +66,73 @@ async function getDeck(){
 }
 
 async function drawCard(){
+
+    if(state == "dealer"){
+
+    }
+
+    if(state == "player"){
+        console.log('Showtime - implementer denne funktion til næste gang vi har programmering')
+    }
+
+
     if(state == "begin"){
         var cardOne = await getOneCard()
+        //Først lægger vi kortetenes værdi oven i spiller variablen (uden hensyn til ES)
         player.cards.push(cardOne)
         var cardTwo = await getOneCard()
         player.cards.push(cardTwo)
+
+        player.total += returnCardValue(cardOne)
+        player.total += returnCardValue(cardTwo)
+
+        //Nu er vi en situation hvor spillere faktisk kunne have vundet, kunne have 22 (to es'er), eller bare har fået et eller andet tal under 21 
+        if(player.total == 22){
+            player.total = 12
+        }
+
+
         //Dealeres FØRSTE kort skal være skjult
         var dealerCardOne = await getOneCard()
         dealerCardOne.hidden = true
         dealer.cards.push(dealerCardOne)
         var dealerCardTwo = await getOneCard()
         dealer.cards.push(dealerCardTwo)
+
+        //Regn dealerens kort ud for at se om de har blackjack 
+        dealer.total += returnCardValue(dealerCardOne)
+        dealer.total += returnCardValue(dealerCardTwo)
+
+        //scenaerie et: begge har 21  
+        if(dealer.total == 21 && player.total ==21){
+            select('#result').html("It's a draw")
+            setTimeout(()=>restart(), 3000)
+        }
+        if(dealer.total == 21 && player.total != 21){
+            select('#result').html("Dealer won")
+            setTimeout(()=>restart(),3000)
+        }
+
+        state = "player"
         showCards()
     }
-    if(state == "dealer"){
 
-    }
-    if(state == "player"){
 
-    }
+
+}
+
+function restart(){
+    select('#result').html('')
+    player.cards = []
+    player.total = 0
+    dealer.cards = []
+    dealer.total = 0
+    state = "begin"
+    drawCard()
 }
 
 function showCards(){
-    console.log("ShowCards er klar med: ", player.cards, dealer.cards)
+    console.log("ShowCards er klar med: ", "Player:", player.cards, "Dealer: ", dealer.cards)
     select('#player .cards').html('')
     player.cards.map( (c, i) => {
         var img = createImg(c.image)
@@ -108,7 +155,11 @@ function showCards(){
 
 function returnCardValue(card){
     if(isNaN(card.value)){
-        return 10
+        if(card.value=="ACE"){
+            return 11
+        }else{
+            return 10
+        }
     }else{
         return card.value
     }
