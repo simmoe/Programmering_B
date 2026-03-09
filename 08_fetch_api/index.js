@@ -22,8 +22,8 @@ function setup(){
 
     getDeck()
 
-    select('#playerDrawBtn').mousePressed(drawCard)
-    select('#playerStandBtn').mousePressed(drawCard)
+    select('#playerDrawBtn').mousePressed(() => drawCard("player") )
+    select('#playerStandBtn').mousePressed(() => drawCard("dealer") )
 
 
     
@@ -65,7 +65,10 @@ async function getDeck(){
     }
 }
 
-async function drawCard(){
+async function drawCard(newState){
+    if(newState){
+        state = newState
+    }
 
     if(state == "dealer"){
 
@@ -73,12 +76,54 @@ async function drawCard(){
 
     if(state == "player"){
         console.log('Showtime - implementer denne funktion til næste gang vi har programmering')
+        //Træk et kort med funktionen get one card
+        var newCard = await getOneCard()
+        //Læg det nye kort til player.cards
+        player.cards.push(newCard)
+        //Vis kortene med showcards() 
+        showCards()
+        //Læg spillerens total sammen (husk at bruge returnCardValue)  
+        player.total += Number(returnCardValue(newCard))
+        //Hvis spilleren har under 21, return
+        if(player.total < 21){
+            return
+        }
+        //Hvis spilleren HAR 21, set state = "dealer" og kald drawCard()
+        if(player.total == 21){
+            state = "dealer"
+            drawCard()
+        }
+        //Hvis spilleren har over 21: 
+        //Tjek for es'er ved at løbe player.cards igennem - hver gang der kommer et es, træk 10 fra total - og se om resultatet stadig er over 21. 
+        if(player.total > 21){
+            player.cards.map( c => {
+                if(c.value == "ACE"){
+                    c.value = "ACE-USED"
+                    player.total -= 10
+                    if(player.total < 21){
+                        return
+                    }
+                    if(player.total < 21){
+                        state = "dealer"
+                        drawCard()
+                    }
+                }
+            })
+            if(player.total > 21){
+                state = "playerLose"
+                drawCard()
+            }
+        }
+        //Men sørg for ikke at trække 10 fra DEN RIGTIGE player.total - brug en idlertidig variabel til at se om spillerens VIRKELIGE sum er udner 21 (med es'er) 
+        //Hvis nu resultatet pludselig er 21 - så skal det være dealerens tur
+        //Hvis resultatet nu er under 21, er det spillerens tur igen 
+        //MEN hvis resultatet STADIG er over 21, sæt state = "playerLose" og kald drawCard()      
     }
 
 
     if(state == "begin"){
         var cardOne = await getOneCard()
-        //Først lægger vi kortetenes værdi oven i spiller variablen (uden hensyn til ES)
+        //Først lægger vi kortenes værdi oven i spiller variablen (uden hensyn til ES)
         player.cards.push(cardOne)
         var cardTwo = await getOneCard()
         player.cards.push(cardTwo)
@@ -86,10 +131,9 @@ async function drawCard(){
         player.total += returnCardValue(cardOne)
         player.total += returnCardValue(cardTwo)
 
-        //Nu er vi en situation hvor spillere faktisk kunne have vundet, kunne have 22 (to es'er), eller bare har fået et eller andet tal under 21 
-        if(player.total == 22){
-            player.total = 12
-        }
+        //Nu er vi en situation hvor spillere faktisk kunne have vundet, kunne have 22 (to es'er), eller bare har fået et eller andet tal under 21 - OG DET ER HELT FINT 
+
+        //
 
 
         //Dealeres FØRSTE kort skal være skjult
@@ -161,7 +205,7 @@ function returnCardValue(card){
             return 10
         }
     }else{
-        return card.value
+        return Number(card.value)
     }
 }
 
