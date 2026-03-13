@@ -24,6 +24,7 @@ function setup(){
 
     select('#playerDrawBtn').mousePressed(() => drawCard("player") )
     select('#playerStandBtn').mousePressed(() => drawCard("dealer") )
+    select('#restartBtn').mousePressed(restart)
 
 
     
@@ -65,12 +66,27 @@ async function getDeck(){
     }
 }
 
+
 async function drawCard(newState){
     if(newState){
         state = newState
     }
 
+    console.log('Drawcard kaldt med state', state)
+
     if(state == "dealer"){
+        dealer.cards[0].hidden = false 
+        showCards()
+    }
+
+    if(state == "playerLose"){
+        //Gå til game end page shiftPage('#page2'), hvor det skal være  tydeligt at spilleren har tabt
+        select('#result').html("You lose motafigga")
+        shiftPage('#page2')
+        //Ved tryk på den knap
+        // Nulstil player og dealer objekterne 
+        //Sæt state = begin 
+        // kald getDeck()
 
     }
 
@@ -156,6 +172,9 @@ async function drawCard(newState){
             select('#result').html("Dealer won")
             setTimeout(()=>restart(),3000)
         }
+        if(dealer.total != 21 && player.total == 21){
+            drawCard("dealer")
+        }
 
         state = "player"
         showCards()
@@ -166,6 +185,7 @@ async function drawCard(newState){
 }
 
 function restart(){
+    console.log('restart')
     select('#result').html('')
     player.cards = []
     player.total = 0
@@ -173,10 +193,11 @@ function restart(){
     dealer.total = 0
     state = "begin"
     drawCard()
+    shiftPage('#page1')
 }
 
 function showCards(){
-    console.log("ShowCards er klar med: ", "Player:", player.cards, "Dealer: ", dealer.cards)
+    //console.log("ShowCards er klar med: ", "Player:", player.cards, "Dealer: ", dealer.cards)
     select('#player .cards').html('')
     player.cards.map( (c, i) => {
         var img = createImg(c.image)
@@ -214,7 +235,7 @@ async function getOneCard(){
     try{
         const response = await fetch(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`)
         const data = await response.json()
-        console.log("DrawCard kommer tilbage med et nyt kort:", data)
+        //console.log("getOneCard kommer tilbage med et nyt kort:", data)
         return data.cards[0]
     } catch(error){
         console.log("Error catched", error)
