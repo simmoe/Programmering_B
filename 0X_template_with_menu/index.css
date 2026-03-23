@@ -92,3 +92,12 @@ body,
     left: 0;
 }
 
+#page1{
+    background:lightblue;
+}
+#page2{
+    background:lightpink;
+}
+#page3{
+    background:lightseagreen;
+}

@@ -75,13 +75,31 @@ async function drawCard(newState){
     console.log('Drawcard kaldt med state', state)
 
     if(state == "dealer"){
+        select("#playerDrawBtn").hide()
+        select("#playerStandBtn").hide()
         dealer.cards[0].hidden = false 
         showCards()
+        if(dealer.total < 17){
+            var newCard = await getOneCard()
+            dealer.total += returnCardValue(newCard.value)
+            dealer.cards.push(newCard)
+            drawCard()
+        }else{
+            if(player.total == dealer.total){
+                //Its a draw
+            }
+            if(player.total > dealer.total){
+                //Player won
+            }
+            if(player.total < dealer.total){
+                //Dealer won
+            }
+        }
     }
 
     if(state == "playerLose"){
         //Gå til game end page shiftPage('#page2'), hvor det skal være  tydeligt at spilleren har tabt
-        select('#result').html("You lose motafigga")
+        select('#result').html("Du tabte")
         shiftPage('#page2')
         //Ved tryk på den knap
         // Nulstil player og dealer objekterne 
