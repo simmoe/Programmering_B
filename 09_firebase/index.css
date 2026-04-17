@@ -23,7 +23,8 @@ body,
 }
 
 #newQuote{
-    width:40vw;
+    width:90vw;
+    font-size:2rem;
 }
 
 #quotes{
@@ -33,5 +34,4 @@ body,
     padding:2rem 10vw;
     max-height:50vh;
     overflow: scroll;
-
 }
