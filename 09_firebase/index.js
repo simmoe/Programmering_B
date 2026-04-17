@@ -6,11 +6,15 @@ console.log('oprettet reference til test')
 function setup(){
     //NU KOMMER DET GENIALE: ONSNAPSHOT 
     quotesRef.onSnapshot( snap => {
+        select('#quotes').html('')
         console.log('Modtog snap', snap.size)
         //ryd quotes div og sæt de nye quotes ind
         snap.forEach( doc => {
             var d = doc.data()
             console.log(d)
+            select('#quotes').child(
+                createDiv(d.text).addClass('card')
+            )
         })
     })
 }
