@@ -12,8 +12,24 @@ function setup(){
         snap.forEach( doc => {
             var d = doc.data()
             console.log(d)
+            // Opret quote kort med knapper
             select('#quotes').child(
-                createDiv(d.text).addClass('card')
+                createDiv().addClass('card').child(
+                    createDiv(d.text)
+                ).child(
+                    createDiv(d.timestamp.toDate().toLocaleDateString("da-dk",{
+                        month: "short",
+                        weekday:"long"
+                    })).addClass('date')
+                ).child(
+                    createImg('./assets/delete.svg')
+                    .addClass('delete')
+                    .mousePressed( ()=>{
+                        if(confirm("ER du nu sikker på at du vil slette - permanent og uopretteligt - dit quote: " + d.text)){
+                            quotesRef.doc(doc.id).delete()
+                        }
+                    } )
+                )
             )
         })
     })
