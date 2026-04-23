@@ -1,6 +1,8 @@
 //lav en ref til din collection
 var quotesRef = db.collection('quotes_data')
 console.log('oprettet reference til test')
+var edit_id = ''
+var edit_div = ''
 
 //P5 setup() bliver kaldt EN gang før siden vises 
 function setup(){
@@ -12,14 +14,21 @@ function setup(){
         snap.forEach( doc => {
             var d = doc.data()
             console.log(d)
+            //vi laver lige en reference til text div'en 
+            var qDiv = createDiv(d.text)
+            qDiv.mousePressed(()=>{
+                qDiv.attribute('contenteditable', 'true')
+                edit_id = doc.id
+                edit_div = qDiv
+            })
             // Opret quote kort med knapper
             select('#quotes').child(
                 createDiv().addClass('card').child(
-                    createDiv(d.text)
+                    qDiv
                 ).child(
                     createDiv(d.timestamp.toDate().toLocaleDateString("da-dk",{
-                        month: "short",
-                        weekday:"long"
+                        weekday:"long",
+                        month: "short"
                     })).addClass('date')
                 ).child(
                     createImg('./assets/delete.svg')
@@ -39,22 +48,32 @@ function setup(){
 function keyPressed(){
     //console.log(key)
     if(key == "Enter"){
-        //hent teksten fra input feltet
-        var q = select('#newQuote').value()
-        if(q == "") {
-            confirm('skriv venligst noget FØR DU TRYKKER ENTER')
-            return
+        if(edit_id != ''){
+            //Nu skal vi opdatere databasen med den nye tekst 
+            quotesRef.doc(edit_id).update({text:edit_div.html()})
+            .then(()=>{
+                edit_id = ''
+                edit_div = ''
+                console.log('Quote opdateret')
+            })
+        }else{
+            //hent teksten fra input feltet
+            var q = select('#newQuote').value()
+            if(q == "") {
+                confirm('skriv venligst noget FØR DU TRYKKER ENTER')
+                return
+            }
+            //nu skal vi gemme det nye quote i firestore
+            //funktionen add() på en collectionref 
+            //OPRETTER en ny collection hvis den IKKE findes 
+            quotesRef.add({
+                text: q,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                //.then kaldes asynkront NÅR add er færdig
+            }).then(
+                console.log('Quote gemt i databasen', q)
+            )
+            select('#newQuote').html('')
         }
-        //nu skal vi gemme det nye quote i firestore
-        //funktionen add() på en collectionref 
-        //OPRETTER en ny collection hvis den IKKE findes 
-        quotesRef.add({
-            text: q,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            //.then kaldes asynkront NÅR add er færdig
-        }).then(
-            console.log('Quote gemt i databasen', q)
-        )
-        select('#newQuote').html('')
     }
 }
