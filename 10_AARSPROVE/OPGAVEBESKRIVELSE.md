@@ -68,15 +68,13 @@ Hver elev skriver sin egen **synopsis** (3–5 normalsider, ekskl. kode og bilag
 1. **Forblad** — titel, navn, dato, hold
 2. **Kort abstract** — et kort resumé af hvad projektet går ud på (3–5 linjer)
 3. **Problemformulering** — hvad er det I har sat jer for at løse/lave?
-4. **Funktionsbeskrivelse** — beskriv spillet fra brugerens perspektiv: skærmlayout, hvad man kan klikke på, spillets flow
-5. **Dokumentation af programmet:**
+4. **Dokumentation af programmet:**
    - Overordnet beskrivelse af programmets opbygning
    - Flowchart eller diagram over spillets struktur (rum/sider og sammenhængen mellem dem)
    - Gennemgang af udvalgte kodestumper med forklaring — beskriv mindst to af jeres gåder/interaktioner teknisk
    - Brug gerne pseudokode til at forklare centrale algoritmer (fx timer-logik, scoring, gåde-logik)
-6. **Test** — beskriv hvordan I har testet spillet (funktionel test og evt. brugertest)
-7. **Konklusion** — hvad er I nået i mål med? Hvad ville I gøre anderledes/videreudvikle?
-8. **Bilag** — den samlede kode (HTML, CSS, JS)
+5. **Konklusion** — hvad er I nået i mål med? Hvad ville I gøre anderledes/videreudvikle?
+6. **Bilag** — den samlede kode (HTML, CSS, JS)
 
 ---
 
