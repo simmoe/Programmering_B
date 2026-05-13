@@ -50,7 +50,7 @@ Spillet skal bygges med de teknikker og værktøjer, I har arbejdet med i løbet
 - I må gerne bruge lyd og lydeffekter ([`loadSound`](https://p5js.org/reference/p5/loadSound/) / [`createAudio`](https://p5js.org/reference/p5/createAudio/))
 - I må gerne bruge webcam, speech synthesis eller andre browser-API'er, hvis det giver mening for jeres spil
 
-###Krav til aflevering
+## Krav til aflevering
 
 Du skal aflevere din samlede kode samt en kort, individuel synopsis (ca. 1-2 normalsider ekskl. kode). Synopsen er din forberedelse til den mundtlige prøve og skal vise din tekniske forståelse af dit eget program.
 
