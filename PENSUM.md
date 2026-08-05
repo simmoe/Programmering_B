@@ -1,7 +1,6 @@
 # Programmering B — Pensum
 
-Klik dig ind i kapitlerne. Hvert kapitel er en mappe med kode + en ultrakort forklaring.  
-**Demo** åbner den kørende version på GitHub Pages.
+Kapitlerne er mapper i repoet. **Demo** åbner den kørende version.
 
 ## 1. år
 
