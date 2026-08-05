@@ -21,7 +21,7 @@ Kamera, lyd, optagelse og tale — flere korte koncepter i samme projekt.
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/04_webcam_mic_speech/)
 
 ### 5. [Arrays](05_arrays/README.md)
-Lister af data. Vi løber dem igennem med `map()`.  
+Lister: `.length`, index, `push`, `pop`, `splice`, `includes`, `map`, `filter`.  
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/05_arrays/)
 
 ### 6. [Memory game](06_memory_game/README.md)
