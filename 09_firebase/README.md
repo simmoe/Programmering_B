@@ -2,10 +2,28 @@
 
 Gem og hent data i Firestore — en database i skyen.
 
-**Demo:** [https://simmoe.github.io/Programmering_B/09_firebase/](https://simmoe.github.io/Programmering_B/09_firebase/)  
-**Kode:** [index.html](index.html) · [firebase.js](firebase.js) · [index.js](index.js)
+**Kode:** [index.html](index.html) · [index.js](index.js)
 
 Før `add()` og `onSnapshot()` virker, skal to ting være på plads: **bibliotekerne** i HTML og en **konfiguration** i `firebase.js`.
+
+---
+
+## Vigtigt: virker ikke direkte på GitHub Pages
+
+`firebase.js` indeholder hemmelige nøgler til dit Firebase-projekt.  
+Dem uploader vi **ikke** til GitHub — filen er derfor ignoreret i repoet (se `.gitignore`).
+
+Derfor virker Firebase-demoen **ikke** bare ved at åbne GitHub Pages. Du skal køre det **lokalt** med din egen config.
+
+### Sådan gør du
+
+1. Opret et projekt på [Firebase Console](https://console.firebase.google.com/)
+2. Tilføj en web-app og kopiér `firebaseConfig`
+3. Lav filen `firebase.js` i denne mappe (den ligger ikke på GitHub)
+4. Indsæt din config, `initializeApp()` og `db` som vist herunder
+5. Åbn projektet lokalt (fx Live Server i VS Code / Cursor)
+
+Så virker Firestore hos dig — uden at hemmelighederne ligger offentligt i repoet.
 
 ---
 
