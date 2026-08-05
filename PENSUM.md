@@ -49,6 +49,9 @@ Større projekt: escape room, timer, high score og synopsis.
 Genstart: sider, `shiftPage`, menu fra DOM + audiovisuelle effekter.  
 [Demo](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)
 
+### 12. [Personligt API](12_PERSONLIGT_API/README.md)
+Parametre, `return` og genbrugelige funktioner i din egen værktøjsfil.
+
 ## Bilag
 
 - [Læreplan](UVM_Programmering_B/Laereplan_Programmering_B_valgfag_2017.pdf)

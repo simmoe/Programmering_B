@@ -26,4 +26,4 @@ Læs [OPGAVE.md](OPGAVE.md)
 - p5 `createDiv`: https://p5js.org/reference/p5/createDiv/
 - MDN DOM: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 
-← [Forrige](../10_AARSPROVE/README.md) · [Pensum](../PENSUM.md)
+← [Forrige](../10_AARSPROVE/README.md) · [Pensum](../PENSUM.md) · → [Næste: Personligt API](../12_PERSONLIGT_API/README.md)
