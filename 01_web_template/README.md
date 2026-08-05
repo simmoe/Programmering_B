@@ -2,6 +2,8 @@
 
 Vi laver flere **sider** i samme HTML-fil. Kun én side vises ad gangen.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/01_web_template/](https://simmoe.github.io/Programmering_B/01_web_template/)
+
 ## Koncept: CSS-klasse som “tænd/sluk”
 
 ```js

@@ -2,6 +2,8 @@
 
 Et **array** er en liste. Vi kan lægge ting ind og løbe listen igennem.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/05_arrays/](https://simmoe.github.io/Programmering_B/05_arrays/)
+
 ## Koncept: `map()`
 
 ```js

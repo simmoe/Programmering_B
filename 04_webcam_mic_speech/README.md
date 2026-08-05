@@ -2,6 +2,8 @@
 
 Browseren kan bruge kamera, mikrofon og tale.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/04_webcam_mic_speech/](https://simmoe.github.io/Programmering_B/04_webcam_mic_speech/)
+
 ## Koncept: afspil lyd ved klik
 
 ```js

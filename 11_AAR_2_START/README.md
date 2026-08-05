@@ -2,6 +2,8 @@
 
 Genstart: byg en præsentation med flere sider, menu fra DOM og AV-effekter.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/11_AAR_2_START/](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)
+
 ## Koncept: menu fra et DOM-array
 
 ```js

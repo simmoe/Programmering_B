@@ -2,6 +2,8 @@
 
 Spillet husker midlertidig tilstand: hvilke kort er vendt?
 
+**Demo:** [https://simmoe.github.io/Programmering_B/06_memory_game/](https://simmoe.github.io/Programmering_B/06_memory_game/)
+
 ## Koncept: array som state
 
 ```js

@@ -2,6 +2,8 @@
 
 Lag der bevæger sig forskelligt = dybde. Ofte styret af scroll eller mus.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/03_web_parallax/](https://simmoe.github.io/Programmering_B/03_web_parallax/)
+
 ## Koncept: style fra JavaScript
 
 ```js

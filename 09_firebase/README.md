@@ -2,6 +2,8 @@
 
 Firestore er en database i skyen. Vi kan **gemme** og **lytte** til data.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/09_firebase/](https://simmoe.github.io/Programmering_B/09_firebase/)
+
 ## Koncept: `add()` + `onSnapshot()`
 
 ```js

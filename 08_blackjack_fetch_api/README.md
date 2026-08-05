@@ -2,6 +2,8 @@
 
 Når data ligger på nettet, henter vi dem med `fetch()`.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/08_blackjack_fetch_api/](https://simmoe.github.io/Programmering_B/08_blackjack_fetch_api/)
+
 ## Koncept: `async` / `await`
 
 ```js

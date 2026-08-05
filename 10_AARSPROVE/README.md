@@ -2,6 +2,8 @@
 
 Her samler vi teknikkerne i ét større projekt: sider, state, timer, database.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/10_AARSPROVE/template/](https://simmoe.github.io/Programmering_B/10_AARSPROVE/template/)
+
 ## Koncept: `shiftPage`
 
 ```js

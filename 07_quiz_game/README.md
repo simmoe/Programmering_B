@@ -2,6 +2,8 @@
 
 Hvert spørgsmål er et **objekt**. Quizzen er et **array** af objekter.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/07_quiz_game/](https://simmoe.github.io/Programmering_B/07_quiz_game/)
+
 ## Koncept: objekt + sammenligning
 
 ```js

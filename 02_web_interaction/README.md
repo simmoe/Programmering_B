@@ -2,6 +2,8 @@
 
 Brugeren klikker — koden svarer. Det kaldes et **event**.
 
+**Demo:** [https://simmoe.github.io/Programmering_B/02_web_interaction/](https://simmoe.github.io/Programmering_B/02_web_interaction/)
+
 ## Koncept: `mousePressed`
 
 ```js
