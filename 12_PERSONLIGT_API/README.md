@@ -14,8 +14,8 @@ Du kalder dem med et klart navn — uden at skulle huske hele den indre kode hve
 
 ```js
 startTimer(10)
-playClick()
-shiftPage('#page2')
+playSound('./assets/click.mp3')
+shiftPage('#page1', '#page2', 'show')
 ```
 
 Funktionerne gemmes typisk i en fil for sig, fx `myApi.js`.
@@ -93,7 +93,7 @@ function shuffle(list) {
   // ...
 }
 
-function playClick() {
+function playSound(path) {
   // ...
 }
 ```
@@ -113,21 +113,24 @@ Nu kan både dette projekt og næste projekt genbruge de samme værktøjer.
 
 ## Eksempel: generaliseret `shiftPage`
 
-I stedet for at hardcode sidenavne overalt, kan funktionen tage målet ind:
+I stedet for at bruge en global `currentPage` og altid klassen `show`, kan funktionen tage **alt** ind som parametre:
 
 ```js
-function shiftPage(newPage) {
-  select(currentPage).removeClass('show')
-  select(newPage).addClass('show')
-  currentPage = newPage
+function shiftPage(currentId, newId, className) {
+  select(currentId).removeClass(className)
+  select(newId).addClass(className)
 }
 
-shiftPage('#intro')
-shiftPage('#gameplay')
+shiftPage('#page1', '#page2', 'show')
+shiftPage('#intro', '#gameplay', 'active')
 ```
 
-Én funktion — mange sider.
+- `currentId` — siden der skal skjules  
+- `newId` — siden der skal vises  
+- `className` — hvilken CSS-klasse der styrer synlighed  
 
-**Reference:** [p5 select](https://p5js.org/reference/p5/select/) · [p5 addClass](https://p5js.org/reference/p5.Element/addClass/)
+Så virker funktionen i flere projekter, også hvis I ikke kalder klassen `show`.
+
+**Reference:** [p5 select](https://p5js.org/reference/p5/select/) · [p5 addClass](https://p5js.org/reference/p5.Element/addClass/) · [p5 removeClass](https://p5js.org/reference/p5.Element/removeClass/)
 
 ← [Forrige: Favoritspil](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)

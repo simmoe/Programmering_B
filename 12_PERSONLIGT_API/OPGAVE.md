@@ -27,7 +27,7 @@ Vælg selv — her er forslag:
 
 | Funktion | Idé |
 |---|---|
-| `shiftPage(newPage)` | skift mellem sider |
+| `shiftPage(currentId, newId, className)` | skift mellem sider med valgfri CSS-klasse |
 | `startTimer(seconds)` | countdown eller optælling |
 | `showMessage(text)` | vis besked på siden |
 | `playSound(path)` | afspil en lydfil |
