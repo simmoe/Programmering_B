@@ -29,7 +29,7 @@ Spilstate: vendte kort, match og arrays.
 [Demo](https://simmoe.github.io/Programmering_B/06_memory_game/)
 
 ### 7. [Quiz](07_quiz_game/README.md)
-Spørgsmål som objekter, score og sideskift.  
+JSON-objekter, lister af JSON, score og sideskift.  
 [Demo](https://simmoe.github.io/Programmering_B/07_quiz_game/)
 
 ### 8. [Blackjack & fetch](08_blackjack_fetch_api/README.md)
