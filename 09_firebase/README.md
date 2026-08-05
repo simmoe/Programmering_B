@@ -3,7 +3,53 @@
 Gem og hent data i Firestore — en database i skyen.
 
 **Demo:** [https://simmoe.github.io/Programmering_B/09_firebase/](https://simmoe.github.io/Programmering_B/09_firebase/)  
-**Kode:** [index.html](index.html) · [index.js](index.js)
+**Kode:** [index.html](index.html) · [firebase.js](firebase.js) · [index.js](index.js)
+
+Før `add()` og `onSnapshot()` virker, skal to ting være på plads: **bibliotekerne** i HTML og en **konfiguration** i `firebase.js`.
+
+---
+
+## 1. Indsæt Firebase-biblioteker i `index.html`
+
+I `<head>` indlæser vi Firebase, **før** vores egen kode:
+
+```html
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore-compat.js"></script>
+<script src="./firebase.js"></script>
+```
+
+- Første script: selve Firebase-appen  
+- Andet script: Firestore (databasen)  
+- Tredje script: vores egen konfiguration  
+
+Uden de tre linjer findes `firebase` og `db` ikke i projektet.
+
+**Reference:** [Firebase Web setup](https://firebase.google.com/docs/web/setup)
+
+---
+
+## 2. Konfiguration i `firebase.js`
+
+```js
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  // ... flere felter fra Firebase Console
+}
+
+firebase.initializeApp(firebaseConfig)
+var db = firebase.firestore()
+```
+
+`firebaseConfig` er nøglerne til *dit* Firebase-projekt.  
+Dem henter du i [Firebase Console](https://console.firebase.google.com/) under Project settings → Your apps.
+
+`initializeApp()` starter forbindelsen.  
+`firebase.firestore()` giver os `db`, som vi bruger i resten af kapitlet.
+
+**Reference:** [Firestore get started](https://firebase.google.com/docs/firestore/quickstart)
 
 ---
 

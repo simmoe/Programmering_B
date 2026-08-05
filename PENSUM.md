@@ -37,7 +37,7 @@ JSON-objekter, lister af JSON, score og sideskift.
 [Demo](https://simmoe.github.io/Programmering_B/08_blackjack_fetch_api/)
 
 ### 9. [Firebase](09_firebase/README.md)
-Gem, opdater, slet og lyt live til data i Firestore.  
+Setup i HTML + `firebase.js`, derefter gem, opdater, slet og live-lytning.  
 [Demo](https://simmoe.github.io/Programmering_B/09_firebase/)
 
 ### 10. [Årsprøve](10_AARSPROVE/README.md)
