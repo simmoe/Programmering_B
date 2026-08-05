@@ -13,7 +13,8 @@ Et API er i denne sammenhæng en **lille værktøjskasse af funktioner**, du sel
 Du kalder dem med et klart navn — uden at skulle huske hele den indre kode hver gang:
 
 ```js
-startTimer(10)
+startTimer(10, '#timer')
+showMessage('Du vandt!', '#result')
 playSound('./assets/click.mp3')
 shiftPage('#page1', '#page2', 'show')
 ```
@@ -54,17 +55,18 @@ Det er sådan, vi **generaliserer** en kodestump.
 
 ## Flere parametre
 
+Det der kan skifte, skal ind som parametre — både **indhold** og **mål**:
+
 ```js
-function showMessage(text, color) {
-  select('#msg').html(text)
-  select('#msg').style('color', color)
+function showMessage(text, divId) {
+  select(divId).html(text)
 }
 
-showMessage('Du vandt!', 'green')
-showMessage('Prøv igen', 'red')
+showMessage('Du vandt!', '#result')
+showMessage('Prøv igen', '#hint')
 ```
 
-Samme funktion — forskelligt indhold.
+Samme funktion — forskellig tekst og forskelligt element.
 
 ---
 

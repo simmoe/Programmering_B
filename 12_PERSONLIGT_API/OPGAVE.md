@@ -21,19 +21,35 @@ Du skal også have et lille projekt (`index.html` + `index.js` + CSS), der **vis
 
 ## Krav til API’et
 
-Dit API skal indeholde mindst **4 funktioner** med parametre.
+Dit API skal indeholde mindst **4 funktioner** med parametre.  
+Funktionerne skal være **generelle**: det der kan skifte fra projekt til projekt, skal ind som parametre (fx hvilket element, hvilken klasse, hvilken tekst).
 
 Vælg selv — her er forslag:
 
-| Funktion | Idé |
+| Funktion | Hvad den gør |
 |---|---|
-| `shiftPage(currentId, newId, className)` | skift mellem sider med valgfri CSS-klasse |
-| `startTimer(seconds)` | countdown eller optælling |
-| `showMessage(text)` | vis besked på siden |
-| `playSound(path)` | afspil en lydfil |
-| `shuffle(list)` | bland et array |
-| `randomFrom(list)` | vælg et tilfældigt element |
-| `saveScore(name, points)` | gem score lokalt (fx i et array) |
+| `shiftPage(currentId, newId, className)` | Skjuler én side og viser en anden med en CSS-klasse |
+| `showMessage(text, divId)` | Skriver en besked ind i et bestemt HTML-element |
+| `setText(id, text)` | Sætter teksten i et element (titel, score, hint osv.) |
+| `bindClick(id, callback)` | Binder et klik på et element til en funktion |
+| `show(id)` / `hide(id)` | Viser eller skjuler et element |
+| `startTimer(seconds, displayId)` | Tæller ned/op og opdaterer tiden i et element på siden |
+| `playSound(path)` | Afspiller en lydfil fra en sti |
+| `createList(list, containerId, className)` | Laver HTML-elementer ud fra et array |
+| `shuffle(list)` | Blander et array og returnerer det |
+| `randomFrom(list)` | Returnerer et tilfældigt element fra et array |
+
+### Om `startTimer`
+
+Den er til spil og tests, hvor tiden skal vises undervejs — fx countdown i et escape room, eller “klik så mange gange du kan på 10 sekunder”.
+
+```js
+startTimer(10, '#timer')
+// viser fx: 10, 9, 8 ... i elementet med id="timer"
+```
+
+`seconds` = hvor lang tid.  
+`displayId` = hvilket element på siden der skal opdateres.
 
 Mindst én funktion skal bruge `return`.
 
