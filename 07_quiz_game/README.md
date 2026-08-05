@@ -1,7 +1,27 @@
-# Kapitel: Quiz
+# 7. Quiz
 
-Her laver vi en sandt/falsk-quiz med score og sideskift.
+Hvert spørgsmål er et **objekt**. Quizzen er et **array** af objekter.
 
-**Kode:** [index.html](index.html)
+## Koncept: objekt + sammenligning
 
-← [Forrige: Arrays](../05_arrays/README.md) · [Pensum](../PENSUM.md) · → [Næste: Årsprøve](../10_AARSPROVE/OPGAVEBESKRIVELSE.md)
+```js
+let questions = [
+  { text: 'JS kører i browseren', answer: true }
+]
+
+if (questions[q].answer == userAnswer) {
+  score++
+}
+```
+
+Objekt = flere oplysninger samlet. `==` tjekker om svaret er rigtigt.
+
+## Kode
+Åbn [index.html](index.html)
+
+## Reference
+- MDN Objects: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects
+- MDN Equality (`==`): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality
+- p5 `html()`: https://p5js.org/reference/p5.Element/html/
+
+← [Forrige](../06_memory_game/README.md) · [Pensum](../PENSUM.md) · → [Næste: Fetch](../08_blackjack_fetch_api/README.md)

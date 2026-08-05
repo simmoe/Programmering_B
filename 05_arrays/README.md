@@ -1,7 +1,25 @@
-# Kapitel: Arrays
+# 5. Arrays
 
-Her arbejder vi med lister, `map()` og filtrering.
+Et **array** er en liste. Vi kan lægge ting ind og løbe listen igennem.
 
-**Kode:** [index.html](index.html)
+## Koncept: `map()`
 
-← [Pensum](../PENSUM.md) · → [Næste: Quiz](../07_quiz_game/README.md)
+```js
+let navne = ['Rikke', 'Peter', 'Zenia']
+
+navne.map(navn => {
+  console.log(navn)
+})
+```
+
+`map()` = “gør noget ved hvert element”.
+
+## Kode
+Åbn [index.html](index.html)
+
+## Reference
+- MDN Arrays: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+- MDN `map()`: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+- MDN `filter()`: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+
+← [Forrige](../04_webcam_mic_speech/README.md) · [Pensum](../PENSUM.md) · → [Næste: Memory](../06_memory_game/README.md)
