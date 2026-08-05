@@ -18,7 +18,7 @@ Visuelle lag og bevægelse. Design der føles levende.
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/03_web_parallax/)
 
 ### 4. [Webcam, mic & speech](04_webcam_mic_speech/README.md)
-Kamera, lyd og tale i browseren.  
+Kamera, lyd, optagelse og tale — flere korte koncepter i samme projekt.  
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/04_webcam_mic_speech/)
 
 ### 5. [Arrays](05_arrays/README.md)
@@ -34,11 +34,11 @@ Spørgsmål som objekter, score og sideskift.
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/07_quiz_game/)
 
 ### 8. [Blackjack & fetch](08_blackjack_fetch_api/README.md)
-Hent data fra nettet med `fetch()`.  
+`fetch`, async/await, state og objekter i et kortspil.  
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/08_blackjack_fetch_api/)
 
 ### 9. [Firebase](09_firebase/README.md)
-Gem og hent data i en database (Firestore).  
+Gem, opdater, slet og lyt live til data i Firestore.  
 **Demo:** [åbn](https://simmoe.github.io/Programmering_B/09_firebase/)
 
 ### 10. [Årsprøve](10_AARSPROVE/README.md)
