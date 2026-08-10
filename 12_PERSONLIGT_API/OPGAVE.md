@@ -39,6 +39,7 @@ Vælg selv — her er forslag:
 | `createList(list, containerId, className)` | Laver HTML-elementer ud fra et array |
 | `shuffle(list)` | Blander et array og returnerer det |
 | `randomFrom(list)` | Returnerer et tilfældigt element fra et array |
+| `mqttListen(topic, onMessage)` | Forbinder til MQTT, subscriber, kalder din funktion med tekst |
 
 ### Om `showToast` og default-parametre
 
@@ -67,6 +68,20 @@ startTimer(10, '#timer')
 
 `seconds` = hvor lang tid.  
 `displayId` = hvilket element på siden der skal opdateres.
+
+### Om `mqttListen`
+
+Pakker connect + subscribe + message ind i én helper.  
+Du vælger topic og hvad der skal ske med teksten:
+
+```js
+mqttListen('programmering', (tekst) => {
+  showToast(tekst)
+})
+```
+
+`onMessage` er en callback — en funktion, helperen kalder automatisk, når der kommer en MQTT-besked.  
+Kræver MQTT-scriptet i HTML (som i favoritspil-forløbet).
 
 ### Krav til funktionerne
 

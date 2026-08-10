@@ -48,7 +48,7 @@ Sider, `shiftPage`, menu fra DOM, AV-effekter og MQTT (styr siden udefra).
 [Demo](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)
 
 ### 12. [Personligt API](12_PERSONLIGT_API/README.md)
-Parametre, default-værdier, `return`, `showToast` og genbrugelige funktioner.
+Parametre, default-værdier, `return`, `showToast`, MQTT-helpers og genbrugelige funktioner.
 
 ## Bilag
 

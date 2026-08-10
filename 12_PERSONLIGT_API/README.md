@@ -168,4 +168,43 @@ Så virker funktionen i flere projekter, også hvis I ikke kalder klassen `show`
 
 **Reference:** [p5 select](https://p5js.org/reference/p5/select/) · [p5 addClass](https://p5js.org/reference/p5.Element/addClass/) · [p5 removeClass](https://p5js.org/reference/p5.Element/removeClass/)
 
+---
+
+## Eksempel: MQTT-helper
+
+MQTT-koden fra favoritspil-forløbet kan også pakkes ind.  
+Idéen: du giver **topic** og en **funktion**, der skal kaldes, når der kommer en besked.
+
+```js
+function mqttListen(topic, onMessage) {
+  let client = mqtt.connect('wss://mqtt.nextservices.dk')
+
+  client.on('connect', () => {
+    client.subscribe(topic)
+  })
+
+  client.on('message', (t, message) => {
+    onMessage(message.toString())
+  })
+
+  return client
+}
+
+// brug:
+mqttListen('programmering', (tekst) => {
+  showToast(tekst)
+  // eller: shiftPage(...) hvis tekst er "1", "2", "3"
+})
+```
+
+`onMessage` er en **callback**: en funktion, du selv bestemmer, som helperen kalder automatisk.
+
+Husk MQTT-scriptet i HTML:
+
+```html
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+```
+
+**Reference:** [mqtt.js](https://github.com/mqttjs/MQTT.js) · [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
+
 ← [Forrige: Favoritspil](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)
