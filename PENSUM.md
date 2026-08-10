@@ -1,7 +1,5 @@
 # Programmering B — Pensum
 
-Kapitlerne er mapper i repoet.
-
 ## 1. år
 
 ### 1. [Web template](01_web_template/README.md)
