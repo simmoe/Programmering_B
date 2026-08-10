@@ -46,7 +46,7 @@ Større projekt: escape room, timer, high score og synopsis.
 ## 2. år
 
 ### 11. [Favoritspil](11_AAR_2_START/README.md)
-Genstart: sider, `shiftPage`, menu fra DOM + audiovisuelle effekter.  
+Sider, `shiftPage`, menu fra DOM, AV-effekter og MQTT (styr siden udefra).  
 [Demo](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)
 
 ### 12. [Personligt API](12_PERSONLIGT_API/README.md)
