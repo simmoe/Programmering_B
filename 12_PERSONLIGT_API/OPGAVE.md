@@ -32,7 +32,7 @@ Vælg selv — her er forslag:
 | `showToast(text, ms = 2500)` | Viser en kort notifikation, der forsvinder igen |
 | `showMessage(text, divId)` | Skriver en besked ind i et bestemt HTML-element |
 | `setText(id, text)` | Sætter teksten i et element (titel, score, hint osv.) |
-| `bindClick(id, callback)` | Binder et klik på et element til en funktion |
+| `bindClick(id, callback)` | Binder et klik til en callback-funktion |
 | `show(id)` / `hide(id)` | Viser eller skjuler et element |
 | `startTimer(seconds, displayId)` | Tæller ned/op og opdaterer tiden i et element på siden |
 | `playSound(path)` | Afspiller en lydfil fra en sti |
@@ -69,10 +69,25 @@ startTimer(10, '#timer')
 `seconds` = hvor lang tid.  
 `displayId` = hvilket element på siden der skal opdateres.
 
+### Om callbacks
+
+En **callback** er en funktion, du giver videre som parameter til en anden funktion.  
+Den anden funktion kalder den automatisk, når noget sker.
+
+```js
+function startSpil() {
+  showToast('Spillet starter')
+}
+
+bindClick('#startBtn', startSpil)
+```
+
+Her er `startSpil` callback’en. Den køres, når knappen klikkes.
+
 ### Om `mqttListen`
 
 Pakker connect + subscribe + message ind i én helper.  
-Du vælger topic og hvad der skal ske med teksten:
+Du vælger topic og en callback til beskedteksten:
 
 ```js
 function handleMqttMessage(tekst) {
@@ -82,14 +97,14 @@ function handleMqttMessage(tekst) {
 mqttListen('programmering', handleMqttMessage)
 ```
 
-`handleMqttMessage` er en almindelig funktion.  
-Du giver den videre til `mqttListen`, som kalder den automatisk, når der kommer en MQTT-besked.  
+Samme callback-idé som `bindClick` — bare ved MQTT i stedet for klik.  
 Kræver MQTT-scriptet i HTML (som i favoritspil-forløbet).
 
 ### Krav til funktionerne
 
 - Mindst én funktion skal bruge `return`
 - Mindst én funktion skal bruge en **default-parameter** (fx `showToast(text, ms = 2500)`)
+- Mindst én funktion skal bruge en **callback** (fx `bindClick` eller `mqttListen`)
 
 ---
 
@@ -119,6 +134,7 @@ I `index.html` skal API-filen indlæses **før** `index.js`:
 
 - Hvad en parameter er, og hvorfor den gør funktionen mere generel
 - Hvad en default-parameter er, og hvornår den bruges
+- Hvad en **callback** er, og hvornår den kaldes
 - Hvad `return` gør i mindst én af dine funktioner
 - Hvorfor det er smart at samle genbrugelig kode i en separat fil
 - Hvordan dit demo-projekt kalder API’et

@@ -119,6 +119,41 @@ let resultat = double(5) // 10
 
 ---
 
+## Callback: en funktion som parameter
+
+Indtil nu har parametre været ting som tekst, tal eller id’er.  
+En parameter kan også være **en hel funktion**.
+
+Det kaldes en **callback**: “her er en funktion — kald den, når noget sker”.
+
+Først laver du den funktion, der skal køres:
+
+```js
+function startSpil() {
+  showToast('Spillet starter')
+  shiftPage('#page1', '#page2', 'show')
+}
+```
+
+Så giver du den videre til en helper:
+
+```js
+function bindClick(id, callback) {
+  select(id).mousePressed(callback)
+}
+
+bindClick('#startBtn', startSpil)
+```
+
+Når knappen klikkes, kalder `bindClick` automatisk `startSpil`.  
+Du skriver ikke `startSpil()` med parentes her — du giver selve funktionen videre.
+
+Samme idé bruger I senere med MQTT: `mqttListen(topic, handleMqttMessage)`.
+
+**Reference:** [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
+
+---
+
 ## Saml funktionerne i en fil
 
 `myApi.js`:
@@ -200,8 +235,8 @@ function handleMqttMessage(tekst) {
 mqttListen('programmering', handleMqttMessage)
 ```
 
-`handleMqttMessage` er en **callback**: en almindelig funktion, du selv laver.  
-Du giver den videre til `mqttListen`, som kalder den automatisk med beskedteksten.
+Her er `handleMqttMessage` igen en **callback** — præcis som `startSpil` i `bindClick`.  
+Forskellen er bare, *hvornår* den kaldes: ved MQTT-besked i stedet for ved klik.
 
 Husk MQTT-scriptet i HTML:
 
