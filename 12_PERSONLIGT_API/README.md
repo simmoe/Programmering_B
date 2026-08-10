@@ -14,8 +14,8 @@ Du kalder dem med et klart navn — uden at skulle huske hele den indre kode hve
 
 ```js
 startTimer(10, '#timer')
+showToast('Forbundet til MQTT')
 showMessage('Du vandt!', '#result')
-playSound('./assets/click.mp3')
 shiftPage('#page1', '#page2', 'show')
 ```
 
@@ -70,6 +70,39 @@ Samme funktion — forskellig tekst og forskelligt element.
 
 ---
 
+## Default-værdier for parametre
+
+I JavaScript laver man **ikke** flere versioner af samme funktion med forskelligt antal parametre (som i nogle andre sprog).  
+I stedet kan en parameter have en **default-værdi**, hvis den ikke bliver sendt med:
+
+```js
+function showToast(text, ms = 2500) {
+  select('#toast').html(text)
+  select('#toast').addClass('show')
+
+  setTimeout(() => {
+    select('#toast').removeClass('show')
+  }, ms)
+}
+
+showToast('Hej')          // bruger 2500 ms
+showToast('Hej', 5000)    // bruger 5000 ms
+```
+
+`ms = 2500` betyder: “hvis du ikke siger andet, så vent 2,5 sekunder”.
+
+Det kræver et HTML-element, fx:
+
+```html
+<div id="toast"></div>
+```
+
+…og CSS der gør `#toast` til en kort notifikation øverst til højre (som I så i favoritspil/MQTT-forløbet).
+
+**Reference:** [MDN Default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+
+---
+
 ## `return` giver noget tilbage
 
 ```js
@@ -95,7 +128,7 @@ function shuffle(list) {
   // ...
 }
 
-function playSound(path) {
+function showToast(text, ms = 2500) {
   // ...
 }
 ```

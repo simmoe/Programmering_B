@@ -29,6 +29,7 @@ Vælg selv — her er forslag:
 | Funktion | Hvad den gør |
 |---|---|
 | `shiftPage(currentId, newId, className)` | Skjuler én side og viser en anden med en CSS-klasse |
+| `showToast(text, ms = 2500)` | Viser en kort notifikation, der forsvinder igen |
 | `showMessage(text, divId)` | Skriver en besked ind i et bestemt HTML-element |
 | `setText(id, text)` | Sætter teksten i et element (titel, score, hint osv.) |
 | `bindClick(id, callback)` | Binder et klik på et element til en funktion |
@@ -38,6 +39,22 @@ Vælg selv — her er forslag:
 | `createList(list, containerId, className)` | Laver HTML-elementer ud fra et array |
 | `shuffle(list)` | Blander et array og returnerer det |
 | `randomFrom(list)` | Returnerer et tilfældigt element fra et array |
+
+### Om `showToast` og default-parametre
+
+`showToast` er den Mac-agtige notifikation fra favoritspil/MQTT-forløbet.
+
+```js
+function showToast(text, ms = 2500) { /* ... */ }
+
+showToast('Gemt!')        // forsvinder efter 2,5 sek
+showToast('Fejl!', 4000)  // forsvinder efter 4 sek
+```
+
+`ms = 2500` er en **default-værdi**: parameteren er valgfri.  
+I JavaScript laver vi ikke flere funktioner med samme navn og forskelligt antal parametre — vi bruger defaults i stedet.
+
+Husk HTML + CSS til `#toast` (ét fast element).
 
 ### Om `startTimer`
 
@@ -51,7 +68,10 @@ startTimer(10, '#timer')
 `seconds` = hvor lang tid.  
 `displayId` = hvilket element på siden der skal opdateres.
 
-Mindst én funktion skal bruge `return`.
+### Krav til funktionerne
+
+- Mindst én funktion skal bruge `return`
+- Mindst én funktion skal bruge en **default-parameter** (fx `showToast(text, ms = 2500)`)
 
 ---
 
@@ -80,6 +100,7 @@ I `index.html` skal API-filen indlæses **før** `index.js`:
 ## Du skal kunne forklare
 
 - Hvad en parameter er, og hvorfor den gør funktionen mere generel
+- Hvad en default-parameter er, og hvornår den bruges
 - Hvad `return` gør i mindst én af dine funktioner
 - Hvorfor det er smart at samle genbrugelig kode i en separat fil
 - Hvordan dit demo-projekt kalder API’et
