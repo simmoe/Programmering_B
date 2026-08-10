@@ -75,12 +75,15 @@ Pakker connect + subscribe + message ind i én helper.
 Du vælger topic og hvad der skal ske med teksten:
 
 ```js
-mqttListen('programmering', (tekst) => {
+function handleMqttMessage(tekst) {
   showToast(tekst)
-})
+}
+
+mqttListen('programmering', handleMqttMessage)
 ```
 
-`onMessage` er en callback — en funktion, helperen kalder automatisk, når der kommer en MQTT-besked.  
+`handleMqttMessage` er en almindelig funktion.  
+Du giver den videre til `mqttListen`, som kalder den automatisk, når der kommer en MQTT-besked.  
 Kræver MQTT-scriptet i HTML (som i favoritspil-forløbet).
 
 ### Krav til funktionerne

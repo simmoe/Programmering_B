@@ -190,14 +190,18 @@ function mqttListen(topic, onMessage) {
   return client
 }
 
-// brug:
-mqttListen('programmering', (tekst) => {
+// Din egen funktion — den kaldes automatisk, når der kommer en besked
+function handleMqttMessage(tekst) {
   showToast(tekst)
-  // eller: shiftPage(...) hvis tekst er "1", "2", "3"
-})
+  // eller: skift side, hvis tekst er "1", "2", "3"
+}
+
+// brug:
+mqttListen('programmering', handleMqttMessage)
 ```
 
-`onMessage` er en **callback**: en funktion, du selv bestemmer, som helperen kalder automatisk.
+`handleMqttMessage` er en **callback**: en almindelig funktion, du selv laver.  
+Du giver den videre til `mqttListen`, som kalder den automatisk med beskedteksten.
 
 Husk MQTT-scriptet i HTML:
 
