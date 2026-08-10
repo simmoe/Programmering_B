@@ -7,6 +7,22 @@ Sider, menu fra DOM, `shiftPage` — og MQTT, så siden kan styres udefra.
 
 ---
 
+## Sådan virker MQTT
+
+MQTT er beskeder via en **broker**.  
+Nogen **publisher** en besked på et **topic**. Alle der **subscriber** på samme topic, modtager den.
+
+![MQTT-oversigt: Publisher sender til broker på et topic, subscriber modtager beskeden](assets/mqtt-oversigt.svg)
+
+I vores eksempel:
+
+- Publisher = MQTT Explorer (senere en M5)
+- Broker = `mqtt.nextservices.dk`
+- Topic = `programmering`
+- Subscriber = hjemmesiden, som kalder `shiftPage`
+
+---
+
 ## Menu fra et DOM-array
 
 ```js
