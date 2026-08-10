@@ -12,7 +12,7 @@ Sider, menu fra DOM, `shiftPage` — og MQTT, så siden kan styres udefra.
 MQTT er beskeder via en **broker**.  
 Nogen **publisher** en besked på et **topic**. Alle der **subscriber** på samme topic, modtager den.
 
-![MQTT-oversigt: Publisher sender til broker på et topic, subscriber modtager beskeden](assets/mqtt-oversigt.svg)
+![MQTT-oversigt: Publisher sender til broker på et topic, subscriber modtager beskeden](assets/mqtt-oversigt.png)
 
 I vores eksempel:
 
