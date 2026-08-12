@@ -1,9 +1,11 @@
-# 11. Favoritspil (2. år)
+# 11. Feature fra favoritspil (2. år)
 
-Sider, menu fra DOM, `shiftPage` — og MQTT, så siden kan styres udefra.
+Én lækker feature fra dit favoritspil — vist eller brugt på siden.  
+Plus sider, menu fra DOM, `shiftPage` og MQTT.
 
 **Demo:** [https://simmoe.github.io/Programmering_B/11_AAR_2_START/](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)  
-**Opgave:** [OPGAVE.md](OPGAVE.md)
+**Opgave:** [OPGAVE.md](OPGAVE.md)  
+**Læringsrum:** [11_0_LAERINGSRUM](../11_0_LAERINGSRUM/README.md) — VS Code uden AI + Cursor som lærer
 
 ---
 
@@ -125,4 +127,4 @@ if (!isNaN(msg) && Number(msg) >= 1 && Number(msg) <= allPages.length) {
 Publish `1`, `2` eller `3` på topic `programmering` — så skifter hjemmesiden side.  
 Senere kan en M5 i teknikfag sende de samme beskeder.
 
-← [Forrige](../10_AARSPROVE/README.md) · [Pensum](../PENSUM.md) · → [Næste: Personligt API](../12_PERSONLIGT_API/README.md)
+← [Forrige: Læringsrum](../11_0_LAERINGSRUM/README.md) · [Pensum](../PENSUM.md) · → [Næste: Personligt API](../12_PERSONLIGT_API/README.md)

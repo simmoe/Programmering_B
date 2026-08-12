@@ -24,4 +24,4 @@ Samme side-skift som i starten — nu inde i et rigtigt spil.
 - p5 `removeClass`: https://p5js.org/reference/p5.Element/removeClass/
 - MDN `setInterval`: https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
 
-← [Forrige](../09_firebase/README.md) · [Pensum](../PENSUM.md) · → [Næste: Favoritspil](../11_AAR_2_START/README.md)
+← [Forrige](../09_firebase/README.md) · [Pensum](../PENSUM.md) · → [Næste: Læringsrum](../11_0_LAERINGSRUM/README.md)

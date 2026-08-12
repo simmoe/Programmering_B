@@ -246,4 +246,4 @@ Husk MQTT-scriptet i HTML:
 
 **Reference:** [mqtt.js](https://github.com/mqttjs/MQTT.js) · [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
 
-← [Forrige: Favoritspil](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)
+← [Forrige: Feature-demo](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)

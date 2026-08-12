@@ -1,31 +1,48 @@
-# Mit favoritspil — interaktiv præsentation
+# Én lækker feature fra dit favoritspil
 
 **Programmering B — 2. år**  
-**Udgangspunkt:** denne mappe (`11_AAR_2_START`)
+**Udgangspunkt:** denne mappe (`11_AAR_2_START`)  
+**Setup:** [Læringsrum](../11_0_LAERINGSRUM/README.md) (VS Code til kode · Cursor til spørgsmål)
 
 ---
 
 ## Opgaven
 
-Lav en lille web-præsentation af dit **favoritspil**.
+Vælg dit **favoritspil** — men fokusér på **én enkelt lækker feature**.
 
-Du bygger videre på skabelonen med flere sider/skærme og navigation med `shiftPage()`.
+Din opgave er ikke at fortælle hele spillets historie.  
+Din opgave er at **vise eller bruge** den feature på siden — så godt du kan.
 
-Vælg selv spillet. Det skal bare være noget, du faktisk gider præsentere.
+Eksempler på features:
+- dodge / dash / parry
+- inventory / crafting
+- fog of war / minimap
+- dialog-valg
+- combo-meter
+- stealth / synsfelt
+- build-a-deck / draft
+- noget helt andet, du synes er fedt
+
+Byg videre på skabelonen med flere sider og `shiftPage()`.
 
 ---
 
 ## Krav til produktet
 
+### Feature først
+- Vælg **én** feature og giv den et klart navn på siden
+- Mindst **én side**, hvor brugeren **prøver / oplever** feature’en (klik, hover, tast, timer, lyd, animation …)
+- Det behøver ikke være en 1:1-kopi af spillet — det skal være en **synlig demo** af idéen
+
 ### Sider
 - Mindst **4 sider** (`.page`)
 - Hver side har sit eget `id` og `title`
 - Hver side har egen baggrund (billede, farve eller gradient)
-- Kort tekst på hver side — fx:
-  - intro / hvad spillet er
-  - gameplay
-  - karakterer / verden
-  - hvorfor lige det her spil er dit favorit
+- Forslag til sider:
+  - hvilket spil + hvilken feature
+  - hvordan feature’en føles i spillet (kort)
+  - **din demo** (her skal man kunne bruge/se den)
+  - hvad var svært / hvad ville du bygge videre
 
 ### Navigation
 - En menu (fx i en `footer`), der bygges fra DOM’en med `selectAll('.page')`
@@ -34,10 +51,10 @@ Vælg selv spillet. Det skal bare være noget, du faktisk gider præsentere.
 - `shiftPage()` skal bruge `addClass('show')` / `removeClass('show')`
 
 ### Audiovisuelle effekter
-- Mindst én **visuel effekt** på hver side  
-  (fx hover, transition, GIF, hide/show, animation, parallax-agtigt greb)
-- Mindst én **lyd- eller AV-effekt** et sted i præsentationen  
-  (fx klik-lyd, baggrundsmusik, speech, kort video)
+- Mindst én **visuel effekt** knyttet til feature-demoen  
+  (fx hover, transition, hide/show, animation, partikler-light)
+- Mindst én **lyd- eller AV-effekt** et sted  
+  (fx klik-lyd, hit-sound, kort speech/video)
 
 ### Assets
 - Læg billeder, lyd osv. i `assets/`
@@ -47,23 +64,24 @@ Vælg selv spillet. Det skal bare være noget, du faktisk gider præsentere.
 
 ## Tips
 
-- Start med HTML-siderne og CSS, så navigationen virker
-- Byg menuen dynamisk, så den følger med, når du tilføjer nye sider
+- Start med at kunne **gøre én ting** i demoen — så pynt
+- Hellere en lille feature der virker, end en stor der kun er tekst
 - Genbrug gerne teknikker fra 1. år (`04_webcam_mic_speech`, parallax, spil-projekter osv.)
-- Hold det simpelt og personligt — hellere 4 fede sider end 10 tomme
+- MQTT/toast fra timen er nice-to-have, ikke krav
 
 ---
 
 ## Du skal kunne forklare
 
+- Hvilken feature du valgte, og hvordan din demo viser den
 - Hvordan siderne er gemt i DOM’en
 - Hvordan menuen bygges fra et array med `selectAll('.page')`
 - Hvad `addClass` og `removeClass` gør i `shiftPage()`
-- Hvordan du har koblet klik / lyd / visuelle effekter til dine sider
+- Hvordan klik / lyd / visuelle effekter er koblet til din feature
 
 ---
 
 ## Aflevering
 
 - Færdigt projekt i mappen
-- Klar til kort fremvisning: vis præsentationen og forklar én teknisk ting, du er stolt af
+- Kort fremvisning: **vis feature-demoen** og forklar én teknisk ting, du er stolt af

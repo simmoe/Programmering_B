@@ -43,8 +43,11 @@ Større projekt: escape room, timer, high score og synopsis.
 
 ## 2. år
 
-### 11. [Favoritspil](11_AAR_2_START/README.md)
-Sider, `shiftPage`, menu fra DOM, AV-effekter og MQTT (styr siden udefra).  
+### 11.0 [Læringsrum](11_0_LAERINGSRUM/README.md)
+VS Code uden AI + Cursor som lærer — dit personlige setup før projekterne.
+
+### 11. [Feature fra favoritspil](11_AAR_2_START/README.md)
+Én feature vist/brugt på siden · `shiftPage`, menu fra DOM, AV og MQTT.  
 [Demo](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)
 
 ### 12. [Personligt API](12_PERSONLIGT_API/README.md)
