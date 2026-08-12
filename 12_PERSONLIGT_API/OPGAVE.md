@@ -2,7 +2,7 @@
 
 **Programmering B — 2. år**  
 **Udgangspunkt:** dette kapitel (`12_PERSONLIGT_API`)  
-**Bygger videre på:** favoritspil-forløbet og teknikker fra 1. år
+**Bygger videre på:** MQTT-startforløbet og teknikker fra 1. år
 
 ---
 
@@ -43,7 +43,7 @@ Vælg selv — her er forslag:
 
 ### Om `showToast` og default-parametre
 
-`showToast` er den Mac-agtige notifikation fra favoritspil/MQTT-forløbet.
+`showToast` er den Mac-agtige notifikation fra MQTT-startforløbet.
 
 ```js
 function showToast(text, ms = 2500) { /* ... */ }
@@ -98,7 +98,7 @@ mqttListen('programmering', handleMqttMessage)
 ```
 
 Samme callback-idé som `bindClick` — bare ved MQTT i stedet for klik.  
-Kræver MQTT-scriptet i HTML (som i favoritspil-forløbet).
+Kræver MQTT-scriptet i HTML (som i MQTT-startforløbet).
 
 ### Krav til funktionerne
 
@@ -114,7 +114,7 @@ Lav en lille side (eller et par sider), der kalder dine API-funktioner.
 
 Det kan fx være:
 
-- en mini-udgave af dit favoritspil-tema
+- en mini-udgave af dit MQTT send/skift-projekt
 - en klik-test med timer
 - en “random fact”-side
 - noget helt eget

@@ -1,4 +1,4 @@
-# Én lækker feature fra dit favoritspil
+# MQTT: send & skift side
 
 **Programmering B — 2. år**  
 **Udgangspunkt:** denne mappe (`11_AAR_2_START`)  
@@ -8,80 +8,68 @@
 
 ## Opgaven
 
-Vælg dit **favoritspil** — men fokusér på **én enkelt lækker feature**.
+Lav et lille projekt med **mindst to sider**:
 
-Din opgave er ikke at fortælle hele spillets historie.  
-Din opgave er at **vise eller bruge** den feature på siden — så godt du kan.
+1. **Send-side** — her **publisher** du noget via MQTT (knap, input, valg …)
+2. **Reaktion-side(r)** — her sker der noget synligt, når beskeden lander  
+   (skift side med `shiftPage`, åbn/vis indhold, toast, lyd …)
 
-Eksempler på features:
-- dodge / dash / parry
-- inventory / crafting
-- fog of war / minimap
-- dialog-valg
-- combo-meter
-- stealth / synsfelt
-- build-a-deck / draft
-- noget helt andet, du synes er fedt
+Du skal både **sende** og **modtage** — i samme projekt.
 
-Byg videre på skabelonen med flere sider og `shiftPage()`.
+Idéen er den samme som i timen: beskeder på et topic kan styre, hvad der sker på skærmen.
 
 ---
 
 ## Krav til produktet
 
-### Feature først
-- Vælg **én** feature og giv den et klart navn på siden
-- Mindst **én side**, hvor brugeren **prøver / oplever** feature’en (klik, hover, tast, timer, lyd, animation …)
-- Det behøver ikke være en 1:1-kopi af spillet — det skal være en **synlig demo** af idéen
+### To roller på siden
+- Mindst **én send-side** med tydelig UI til at sende (fx knapper eller tekstfelt + send)
+- Mindst **én reaktion**, når MQTT-besked modtages — fx:
+  - `shiftPage` til en bestemt side
+  - vise/skjule et element
+  - `showToast` med beskeden
+  - starte lyd / animation
+- Det skal virke, når **du selv** sender fra din send-side  
+  (bonus: det virker også fra MQTT Explorer / en kammerats side på samme topic)
 
-### Sider
-- Mindst **4 sider** (`.page`)
-- Hver side har sit eget `id` og `title`
-- Hver side har egen baggrund (billede, farve eller gradient)
-- Forslag til sider:
-  - hvilket spil + hvilken feature
-  - hvordan feature’en føles i spillet (kort)
-  - **din demo** (her skal man kunne bruge/se den)
-  - hvad var svært / hvad ville du bygge videre
+### Sider & navigation
+- Mindst **2 sider** (`.page`) — gerne flere, hvis reaktionerne har egne skærme
+- Hver side har `id` og `title`
+- Menu fra DOM med `selectAll('.page')` + `shiftPage()`
+- `shiftPage()` bruger `addClass('show')` / `removeClass('show')`
 
-### Navigation
-- En menu (fx i en `footer`), der bygges fra DOM’en med `selectAll('.page')`
-- Menuen skal bruge sidernes `title`
-- Klik på et menupunkt skal skifte side med `shiftPage()`
-- `shiftPage()` skal bruge `addClass('show')` / `removeClass('show')`
+### MQTT
+- Connect til `wss://mqtt.nextservices.dk`
+- Subscribe på et topic (fx `programmering` eller dit eget hold-topic)
+- Publish fra send-siden med `client.publish(topic, besked)`
+- I `message`-callbacken: læs teksten og **reager** (side-skift / UI)
 
-### Audiovisuelle effekter
-- Mindst én **visuel effekt** knyttet til feature-demoen  
-  (fx hover, transition, hide/show, animation, partikler-light)
-- Mindst én **lyd- eller AV-effekt** et sted  
-  (fx klik-lyd, hit-sound, kort speech/video)
-
-### Assets
-- Læg billeder, lyd osv. i `assets/`
-- Du må gerne hente materialer fra nettet — husk at kunne sige, hvor de kommer fra
+### Feedback
+- Brug gerne toast, når du forbinder eller modtager en besked
+- Mindst én synlig reaktion ud over “tekst i konsollen”
 
 ---
 
 ## Tips
 
-- Start med at kunne **gøre én ting** i demoen — så pynt
-- Hellere en lille feature der virker, end en stor der kun er tekst
-- Genbrug gerne teknikker fra 1. år (`04_webcam_mic_speech`, parallax, spil-projekter osv.)
-- MQTT/toast fra timen er nice-to-have, ikke krav
+- Start med: knap → `publish` → se beskeden i toast eller på siden
+- Så: hvis besked er `2` (eller `rum2`, `åbn`, …) → `shiftPage(...)`
+- Aftal topic med dem, du tester med — ellers får I hinandens beskeder
+- Kør via Live Server (ikke `file://`)
 
 ---
 
 ## Du skal kunne forklare
 
-- Hvilken feature du valgte, og hvordan din demo viser den
-- Hvordan siderne er gemt i DOM’en
-- Hvordan menuen bygges fra et array med `selectAll('.page')`
-- Hvad `addClass` og `removeClass` gør i `shiftPage()`
-- Hvordan klik / lyd / visuelle effekter er koblet til din feature
+- Forskellen på **publish** og **subscribe**
+- Hvor i koden du **sender**, og hvor du **modtager**
+- Hvordan en MQTT-besked får siden til at skifte / åbne noget
+- Hvordan menuen bygges fra `selectAll('.page')`
+- Hvad `addClass` / `removeClass` gør i `shiftPage()`
 
 ---
 
 ## Aflevering
 
 - Færdigt projekt i mappen
-- Kort fremvisning: **vis feature-demoen** og forklar én teknisk ting, du er stolt af
+- Kort fremvisning: **send noget** → **vis reaktionen** (side-skift eller åbning) live

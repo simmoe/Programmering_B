@@ -97,7 +97,7 @@ Det kræver et HTML-element, fx:
 <div id="toast"></div>
 ```
 
-…og CSS der gør `#toast` til en kort notifikation øverst til højre (som I så i favoritspil/MQTT-forløbet).
+…og CSS der gør `#toast` til en kort notifikation øverst til højre (som I så i MQTT-startforløbet).
 
 **Reference:** [MDN Default parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
@@ -207,7 +207,7 @@ Så virker funktionen i flere projekter, også hvis I ikke kalder klassen `show`
 
 ## Eksempel: MQTT-helper
 
-MQTT-koden fra favoritspil-forløbet kan også pakkes ind.  
+MQTT-koden fra startforløbet kan også pakkes ind.  
 Idéen: du giver **topic** og en **funktion**, der skal kaldes, når der kommer en besked.
 
 ```js
@@ -246,4 +246,4 @@ Husk MQTT-scriptet i HTML:
 
 **Reference:** [mqtt.js](https://github.com/mqttjs/MQTT.js) · [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
 
-← [Forrige: Feature-demo](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)
+← [Forrige: MQTT send & skift](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)

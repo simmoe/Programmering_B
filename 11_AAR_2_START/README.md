@@ -1,7 +1,7 @@
-# 11. Feature fra favoritspil (2. år)
+# 11. MQTT: send & skift side (2. år)
 
-Én lækker feature fra dit favoritspil — vist eller brugt på siden.  
-Plus sider, menu fra DOM, `shiftPage` og MQTT.
+Én side **sender** MQTT. En anden **skifter / åbner**, når beskeden lander.  
+Plus menu fra DOM, `shiftPage` og toast.
 
 **Demo:** [https://simmoe.github.io/Programmering_B/11_AAR_2_START/](https://simmoe.github.io/Programmering_B/11_AAR_2_START/)  
 **Opgave:** [OPGAVE.md](OPGAVE.md)  
@@ -18,10 +18,10 @@ Nogen **publisher** en besked på et **topic**. Alle der **subscriber** på samm
 
 I vores eksempel:
 
-- Publisher = MQTT Explorer (senere en M5)
+- Publisher = din **send-side** (eller MQTT Explorer / senere en M5)
 - Broker = `mqtt.nextservices.dk`
-- Topic = `programmering`
-- Subscriber = hjemmesiden, som kalder `shiftPage`
+- Topic = `programmering` (eller dit eget)
+- Subscriber = samme hjemmeside, som kalder `shiftPage` / viser noget
 
 ---
 
@@ -43,9 +43,11 @@ HTML-siderne **bliver** menuen. Tilføj en side → menuen følger med.
 
 ---
 
-## Skift side med `shiftPage`
+## `shiftPage`
 
 ```js
+let currentPage = '#page1'
+
 function shiftPage(newId) {
   select(currentPage).removeClass('show')
   select(newId).addClass('show')
@@ -53,78 +55,39 @@ function shiftPage(newId) {
 }
 ```
 
-CSS-klassen `show` styrer, hvilken side der er synlig.
-
 **Reference:** [p5 addClass](https://p5js.org/reference/p5.Element/addClass/) · [p5 removeClass](https://p5js.org/reference/p5.Element/removeClass/)
 
 ---
 
-## MQTT-bibliotek i HTML
+## Send MQTT fra en knap
 
-```html
-<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+```js
+select('#sendBtn').mousePressed(() => {
+  let tekst = select('#msgInput').value()
+  client.publish('programmering', tekst)
+  showToast('Sendt: ' + tekst)
+})
 ```
 
-Scriptet giver adgang til `mqtt` i JavaScript.
+---
+
+## Modtag → skift side
+
+```js
+client.on('message', (topic, message) => {
+  let msg = message.toString().trim()
+  showToast('Modtog: ' + msg)
+
+  if (msg === '2' || msg === 'page2') {
+    shiftPage('#page2')
+  }
+})
+```
+
+Publish `1`, `2`, `page2` — eller dine egne koder — og lad siden reagere.
 
 **Reference:** [mqtt.js](https://github.com/mqttjs/MQTT.js)
 
 ---
-
-## Forbind til MQTT-broker
-
-```js
-client = mqtt.connect('wss://mqtt.nextservices.dk')
-
-client.on('connect', (m) => {
-  console.log('Client connected: ', m)
-  connectionDiv.html('You are now connected to mqtt.nextservices.dk')
-})
-```
-
-`wss://` = WebSocket-forbindelse fra browseren til brokeren.
-
-**Reference:** [MQTT.js connect](https://github.com/mqttjs/MQTT.js#mqttconnecturl-options)
-
----
-
-## Subscribe på et topic
-
-```js
-client.subscribe('programmering')
-```
-
-Et **topic** er emnet, I lytter på. Kun beskeder på det topic kommer ind.
-
----
-
-## Modtag beskeder
-
-```js
-client.on('message', (topic, message) => {
-  console.log('Received Message: ' + message.toString())
-  console.log('On Topic: ' + topic)
-
-  connectionDiv.html(
-    'Received message: <b>' + message + '</b> on topic: <b>' + topic + '</b>'
-  )
-})
-```
-
-Når nogen **publisher** til topic’et, kører denne funktion.
-
----
-
-## Skift side via MQTT
-
-```js
-let msg = message.toString().trim()
-if (!isNaN(msg) && Number(msg) >= 1 && Number(msg) <= allPages.length) {
-  shiftPage('#page' + msg)
-}
-```
-
-Publish `1`, `2` eller `3` på topic `programmering` — så skifter hjemmesiden side.  
-Senere kan en M5 i teknikfag sende de samme beskeder.
 
 ← [Forrige: Læringsrum](../11_0_LAERINGSRUM/README.md) · [Pensum](../PENSUM.md) · → [Næste: Personligt API](../12_PERSONLIGT_API/README.md)

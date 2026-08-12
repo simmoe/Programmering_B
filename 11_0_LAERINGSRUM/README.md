@@ -132,4 +132,4 @@ Udfyld med dig selv (2 minutter). Gem gerne i din logbog eller i en fil `mit-lae
 
 ---
 
-← [Forrige: Årsprøve](../10_AARSPROVE/README.md) · [Pensum](../PENSUM.md) · → [Næste: Feature-demo](../11_AAR_2_START/README.md)
+← [Forrige: Årsprøve](../10_AARSPROVE/README.md) · [Pensum](../PENSUM.md) · → [Næste: MQTT send & skift](../11_AAR_2_START/README.md)
