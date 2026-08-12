@@ -15,19 +15,23 @@ function setup(){
         }, 2000)
     })
 
-    client.subscribe('programmering')
-    client.subscribe('programmering/page')
+    client.subscribe('simon')
+    client.subscribe('simon/page')
 
     //Her får vi beskeder på forskellige topics vi abonnerer på 
     client.on('message', (topic, msg) => {
+        console.log(topic, msg.toString())
         msg = msg.toString()
-        if(topic == 'programmering/page'){
+        if(topic == 'simon/page'){
             console.log('nu skal der skiftes side')
             //ER DET ET TAL?
             msg = '#page' + msg
             shiftPage(msg)
         }
-        select('#msg').elt.textContent = 'Besked på topic ' + topic + ' med teksten ' + msg
+        //NU SKAL DER SKE NOGET SPÆNDENDE
+        if(topic == 'simon'){
+            select('#msg').elt.textContent = 'Besked på topic ' + topic + ' med teksten ' + msg
+        }
     })
 
     client.publish('programmering/page', '1')
@@ -35,14 +39,9 @@ function setup(){
 }
 
 var currentPage = "#page1"
-var readyToShift = true
 function shiftPage(newPage){
-    if(readyToShift){
-        if( !select(newPage) ) return
-        select(currentPage).removeClass('show')
-        currentPage = newPage
-        select(currentPage).addClass('show')
-        readyToShift = false
-        setTimeout(()=>readyToShift = true, 5000)
-    }
+    if( !select(newPage) ) return
+    select(currentPage).removeClass('show')
+    currentPage = newPage
+    select(currentPage).addClass('show')
 }
