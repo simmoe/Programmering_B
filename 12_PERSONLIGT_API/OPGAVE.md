@@ -15,7 +15,7 @@ Filen skal hedde noget i stil med:
 - `myApi.js`, eller  
 - `ditnavnApi.js`
 
-Du skal også have et lille projekt (`index.html` + `index.js` + stylesheet), der **viser**, at API’et virker. CSS der hører til API’et (fx `.show` og `#toast`) kan ligge i `myApi.css`.
+Du skal også have et lille projekt (`index.html` + `index.js` + stylesheet), der **viser**, at API’et virker. CSS der hører til API’et (fx `.show` og `#toast`) kan ligge i `myApiStyles.css`.
 
 ---
 
@@ -54,7 +54,7 @@ showToast('Fejl!', 4000)  // forsvinder efter 4 sek
 `ms = 2500` er en **default-værdi**: parameteren er valgfri.  
 I JavaScript laver vi ikke flere funktioner med samme navn og forskelligt antal parametre — vi bruger defaults i stedet.
 
-Husk HTML + CSS til `#toast` (ét fast element). Det CSS kan ligge i `myApi.css`.
+Husk HTML + CSS til `#toast` (ét fast element). Det CSS kan ligge i `myApiStyles.css`.
 
 ### Om `shiftPage`
 
@@ -148,7 +148,7 @@ Det vigtige er ikke det store produkt — det er, at API’et bliver brugt.
 I `index.html` skal API’ets CSS og JS indlæses **før** `index.js`:
 
 ```html
-<link rel="stylesheet" href="./myApi.css">
+<link rel="stylesheet" href="./myApiStyles.css">
 <script src="./myApi.js"></script>
 <script src="./index.js"></script>
 ```
@@ -169,6 +169,6 @@ I `index.html` skal API’ets CSS og JS indlæses **før** `index.js`:
 ## Aflevering
 
 - `myApi.js` (eller tilsvarende) med mindst 4 funktioner
-- `myApi.css` (eller tilsvarende) med det CSS, funktionerne forventer
+- `myApiStyles.css` (eller tilsvarende) med det CSS, funktionerne forventer
 - Et lille demo-projekt der bruger dem
 - Kort fremvisning: vis én funktion i API’et og ét sted, den bliver kaldt

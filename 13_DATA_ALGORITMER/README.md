@@ -21,10 +21,10 @@ Det er ét fælles interface — telefonerne er fjernbetjeninger.
 
 ## Trin 0. Tag API’et med
 
-Kopiér `myApi.js` og `myApi.css` ind i projektet.
+Kopiér `myApi.js` og `myApiStyles.css` ind i projektet.
 
 ```html
-<link rel="stylesheet" href="./myApi.css">
+<link rel="stylesheet" href="./myApiStyles.css">
 <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 <script src="./myApi.js"></script>
 <script src="./index.js"></script>
@@ -182,17 +182,17 @@ Nu ejer `playerA` det, spillet skal bruge. Resten af JSON’en kan I ignorere.
 
 ---
 
-## Trin 6. To sider: board og controller
+## Trin 6. To apps: fællesskærm og controller
 
-To HTML-filer (eller to `.page` med `shiftPage`, hvis I kører det i samme vindue under test):
+De to roller ligger i hver sin mappe. Begge bruger API-filerne fra roden:
 
-| Fil | Hvem | Job |
+| Mappe | Hvem | Job |
 |---|---|---|
-| `index.html` | Fællesskærm | Viser katalog + spiller A og B |
-| `controller.html` | Mobil | Knapper: forrige / næste / vælg / filter |
+| `twoPlayerScreen/` | Computer / projektor | Viser katalog + spiller A og B |
+| `controller/` | Mobil | Knapper: forrige / næste / vælg / filter |
 
-Computer åbner `index.html` via Live Server.  
-Telefonen åbner `controller.html` på **samme** Live Server — brug computerens IP, fx `http://192.168.x.x:5500/controller.html`.
+Computer åbner `twoPlayerScreen/index.html` via Live Server.  
+Telefonen åbner `controller/index.html` på **samme** Live Server — brug computerens IP, fx `http://192.168.x.x:5500/controller/`.
 
 På controlleren: én tydelig knap “Jeg er A” / “Jeg er B”, så telefonen ved, hvilken slot den styrer.
 

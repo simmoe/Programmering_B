@@ -15,7 +15,7 @@ To **mobiler** er controllere — én til spiller A, én til spiller B. De sende
 
 Det er ikke to separate konfigurations-sider. Telefonen er en fjernbetjening til den fælles skærm.
 
-Medbring `myApi.js` og `myApi.css`. Nye, genbrugelige funktioner lægges i API’et.
+Medbring `myApi.js` og `myApiStyles.css`. Nye, genbrugelige funktioner lægges i API’et.
 
 ---
 
@@ -23,8 +23,8 @@ Medbring `myApi.js` og `myApi.css`. Nye, genbrugelige funktioner lægges i API�
 
 ### 1. Board og controller
 
-- En fællesskærm (`index.html`), der viser katalog + slot A og slot B  
-- En controller (`controller.html`), der virker på mobil: vælg A eller B, bladre, vælg, gerne ét filter  
+- En fællesskærm i `twoPlayerScreen/`, der viser katalog + slot A og slot B  
+- En mobil-app i `controller/`: vælg A eller B, bladre, vælg, gerne ét filter  
 - Live Server — telefonen rammer computerens IP, ikke `file://`
 
 ### 2. Jeres egne objekter
@@ -47,7 +47,7 @@ Funktionen skal ligge i API’et, hvis den kan genbruges (`filterBy`, `sortBy`, 
 - `shiftPage` mindst ét sted (fx katalog → arena, når begge er valgt)  
 - `showToast` når kataloget er hentet, og når A eller B vælger  
 - `mousePressed` til klik  
-- `myApi.css` indlæst på **begge** sider
+- `myApiStyles.css` indlæst på **begge** sider
 
 ### 6. MQTT som controller-ledning
 
@@ -79,6 +79,7 @@ Eget topic.
 
 ## Aflevering
 
-- `index.html` (board), `controller.html` (mobil), `index.js` / evt. `controller.js`, `myApi.js`, `myApi.css`  
+- `twoPlayerScreen/` og `controller/`, begge med `index.html`, `index.js` og `index.css`  
+- Fælles `myApi.js`, `myApiStyles.css` og `assets/` i projektets rod  
 - To spillere valgt via controllere, synligt på fællesskærmen  
 - Kort fremvisning: telefon vælger → boardet opdaterer

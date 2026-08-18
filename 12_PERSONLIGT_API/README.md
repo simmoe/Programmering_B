@@ -19,7 +19,7 @@ showMessage('Du vandt!', '#result')
 shiftPage('#page2')
 ```
 
-Funktionerne gemmes typisk i en fil for sig, fx `myApi.js`. CSS der hører til (`.show`, `#toast` osv.) kan ligge i `myApi.css`.
+Funktionerne gemmes typisk i en fil for sig, fx `myApi.js`. CSS der hører til (`.show`, `#toast` osv.) kan ligge i `myApiStyles.css`.
 
 **Reference:** [MDN Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 
@@ -162,12 +162,12 @@ function showToast(text, ms = 2500) {
 `index.html` (stylesheet + API **før** den kode, der bruger det):
 
 ```html
-<link rel="stylesheet" href="./myApi.css">
+<link rel="stylesheet" href="./myApiStyles.css">
 <script src="./myApi.js"></script>
 <script src="./index.js"></script>
 ```
 
-`myApi.css` er det, der får funktionerne til at *se* rigtige ud: klassen `.show` til sider, layout til `#toast`, og hvad I ellers generaliserer. Så flytter I både JS og CSS med over i næste projekt.
+`myApiStyles.css` er det, der får funktionerne til at *se* rigtige ud: klassen `.show` til sider, layout til `#toast`, og hvad I ellers generaliserer. Så flytter I både JS og CSS med over i næste projekt.
 
 **Reference:** [MDN Script loading](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
 
@@ -201,7 +201,7 @@ shiftPage('#gameplay', '#intro', 'active') // anden CSS-klasse
 - `fromId` — siden der skal skjules (default: den nuværende)  
 - `className` — CSS-klassen der styrer synlighed (default: `show`)  
 
-Klassen `show` ligger i `myApi.css`, så I ikke skal huske at kopiere den hver gang.
+Klassen `show` ligger i `myApiStyles.css`, så I ikke skal huske at kopiere den hver gang.
 
 **Reference:** [p5 select](https://p5js.org/reference/p5/select/) · [p5 addClass](https://p5js.org/reference/p5.Element/addClass/) · [p5 removeClass](https://p5js.org/reference/p5.Element/removeClass/)
 
