@@ -53,6 +53,9 @@ Publish fra én side · subscribe der skifter/åbner · menu, `shiftPage`, toast
 ### 12. [Personligt API](12_PERSONLIGT_API/README.md)
 Parametre, default-værdier, callbacks, `return`, `showToast` og MQTT-helpers.
 
+### 13. [Data og algoritmer](13_DATA_ALGORITMER/README.md)
+Fællesskærm + mobil-controllere · Rick and Morty · filter/sorter · dit API.
+
 ## Bilag
 
 - [Læreplan](UVM_Programmering_B/Laereplan_Programmering_B_valgfag_2017.pdf)

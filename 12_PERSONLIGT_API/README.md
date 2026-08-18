@@ -16,10 +16,10 @@ Du kalder dem med et klart navn — uden at skulle huske hele den indre kode hve
 startTimer(10, '#timer')
 showToast('Forbundet til MQTT')
 showMessage('Du vandt!', '#result')
-shiftPage('#page1', '#page2', 'show')
+shiftPage('#page2')
 ```
 
-Funktionerne gemmes typisk i en fil for sig, fx `myApi.js`.
+Funktionerne gemmes typisk i en fil for sig, fx `myApi.js`. CSS der hører til (`.show`, `#toast` osv.) kan ligge i `myApi.css`.
 
 **Reference:** [MDN Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 
@@ -126,29 +126,20 @@ En parameter kan også være **en hel funktion**.
 
 Det kaldes en **callback**: “her er en funktion — kald den, når noget sker”.
 
-Først laver du den funktion, der skal køres:
+Det kender I allerede fra p5: [`mousePressed`](https://p5js.org/reference/p5.Element/mousePressed/) tager en funktion, der skal køres ved klik.
 
 ```js
 function startSpil() {
   showToast('Spillet starter')
-  shiftPage('#page1', '#page2', 'show')
-}
-```
-
-Så giver du den videre til en helper:
-
-```js
-function bindClick(id, callback) {
-  select(id).mousePressed(callback)
+  shiftPage('#page2')
 }
 
-bindClick('#startBtn', startSpil)
+select('#startBtn').mousePressed(startSpil)
 ```
 
-Når knappen klikkes, kalder `bindClick` automatisk `startSpil`.  
-Du skriver ikke `startSpil()` med parentes her — du giver selve funktionen videre.
+Du skriver ikke `startSpil()` med parentes her — du giver selve funktionen videre. p5 kalder den, når der klikkes.
 
-Samme idé bruger I senere med MQTT: `mqttListen(topic, handleMqttMessage)`.
+Samme idé kan I pakke ind i jeres eget API, fx `mqttListen(topic, handleMqttMessage)`.
 
 **Reference:** [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
 
@@ -168,38 +159,49 @@ function showToast(text, ms = 2500) {
 }
 ```
 
-`index.html` (husk rækkefølgen — API før den kode, der bruger det):
+`index.html` (stylesheet + API **før** den kode, der bruger det):
 
 ```html
+<link rel="stylesheet" href="./myApi.css">
 <script src="./myApi.js"></script>
 <script src="./index.js"></script>
 ```
 
-Nu kan både dette projekt og næste projekt genbruge de samme værktøjer.
+`myApi.css` er det, der får funktionerne til at *se* rigtige ud: klassen `.show` til sider, layout til `#toast`, og hvad I ellers generaliserer. Så flytter I både JS og CSS med over i næste projekt.
 
 **Reference:** [MDN Script loading](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)
 
 ---
 
-## Eksempel: generaliseret `shiftPage`
+## Eksempel: `shiftPage` med default-parametre
 
-I stedet for at bruge en global `currentPage` og altid klassen `show`, kan funktionen tage **alt** ind som parametre:
+I 1. år kaldte I `shiftPage('#page2')` — først den side, I vil **hen til**. Det bevarer vi.  
+De ekstra parametre har defaults, så den gamle måde stadig virker, og den nye er valgfri:
 
 ```js
-function shiftPage(currentId, newId, className) {
-  select(currentId).removeClass(className)
-  select(newId).addClass(className)
+let currentPage = '#page1'
+
+function shiftPage(newId, fromId = currentPage, className = 'show') {
+  let fromEl = select(fromId)
+  let toEl = select(newId)
+  if (!toEl) return
+  if (fromEl) fromEl.removeClass(className)
+  toEl.addClass(className)
+  currentPage = newId
 }
 
-shiftPage('#page1', '#page2', 'show')
-shiftPage('#intro', '#gameplay', 'active')
+shiftPage('#page2')                       // som i 1. år
+shiftPage('#page2', '#page1')             // sig selv, hvorfra
+shiftPage('#gameplay', '#intro', 'active') // anden CSS-klasse
 ```
 
-- `currentId` — siden der skal skjules  
-- `newId` — siden der skal vises  
-- `className` — hvilken CSS-klasse der styrer synlighed  
+`select()` returnerer `null`, hvis elementet ikke findes. Uden tjekket crasher `removeClass`, fx hvis defaulten `'#page1'` slet ikke er på siden. Findes fra-siden ikke, springer vi den over og viser alligevel den nye.
 
-Så virker funktionen i flere projekter, også hvis I ikke kalder klassen `show`.
+- `newId` — siden der skal vises  
+- `fromId` — siden der skal skjules (default: den nuværende)  
+- `className` — CSS-klassen der styrer synlighed (default: `show`)  
+
+Klassen `show` ligger i `myApi.css`, så I ikke skal huske at kopiere den hver gang.
 
 **Reference:** [p5 select](https://p5js.org/reference/p5/select/) · [p5 addClass](https://p5js.org/reference/p5.Element/addClass/) · [p5 removeClass](https://p5js.org/reference/p5.Element/removeClass/)
 
@@ -235,7 +237,7 @@ function handleMqttMessage(tekst) {
 mqttListen('programmering', handleMqttMessage)
 ```
 
-Her er `handleMqttMessage` igen en **callback** — præcis som `startSpil` i `bindClick`.  
+Her er `handleMqttMessage` igen en **callback** — præcis som `startSpil` i `mousePressed`.  
 Forskellen er bare, *hvornår* den kaldes: ved MQTT-besked i stedet for ved klik.
 
 Husk MQTT-scriptet i HTML:
@@ -246,4 +248,4 @@ Husk MQTT-scriptet i HTML:
 
 **Reference:** [mqtt.js](https://github.com/mqttjs/MQTT.js) · [MDN Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
 
-← [Forrige: MQTT send & skift](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md)
+← [Forrige: MQTT send & skift](../11_AAR_2_START/README.md) · [Pensum](../PENSUM.md) · → [Næste: Data og algoritmer](../13_DATA_ALGORITMER/README.md)
