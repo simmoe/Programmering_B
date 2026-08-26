@@ -1,6 +1,7 @@
-body {
+body, * {
     margin: 0;
     overflow: hidden;
+      box-sizing: border-box;
 }
 
 .page {
@@ -20,8 +21,16 @@ body {
 #players{
     display:grid;
     grid-template-columns: 1fr 1fr;
+    height:30vh;
 }
 
 #playerA img, #playerB img{
     width:100px;
+}
+
+
+#characters{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap:1rem;
 }
