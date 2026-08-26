@@ -3,20 +3,19 @@ var chars = []
 
 function setup() {
     // Hent kataloget, lyt på MQTT og opdatér fællesskærmen her.
-    getChars()
+    getCharacters()
     
 }
 
-async function getChars(){
+async function getCharacters(){
     //Vi starter med at hente karakterne i Rick Morty API
-    var res 
-    try{
-        res = await fetch('https://rickandmortyapi.com/api/character?page=1')
-    }catch(err){
-        console.log(err)
-    }
-    //Hvis response er ok, henter vi json data 
-    var json = await res.json()
-    chars = json.results
-    console.log(chars) 
+    var characters = await getJSON('https://rickandmortyapi.com/api/character?page=1')
+    showCharacters(characters.results)
+}
+
+function showCharacters(characters){
+    characters.map( c => {
+        var card = createCard(c.name, c.species, c.image)        
+        select('#characters').child(card)
+    })    
 }

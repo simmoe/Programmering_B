@@ -50,3 +50,27 @@ function createMenu(menuDivId){
 
     } )
 }
+
+//Funktion der henter og returnerer JSON fra et API
+async function getJSON( endpoint ){
+    //Vi starter med at kontakte serveren med et request
+    var res 
+    try{
+        res = await fetch( endpoint )
+    }catch(err){
+        console.log(err)
+    }
+    //Hvis response er ok, henter vi json data 
+    var json = await res.json()
+    console.log('Hentede poster fra fetchJSON', json)
+    return json 
+}
+
+
+function createCard(title = "", text = "", image = ""){
+    var card = createDiv().addClass('card')
+    card.child(createImg(image))
+    card.child(createElement('h2', title))
+    card.child(createElement('p', text))
+    return card
+}
