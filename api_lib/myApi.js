@@ -5,7 +5,7 @@
 //txt : the text the toast will display
 //timeout: how long the toast will show in ms, defaults to 2000
 //type: choose between notify and warning 
-function showToast(toastDiv = "#toast", txt, timeout=2000, type="notify"){
+function showToast(txt, timeout=2000, type="notify"){
     var toast  
     try {
         toast = select('#toast')
