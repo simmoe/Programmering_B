@@ -19,3 +19,8 @@ Når en spiller har valgt, kan den ikke bladre mere. Læg to globale på fælles
 ```js
 var i = eval(`player${msObject.name}Index++`)
 ```
+
+Når funktionaliteten virker, må du meget gerne arbejde videre med layout. Du kan også prøve karakterer fra et andet API — det er en god øvelse.
+
+- Disney: [api.disneyapi.dev/character?page=1&pageSize=20](https://api.disneyapi.dev/character?page=1&pageSize=20) — listen ligger i `data`, brug `name` og `imageUrl`
+- Pokémon: [pokeapi.co/api/v2/pokemon?limit=20](https://pokeapi.co/api/v2/pokemon?limit=20) — billedet bygger du selv, fx `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png`
