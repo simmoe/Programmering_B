@@ -26,10 +26,8 @@ function setup() {
             select(`#player${msObject.name}`).addClass('selected')
         }
         if(msObject.action == "forward"){
-            //hent variablen emd det rigtige index til den her spiller 
-            var i = eval(`player${msObject.name}Index`)
-            //tæl den op 
-            i ++ 
+            //hent variablen med det rigtige index og tæl den op og læg den i i 
+            var i = eval(`player${msObject.name}Index++`)
             //skift billede
             select(`#player${msObject.name} img`).attribute("src", characters[i].image)
             select(`#player${msObject.name} h2`).html(characters[i].name)
