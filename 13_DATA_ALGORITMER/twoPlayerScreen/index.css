@@ -24,9 +24,15 @@ body, * {
     height:30vh;
 }
 
+#players .selected{
+    border:8px solid yellow;
+}
+
 #playerA img, #playerB img{
     width:100px;
 }
+
+
 
 
 #characters{

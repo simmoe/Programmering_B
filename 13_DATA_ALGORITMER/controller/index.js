@@ -3,6 +3,8 @@ var topic = "karaktervalg"
 var me
 
 function setup() {
+        console.log(window.location.href)
+
     // Bind controllerens knapper og send handlinger over MQTT her.
     //init mqtt
     client = mqtt.connect('wss://mqtt.nextservices.dk')
@@ -25,6 +27,7 @@ function setup() {
 
     select('#playerA').mousePressed(() => choosePlayer('A'))
     select('#playerB').mousePressed(() => choosePlayer('B'))
+    select('#forward').mousePressed(() => choice('forward'))
 }
 
 function choosePlayer(n){
@@ -37,4 +40,13 @@ function choosePlayer(n){
     client.publish(topic, obj)
     select('#name').html(` I am ${me} ` )
     shiftPage('#choose')
+}
+
+function choice(direction){
+    var obj = {
+        "name":me,
+        action:direction
+    }
+    obj = JSON.stringify(obj)
+    client.publish(topic, obj)
 }
