@@ -15,7 +15,10 @@ function setup() {
         client.subscribe(topic)
     })
     client.on('message', (topic, ms) => {
-        showToast(`Modtog besked: ${ms.toString()}`)    } )
+        showToast(`Modtog besked: ${ms.toString()}`)    
+        var msObject = JSON.parse(ms.toString())
+        console.log(msObject.name)
+    } )
 }
 
 async function getCharacters(){
