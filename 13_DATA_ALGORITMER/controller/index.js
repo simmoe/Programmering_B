@@ -3,8 +3,6 @@ var topic = "karaktervalg"
 var me
 
 function setup() {
-        console.log(window.location.href)
-
     // Bind controllerens knapper og send handlinger over MQTT her.
     //init mqtt
     client = mqtt.connect('wss://mqtt.nextservices.dk')
