@@ -22,3 +22,17 @@ canvas {
     position: fixed;
     left: 0;
 }
+
+#info{
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    background-color:whitesmoke;
+    height:10rem;
+    width:10rem;
+    border-radius: 1rem;
+    display:grid;
+    place-items: center;
+    z-index:2;
+    font-size: 3rem;
+}
