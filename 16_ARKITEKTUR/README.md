@@ -1,4 +1,4 @@
-# 15. Arkitektur
+# 16. Arkitektur
 
 Når et program vokser, er det ikke nok at “det virker”.  
 Vi deler koden i **lag**, så UI, logik og data ikke bliver ét stort rod.
@@ -31,4 +31,4 @@ Vælg selv type, fx:
 
 ---
 
-← [Forrige: Rekursion](../14_REKURSION/README.md) · [Pensum](../PENSUM.md) · → [Næste: Udvid et system](../16_UDVID_SYSTEM/README.md)
+← [Forrige: Rekursion](../15_REKURSION/README.md) · [Pensum](../PENSUM.md) · → [Næste: Udvid et system](../17_UDVID_SYSTEM/README.md)

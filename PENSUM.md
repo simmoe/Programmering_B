@@ -56,6 +56,18 @@ Parametre, default-værdier, callbacks, `return`, `showToast` og MQTT-helpers.
 ### 13. [Data og algoritmer](13_DATA_ALGORITMER/README.md)
 Fællesskærm + mobil-controllere · Rick and Morty · filter/sorter · dit API.
 
+### 14. [Canvas og OOP](14_canvas_og_OOP/README.md)
+p5-canvas, klasser og objekter.
+
+### 15. [Rekursion](15_REKURSION/README.md)
+En funktion kalder sig selv.
+
+### 16. [Arkitektur](16_ARKITEKTUR/README.md)
+UI, logik og data i lag.
+
+### 17. [Udvid et system](17_UDVID_SYSTEM/README.md)
+Læs fremmed kode og tilføj en feature.
+
 ## Bilag
 
 - [Læreplan](UVM_Programmering_B/Laereplan_Programmering_B_valgfag_2017.pdf)
