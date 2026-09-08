@@ -1,4 +1,4 @@
-# 16. Udvid et system
+# 17. Udvid et system
 
 Nu er opgaven ikke at starte forfra — men at **læse, forstå og udvide** et større program.
 
@@ -30,4 +30,4 @@ Eksempler på features:
 
 ---
 
-← [Forrige: Arkitektur](../15_ARKITEKTUR/README.md) · [Pensum](../PENSUM.md)
+← [Forrige: Arkitektur](../16_ARKITEKTUR/README.md) · [Pensum](../PENSUM.md)

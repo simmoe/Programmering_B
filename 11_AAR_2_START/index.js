@@ -1,6 +1,13 @@
 var client 
 
 function setup(){
+    //Skift til den aktuelle side 
+    shiftPage('#page5')
+
+    //lav et kort med funktionen createCard
+    createCard("Her er teksten", "https://cdn.mos.cms.futurecdn.net/ARWms77gyVZ5u2MZkQqcKc-1256-80.jpg", "#cards")
+
+
     //mqtt er et objekt vi får fra mqtt bilbioteket i html siden 
     client = mqtt.connect('wss://mqtt.nextservices.dk')
 
@@ -38,10 +45,26 @@ function setup(){
 
 }
 
-var currentPage = "#page1"
+var currentPage = "#page5"
+
 function shiftPage(newPage){
     if( !select(newPage) ) return
     select(currentPage).removeClass('show')
     currentPage = newPage
     select(currentPage).addClass('show')
 }
+
+function createCard(text, img, destId){
+    console.log(img)
+    var containerDiv = createDiv().addClass('container')
+    var topDiv = createDiv().addClass('top')
+    var newImg = createImg(img, "alternativ tekst")
+    topDiv.child(newImg)
+    var bottomDiv = createDiv(text).addClass('bottom')
+    containerDiv.child(topDiv)
+    containerDiv.child(bottomDiv)
+    select(destId).child(containerDiv)
+}
+
+
+

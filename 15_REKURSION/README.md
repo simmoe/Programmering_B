@@ -1,4 +1,4 @@
-# 14. Rekursion
+# 15. Rekursion
 
 En funktion kan kalde **sig selv**. Det kaldes **rekursion**.
 
@@ -31,4 +31,4 @@ Vælg selv spor, fx:
 
 ---
 
-← [Forrige: Data og algoritmer](../13_DATA_ALGORITMER/README.md) · [Pensum](../PENSUM.md) · → [Næste: Arkitektur](../15_ARKITEKTUR/README.md)
+← [Forrige: Canvas og OOP](../14_canvas_og_OOP/README.md) · [Pensum](../PENSUM.md) · → [Næste: Arkitektur](../16_ARKITEKTUR/README.md)

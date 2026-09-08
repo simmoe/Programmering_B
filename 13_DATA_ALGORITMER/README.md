@@ -244,4 +244,4 @@ Brug et **eget topic** (klasse + gruppe), så I ikke får naboernes valg.
 
 Hvis noget fejler: tjek først at `fetch` virker uden MQTT. Så at én knap på computeren kan vælge. Til sidst telefonen.
 
-← [Forrige: Personligt API](../12_PERSONLIGT_API/README.md) · [Pensum](../PENSUM.md) · → [Næste: Rekursion](../14_REKURSION/README.md)
+← [Forrige: Personligt API](../12_PERSONLIGT_API/README.md) · [Pensum](../PENSUM.md) · → [Næste: Canvas og OOP](../14_canvas_og_OOP/README.md)

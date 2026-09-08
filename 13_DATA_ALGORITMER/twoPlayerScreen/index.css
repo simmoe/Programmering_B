@@ -1,6 +1,7 @@
-body {
+body, * {
     margin: 0;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .page {
@@ -10,8 +11,33 @@ body {
     display: grid;
     position: fixed;
     top: 100vh;
+    padding:10rem;
 }
 
 .page.show {
     top: 0;
+}
+
+#players{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    height:30vh;
+}
+
+#players .selected{
+    border:8px solid yellow;
+}
+
+#playerA img, #playerB img{
+    width:100px;
+}
+
+
+
+
+#characters{
+    display:grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 150px;
+    gap:1rem;
 }
