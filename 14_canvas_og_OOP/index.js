@@ -1,63 +1,50 @@
-var x = 20
-var speed = 10
-var r = 40
-
-var gravity = 1
-var hor_x 
-var hor_speed = 0
-var hor_r = 20
-var hor_y = 0
-var hor_velo = .9
-var friction = .99
+var gravity 
+var friction  
+var b
+var f 
+var points = 1000
+var bSound
 
 
-//P5 setup() bliver kaldt EN gang før siden vises 
-function setup(){
-    var canvas = createCanvas(windowWidth, windowHeight)
-    canvas.parent('#page1')
 
-    hor_x = windowWidth / 2
+async function setup() {
+  bSound = await loadSound("/api_lib/sounds/beep.mp3")
+  var c = createCanvas(windowWidth, windowHeight)
+  select('#page2').child(c)
+  select('#startButton').mousePressed(()=>shiftPage('#page2'))
+  gravity = createVector(0, 0.5)
+  friction = 0.99
+
+  select('#info').html(points)
+
+  b = new Ball(windowWidth/2, 0, 100, "orange", 12)
+  f = new FloatingBall(100, 100, 50, "lightblue", 0, 12)
 }
 
-
-//draw kører 60 / sekundet 
 function draw() {
-    //vi kan sætte draw frameRate her 
-    frameRate(60)
+  background(100)
+  
+  b.update()
+  b.constrain()
+  b.show()
 
-    background(220, 100, 50)
+  if(b.hit(f)){
+    points--
+    bSound.play()
+  }
 
-    //håndter kugle 1 
-    fill('lightblue')
-    circle(x, 100, r)
+  select('#info').html(points)
 
-    x = x + speed
+  f.update()
+  f.constrain()
+  f.show()
 
-    if(x > windowWidth - r/2 || x < 0 + r/2){
-        speed = -speed
-    }
-
-    //håndter kugle 2 
-    fill(100, 80, 220)
-    noStroke()
-
-    //fald ned mod jorden
-    hor_velo += gravity
-    hor_velo *= friction
-    hor_y += hor_velo
-    circle(hor_x, hor_y, hor_r)
-
-    if(hor_y > windowHeight - hor_r/2){
-        hor_y = windowHeight - hor_r/2
-        hor_velo = -hor_velo
-    }
-
-    select('#info').html(round(hor_velo, 2))
 }
 
 function keyPressed(){
-    console.log(key)
-    if(key == " "){
-        hor_velo += -10
-    }
+  if(key == " "){
+    b.jump()
+    f.jump()
+  }
 }
+

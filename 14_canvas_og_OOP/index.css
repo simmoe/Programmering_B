@@ -20,7 +20,13 @@ canvas {
     height: 100vh;
     overflow: hidden;
     position: fixed;
-    left: 0;
+    left: -100vw;
+    display:grid;
+    place-items: center;
+    transition: 1s ease-in-out;
+}
+.show{
+    left:0;
 }
 
 #info{
