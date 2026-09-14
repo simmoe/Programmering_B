@@ -14,7 +14,6 @@ De formelle rammer findes i den overordnede mappe:
 
 - `static/` - udleverede PDF'er, synopser og eventuelle faste bilag.
 - `synopser/` - arbejdskopier, uddrag eller bearbejdede noter til synopser.
-- `projekter/` - eksamensprojekter, kode, links eller eksportfiler.
 - `vurderingsnoter/` - egne noter, vurderinger og sporgsmal til den mundtlige eksamen.
 - `materiale/` - lokale skabeloner, oversigter, rubrics eller praktiske dokumenter.
 
