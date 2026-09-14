@@ -4,13 +4,17 @@ var b
 var f 
 var points = 1000
 var bSound
+var bgMusic
 var blomkaal
 var roedkaal
 
 async function setup() {
   blomkaal = await loadImage('./assets/blomkaal.png')
   roedkaal = await loadImage('./assets/roedkaal.png')
-  bSound = await loadSound("/api_lib/sounds/beep.mp3")
+  bSound = await loadSound("../api_lib/sounds/beep.mp3")
+  bgMusic = new Audio('./assets/chiptune.mp3')
+  bgMusic.loop = true
+  bgMusic.volume = 0.25
   shiftPage('#page1')
   var c = createCanvas(windowWidth, windowHeight)
   select('#page2').child(c)
@@ -37,14 +41,17 @@ async function setup() {
 function startGame(){
   frameRate(60)
   points = 1000
+  if (bgMusic.paused) bgMusic.play()
     startTimer(1, 12, 'top-right', ()=>{
+      bgMusic.pause()
+      bgMusic.currentTime = 0
       select('#stats').html(`<h1>${points} point</h1>`)
       shiftPage('#page3')
-    }, './assets/roedkaal.png')
+    })
 }
 
 function draw() {
-  clear()
+  background(100, 10)
   
   b.update()
   b.constrain()
