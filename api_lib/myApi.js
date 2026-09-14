@@ -27,7 +27,7 @@ function showToast(txt, timeout=2000, type="notify"){
 //Kaldes med newPageId - og toggler klassen show på den side som har det nye id 
 var currentPage
 function shiftPage(newPageId){
-    if(select('#currentPage')) select("#currentPage").removeClass('show')
+    if(select(currentPage)) select(currentPage).removeClass('show')
     select(newPageId).addClass('show')
     currentPage = newPageId
 }
@@ -73,4 +73,33 @@ function createCard(title = "", text = "", image = ""){
     card.child(createElement('h2', title))
     card.child(createElement('p', text))
     return card
+}
+
+//from, to: start og slut i sekunder — fx 1, 14 tæller op, 14, 1 tæller ned
+//corner: top-left, top-right, bottom-left eller bottom-right
+//callback: kaldes når timeren rammer to
+//bg: valgfrit baggrundsbillede bag tiden
+function startTimer(from, to, corner = 'top-right', callback, bg) {
+    selectAll('.timer').map(el => el.remove())
+    var timer = createDiv(from)
+    timer.addClass('timer')
+    timer.addClass(corner)
+    if (bg) timer.style('background-image', 'url(' + bg + ')')
+
+    // Skal vi tælle op eller ned?
+    var step = from < to ? 1 : -1
+    var now = from
+
+    var tick = setInterval(() => {
+        now += step
+        timer.html(now)
+
+        // Er vi i mål?
+        if (now === to) {
+            clearInterval(tick)
+            callback(now)
+        }
+    }, 1000)
+
+    return timer
 }

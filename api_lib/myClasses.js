@@ -1,7 +1,7 @@
 class Ball {
-  constructor(x, y, r, col, jump){ 
+  constructor(x, y, r, img, jump){ 
     this.diam = r
-    this.col = col
+    this.img = img
     this.velocity = createVector(0, 0)
     this.position = createVector(x, y)
     this.jumpForce = jump
@@ -22,8 +22,8 @@ class Ball {
   }
   
   show(){
-    fill(this.col)
-    circle(this.position.x, this.position.y, this.diam)
+    imageMode(CENTER)
+    image(this.img, this.position.x, this.position.y, this.diam, this.diam)
   }
   hit(anotherBall){
     var b = anotherBall
@@ -39,9 +39,9 @@ class Ball {
 }
 
 class FloatingBall extends Ball{
-    constructor(x, y, r, col, jump, speed){
+    constructor(x, y, r, img, jump, speed){
         //super betyder at vi overtager disse argumenter fra "super" klassen (Ball)
-        super(x, y, r, col, jump)
+        super(x, y, r, img, jump)
         //vi overskriver velocity vektoren med en lokal der flytter sig på x aksen 
         this.velocity = createVector(speed, 0)
     }
