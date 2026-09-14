@@ -46,6 +46,7 @@ class FloatingBall extends Ball{
         this.velocity = createVector(speed, 0)
     }
     update(){
+      this.position.add(0, random(2))
         this.position.add(this.velocity)
     }
 
