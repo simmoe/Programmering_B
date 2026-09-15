@@ -35,7 +35,7 @@ JSON-objekter, lister af JSON, score og sideskift.
 [Demo](https://simmoe.github.io/Programmering_B/08_blackjack_fetch_api/)
 
 ### 9. [Firebase](09_firebase/README.md)
-Setup i HTML + `firebase.js` (lærerdemoen følger med i repoet), derefter gem/lyt.
+Setup i HTML + lokal `firebase.js` (gitignore — virker ikke på GitHub Pages), derefter gem/lyt.
 
 ### 10. [Årsprøve](10_AARSPROVE/README.md)
 Større projekt: escape room, timer, high score og synopsis.  

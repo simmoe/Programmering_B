@@ -8,13 +8,23 @@ Før `add()` og `onSnapshot()` virker, skal to ting være på plads: **bibliotek
 
 ---
 
-## Config i `firebase.js`
+## `firebase.js` kommer ikke på GitHub
 
-Web-nøglen i `firebaseConfig` er **ikke en hemmelighed**. Den skal ligge i browseren, ellers kan siden ikke ramme Firebase. Det, der styrer adgangen, er Firestore-reglerne.
+Filen er i `.gitignore`. Det er meningen.
 
-Lærerdemoen i denne mappe bruger `simons-testdatabase` og følger med i repoet, så den virker på GitHub Pages og på dine andre computere efter `git pull`.
+Firebase-nøglen skal bruges i browseren, men den skal **ikke** ligge i et offentligt elevrepo. GitHub scanner pushes og sender mail, hvis den ser en API-nøgle.
 
-Elever kan senere skifte til deres eget projekt: opret en web-app i [Firebase Console](https://console.firebase.google.com/) og ret `firebaseConfig`.
+### Sådan gør du (elev)
+
+1. Opret et projekt på [Firebase Console](https://console.firebase.google.com/)
+2. Tilføj en web-app og kopiér `firebaseConfig`
+3. Lav `firebase.js` lokalt i denne mappe
+4. Indsæt config, `initializeApp()` og `db` som vist herunder
+5. Kør siden med Live Server
+
+Så virker Firestore hos dig. Filen bliver på din computer.
+
+Adgangen styres af Firestore-reglerne — ikke af at skjule filen. Alligevel pusher vi den ikke, fordi GitHub (og gode vaner) behandler nøgler som private.
 
 ---
 
