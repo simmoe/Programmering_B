@@ -8,22 +8,13 @@ Før `add()` og `onSnapshot()` virker, skal to ting være på plads: **bibliotek
 
 ---
 
-## Vigtigt: virker ikke direkte på GitHub Pages
+## Config i `firebase.js`
 
-`firebase.js` indeholder hemmelige nøgler til dit Firebase-projekt.  
-Dem uploader vi **ikke** til GitHub — filen er derfor ignoreret i repoet (se `.gitignore`).
+Web-nøglen i `firebaseConfig` er **ikke en hemmelighed**. Den skal ligge i browseren, ellers kan siden ikke ramme Firebase. Det, der styrer adgangen, er Firestore-reglerne.
 
-Derfor virker Firebase-demoen **ikke** bare ved at åbne GitHub Pages. Du skal køre det **lokalt** med din egen config.
+Lærerdemoen i denne mappe bruger `simons-testdatabase` og følger med i repoet, så den virker på GitHub Pages og på dine andre computere efter `git pull`.
 
-### Sådan gør du
-
-1. Opret et projekt på [Firebase Console](https://console.firebase.google.com/)
-2. Tilføj en web-app og kopiér `firebaseConfig`
-3. Lav filen `firebase.js` i denne mappe (den ligger ikke på GitHub)
-4. Indsæt din config, `initializeApp()` og `db` som vist herunder
-5. Åbn projektet lokalt (fx Live Server i VS Code / Cursor)
-
-Så virker Firestore hos dig — uden at hemmelighederne ligger offentligt i repoet.
+Elever kan senere skifte til deres eget projekt: opret en web-app i [Firebase Console](https://console.firebase.google.com/) og ret `firebaseConfig`.
 
 ---
 
