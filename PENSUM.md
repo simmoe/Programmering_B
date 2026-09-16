@@ -57,8 +57,8 @@ Parametre, default-værdier, callbacks, `return`, `showToast` og MQTT-helpers.
 Fællesskærm + mobil-controllere · Rick and Morty · filter/sorter · dit API.
 
 ### 14. [Canvas og OOP](14_canvas_og_OOP/README.md)
-p5-canvas, klasser og objekter.  
-[Demo](https://simmoe.github.io/Programmering_B/14_canvas_og_OOP/)
+p5-canvas, klasser og objekter. Konkurrence: udfordr Jumping Cabbage.  
+[Opgave](14_canvas_og_OOP/OPGAVE.md) · [Demo](https://simmoe.github.io/Programmering_B/14_canvas_og_OOP/)
 
 ### 15. [Rekursion](15_REKURSION/README.md)
 En funktion kalder sig selv.
