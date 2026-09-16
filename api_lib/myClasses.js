@@ -46,8 +46,8 @@ class FloatingBall extends Ball{
         this.velocity = createVector(speed, 0)
     }
     update(){
-      this.position.add(0, random(2))
-        this.position.add(this.velocity)
+      this.position.add(0, random(12))
+      this.position.add(this.velocity)
     }
 
     constrain(){
@@ -66,7 +66,7 @@ class Firebase {
     this.ref = db.collection(collection)
   }
 
-  save(name, points, limit, sort) {
+  save(name, points) {
     this.ref.add({
       name: name,
       points: points,

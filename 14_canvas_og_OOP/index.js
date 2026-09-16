@@ -45,9 +45,9 @@ async function setup() {
   frameRate(0)
 
   var fb = new Firebase('jumping_cabbage_data')
-  fb.listen(updateHighscore, 10, 'points', 'asc')
+  fb.listen(updateHighscore, 5, 'points', 'asc')
 }
-
+//callback fra listen som har returneret et array  
 function updateHighscore(scores){
   console.log('Got result', scores)
   var HS = select('#highScore')
@@ -75,7 +75,7 @@ function startGame(){
 }
 
 function draw() {
-  background(100, 10)
+  background(100)
   
   b.update()
   b.constrain()
