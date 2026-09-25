@@ -1,4 +1,4 @@
-# 16. Arkitektur
+# 17. Arkitektur
 
 Når et program vokser, er det ikke nok at “det virker”.  
 Vi deler koden i **lag**, så UI, logik og data ikke bliver ét stort rod.

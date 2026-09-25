@@ -60,13 +60,17 @@ Fællesskærm + mobil-controllere · Rick and Morty · filter/sorter · dit API.
 p5-canvas, klasser og objekter. Konkurrence: udfordr Jumping Cabbage.  
 [Opgave](14_canvas_og_OOP/OPGAVE.md) · [Demo](https://simmoe.github.io/Programmering_B/14_canvas_og_OOP/)
 
-### 15. [Rekursion](15_REKURSION/README.md)
+### 15. [miniGames med OOP](15_minigames/README.md)
+Klasser og instanser: Ball-familien, bounce og Firebase.  
+[miniGames med OOP](https://simmoe.github.io/Programmering_B/15_minigames/) · [Opgaver](https://simmoe.github.io/Programmering_B/15_minigames/opgaver.html) · [Projekt](https://simmoe.github.io/Programmering_B/15_minigames/projekt.html) · [Demo side](https://simmoe.github.io/Programmering_B/15_minigames/myClasses_demo/)
+
+### 16. [Rekursion](15_REKURSION/README.md)
 En funktion kalder sig selv.
 
-### 16. [Arkitektur](16_ARKITEKTUR/README.md)
+### 17. [Arkitektur](16_ARKITEKTUR/README.md)
 UI, logik og data i lag.
 
-### 17. [Udvid et system](17_UDVID_SYSTEM/README.md)
+### 18. [Udvid et system](17_UDVID_SYSTEM/README.md)
 Læs fremmed kode og tilføj en feature.
 
 ## Bilag

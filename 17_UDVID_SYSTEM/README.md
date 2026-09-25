@@ -1,4 +1,4 @@
-# 17. Udvid et system
+# 18. Udvid et system
 
 Nu er opgaven ikke at starte forfra — men at **læse, forstå og udvide** et større program.
 

@@ -41,7 +41,7 @@ async function setup() {
 
   select('#info').html(points)
 
-  b = new Ball(windowWidth/2, 0, 160, blomkaal, 12)
+  b = new JumpingBall(windowWidth/2, 0, 160, blomkaal, 12)
   frameRate(0)
 
   var fb = new Firebase('jumping_cabbage_data')
@@ -82,7 +82,7 @@ function draw() {
   b.show()
 
   if(frameCount % 120 == 0){
-    f = new FloatingBall(100, 100, 110, roedkaal, 0, 12)
+    f = new Ball(100, 100, 110, roedkaal, null, 12, 0, [true, true, false, false])
     floatingBalls.push(f)
   }
 
