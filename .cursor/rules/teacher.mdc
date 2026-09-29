@@ -1,5 +1,13 @@
 ---
+description: Pull published main before changing student-facing course files
 alwaysApply: true
 ---
 
+# Published main
 
+This course lives on GitHub `main`. Students and the other computer read that, not a local leftover.
+
+1. Stay on `main`. No branches, no PRs.
+2. `git fetch` at the start of work. If HEAD is not `origin/main`, pull before editing or pushing.
+3. Do not push a dirty tree. Commit the course files that belong on GitHub; leave secrets and `node_modules` out.
+4. This repo is not Firebase Hosting. Do not `firebase deploy` from here.
