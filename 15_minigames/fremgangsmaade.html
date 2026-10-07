@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fremgangsmåde — miniGames med OOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+<link rel="stylesheet" href="api_lib/flowchart.css" />
+<style>
+  :root {
+    --ink: #111;
+    --soft: #5a5a5a;
+    --faint: #9a9a9a;
+    --rule: #e4e4e4;
+    --bg: #fff;
+  }
+  * { box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1.75rem;
+    overflow-y: scroll;
+  }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 300 16px/1.55 Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 46rem;
+    padding: 3.5rem 0 7rem;
+  }
+  .kicker {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.75rem;
+    font-weight: 400;
+  }
+  .kicker a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 2.35rem;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    margin: 0 0 2rem;
+  }
+  h1 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h2 {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 2.75rem 0 1rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  p { margin: 0 0 1rem; }
+  ul {
+    margin: 0 0 1.15rem;
+    padding: 0 0 0 1.15rem;
+  }
+  li { margin: 0 0 0.4rem; }
+  code {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+  .page a {
+    color: inherit;
+  }
+  .flowchart-canvas + p {
+    margin-top: 1.25rem;
+  }
+</style>
+</head>
+<body id="top">
+<div class="shell">
+<nav class="bar" aria-label="Indhold">
+  <a class="bar-title" href="index.html#top">miniGames med OOP</a>
+  <details class="bar-fold">
+    <summary><a href="opgaver.html">Opgave</a></summary>
+    <ul>
+      <li><a href="opgaver.html#ball">Ball</a></li>
+      <li><a href="opgaver.html#jumpingball">JumpingBall</a></li>
+      <li><a href="opgaver.html#springball">SpringBall</a></li>
+      <li><a href="opgaver.html#movingball">MovingBall</a></li>
+      <li><a href="opgaver.html#shootingball">ShootingBall</a></li>
+      <li><a href="opgaver.html#bullet">Bullet</a></li>
+      <li><a href="opgaver.html#firebase">Firebase</a></li>
+    </ul>
+  </details>
+  <a class="bar-item" href="myClasses_demo/" target="_blank" rel="noreferrer">Classes demo</a>
+  <details class="bar-fold" open>
+    <summary><a href="projekt.html">Projekt</a></summary>
+    <ul>
+      <li><a href="fremgangsmaade.html">Fremgangsmåde</a></li>
+      <li><a href="samarbejde.html">Samarbejde</a></li>
+    </ul>
+  </details>
+</nav>
+<div class="page">
+<main>
+<p class="kicker"><a href="index.html">miniGames med OOP</a> · <a href="projekt.html">projekt</a> · fremgangsmåde</p>
+<h1><a href="#top">Fremgangsmåde</a></h1>
+
+<h2>Brainstorm</h2>
+<p>I skal lave tre minigames ved hjælp af de forskellige klasser med bolde.</p>
+<ul>
+  <li>Benspænd: Hvert spil skal tage nøjagtigt 20 sekunder.</li>
+  <li>Spilleren får et point ad gangen for at ramme andre objekter.</li>
+</ul>
+<p>Beskriv hvert spil med en kort sætning, der indeholder konceptet — spillets regler og mål.</p>
+
+<h2>Wireframes</h2>
+<p>I tegner på papir.</p>
+<p>Først skallen:</p>
+<ul>
+  <li>Splash</li>
+  <li>Forside</li>
+  <li>Indstillinger</li>
+  <li>High score</li>
+</ul>
+<p>Så de tre spil.</p>
+
+<h2>Flowcharts</h2>
+<p>Her er flowchartet for skallen.</p>
+<div class="flowchart-canvas">
+  <p class="flowchart-title">Spilcentralen</p>
+  <svg viewBox="0 0 800 330" role="img" aria-label="Flowchart over spilcentralen">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+      </marker>
+    </defs>
+    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+      <rect x="12" y="8" width="128" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="76" y="32" text-anchor="middle">Start</text>
+      <text x="76" y="48" text-anchor="middle">spilcentral</text>
+      <line x1="140" y1="36" x2="154" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+
+      <rect x="156" y="8" width="132" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="222" y="32" text-anchor="middle">Sæt globale</text>
+      <text x="222" y="48" text-anchor="middle">variabler</text>
+      <line x1="288" y1="36" x2="302" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+
+      <rect x="304" y="8" width="164" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="386" y="30" text-anchor="middle">Opret settings</text>
+      <text x="386" y="46" text-anchor="middle" font-size="12">navn, point, sværhed</text>
+      <line x1="468" y1="36" x2="482" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+
+      <rect x="484" y="8" width="210" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="589" y="30" text-anchor="middle">Setup</text>
+      <text x="589" y="46" text-anchor="middle" font-size="12">gravity, firebase, canvas</text>
+
+      <path d="M589 64 V80 H384 V96" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+      <rect x="328" y="96" width="112" height="48" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="384" y="125" text-anchor="middle">splash</text>
+      <line x1="384" y1="144" x2="384" y2="164" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+
+      <rect x="304" y="166" width="160" height="48" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="384" y="195" text-anchor="middle">forside</text>
+
+      <line x1="384" y1="214" x2="384" y2="236" stroke="#7b8c99" stroke-width="1.55"/>
+      <path d="M120 236 H648" fill="none" stroke="#7b8c99" stroke-width="1.55"/>
+      <line x1="120" y1="236" x2="120" y2="258" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+      <line x1="384" y1="236" x2="384" y2="258" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+      <line x1="648" y1="236" x2="648" y2="258" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr)"/>
+
+      <rect x="40" y="258" width="160" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="120" y="291" text-anchor="middle">indstillinger</text>
+
+      <rect x="304" y="258" width="160" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="384" y="291" text-anchor="middle">start spil</text>
+
+      <rect x="568" y="258" width="160" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="648" y="291" text-anchor="middle">high score</text>
+    </g>
+  </svg>
+</div>
+<p>For hvert spil tegner I et flowchart. Det starter sådan.</p>
+<div class="flowchart-canvas">
+  <p class="flowchart-title">Spil</p>
+  <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for et spil">
+    <defs>
+      <marker id="arr-spil" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+      </marker>
+    </defs>
+    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+      <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="64" y="32" text-anchor="middle">Start</text>
+      <text x="64" y="48" text-anchor="middle">spil</text>
+      <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+
+      <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="211" y="30" text-anchor="middle">Sæt globals</text>
+      <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
+      <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+
+      <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="366" y="41" text-anchor="middle">Opret spiller</text>
+      <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+
+      <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
+      <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+
+      <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+      <text x="711" y="30" text-anchor="middle">Start timer</text>
+      <text x="711" y="46" text-anchor="middle">20 sek</text>
+    </g>
+  </svg>
+</div>
+<p>Herfra tegner I selv videre.</p>
+
+<h2>Todo-kort</h2>
+<p>Når flowchartene er tegnet, skriver I kortene i To do på jeres GitHub-board. Tavlen er beskrevet under <a href="samarbejde.html">Samarbejde</a>.</p>
+</main>
+</div>
+</div>
+</body>
+</html>
