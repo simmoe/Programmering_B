@@ -71,9 +71,14 @@
     padding: 0 0 0 1.15rem;
   }
   li { margin: 0 0 0.4rem; }
-  code {
+  code, pre {
     font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
     font-size: 0.88em;
+  }
+  pre {
+    margin: 0 0 1.15rem;
+    line-height: 1.5;
+    white-space: pre;
   }
 </style>
 </head>
@@ -97,8 +102,8 @@
   <details class="bar-fold" open>
     <summary><a href="projekt.html">Projekt</a></summary>
     <ul>
-      <li><a href="fremgangsmaade.html">Fremgangsmåde</a></li>
-      <li><a href="samarbejde.html">Samarbejde</a></li>
+      <li><a href="forproduktion.html">1 Forproduktion</a></li>
+      <li><a href="samarbejde.html">2 Samarbejde</a></li>
     </ul>
   </details>
 </nav>
@@ -115,6 +120,20 @@
   <li>Start spil</li>
 </ul>
 <p>Shop er valgfri — se om I kan få den til at hænge sammen med resten, hvis I laver den.</p>
+
+<h2 id="spilrepo">Spillets repo</h2>
+<p>I skal oprette et helt nyt repo til spillet. I arbejder sammen i det. En af jer opretter det og inviterer den anden som collaborator.</p>
+<p>Udgangspunktet er <code>0X_template_no_menu</code>. I roden af repoet skal mapperne ligge sådan:</p>
+<pre>api_lib/
+0X_template_no_menu/
+    index.html
+    index.css
+    index.js</pre>
+<ul>
+  <li>Hele <code>api_lib</code> fra dette forløb skal med. Bland den ikke med en <code>api_lib</code> fra et tidligere forløb.</li>
+  <li>Skabelonen ligger ved siden af <code>api_lib</code>. <code>index.html</code> henter biblioteket med <code>../api_lib/</code>.</li>
+  <li>Læg ikke spillets filer i roden, og ikke inde i <code>api_lib</code>. I kan omdøbe <code>0X_template_no_menu</code>.</li>
+</ul>
 
 <h2>Objektorientering</h2>
 <p>I objektorienteret programmering er styrken meget forbundet med forskellen på klasser og instanser. Selvom alle objekter i et 2D-spil ofte kan nedstamme fra den samme stamklasse — fx <code>Ball</code> — så opfører instanserne sig helt forskelligt pga. to ting:</p>
