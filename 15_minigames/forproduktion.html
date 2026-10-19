@@ -129,6 +129,18 @@
   .print-hint { margin: 0 0 1.5rem; }
   .flowchart-canvas + p { margin-top: 1.25rem; }
   .flowchart-blank { min-height: 22rem; }
+  .sketch input[type="file"] {
+    font: inherit;
+    font-size: 0.88rem;
+    margin: 0.2rem 0 0.6rem;
+  }
+  .sketch-preview img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0.4rem 0 0;
+    border: 1px solid var(--rule);
+  }
   .status {
     position: fixed;
     right: 1.25rem;
@@ -158,6 +170,8 @@
     }
     .flowchart-canvas svg { width: 100%; height: auto; }
     .flowchart-blank { min-height: 16rem; border: 1px solid #d0d0d0; }
+    input[type="file"] { display: none; }
+    .sketch-preview img { break-inside: avoid; }
     a { color: inherit; text-decoration: none; }
   }
 </style>
@@ -182,7 +196,14 @@
   <details class="bar-fold" open>
     <summary><a href="projekt.html">Projekt</a></summary>
     <ul>
-      <li><a href="forproduktion.html">1 Forproduktion</a></li>
+      <li>
+        <details class="bar-fold bar-nested" open>
+          <summary><a href="forproduktion.html">1 Forproduktion</a></summary>
+          <ul>
+            <li><a href="#spil">Tre spil</a></li>
+          </ul>
+        </details>
+      </li>
       <li><a href="samarbejde.html">2 Samarbejde</a></li>
     </ul>
   </details>
@@ -222,6 +243,11 @@
   <li>High score</li>
 </ul>
 <p>Så de tre spil.</p>
+<div class="field sketch">
+  <label for="shell-skitse">Papirskitse — foto af det I har tegnet</label>
+  <input id="shell-skitse" data-image type="file" accept="image/*" />
+  <div class="sketch-preview" data-for="shell-skitse"></div>
+</div>
 
 <h2>Flowcharts</h2>
 <p>Her er flowchartet for skallen.</p>
@@ -279,7 +305,7 @@
   </svg>
 </div>
 
-<h2>Tre spil</h2>
+<h2 id="spil">Tre spil</h2>
 <p>Udfyld ét ark til hvert minigame. Målet skal være så tydeligt, at den anden i makkerparret kan spille uden at spørge, hvornår runden er i hus. I kan skrive her — det gemmes i browseren — og tegne flowchartet på en udskrift.</p>
 
 <section class="game" id="spil1">
@@ -303,6 +329,11 @@
   <div class="field klasser">
     <label for="g1-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
     <textarea id="g1-klasser" data-save></textarea>
+  </div>
+  <div class="field sketch">
+    <label for="g1-skitse">Papirskitse — foto af det I har tegnet</label>
+    <input id="g1-skitse" data-image type="file" accept="image/*" />
+    <div class="sketch-preview" data-for="g1-skitse"></div>
   </div>
   <h3>Flowchart</h3>
   <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
@@ -360,6 +391,11 @@
     <label for="g2-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
     <textarea id="g2-klasser" data-save></textarea>
   </div>
+  <div class="field sketch">
+    <label for="g2-skitse">Papirskitse — foto af det I har tegnet</label>
+    <input id="g2-skitse" data-image type="file" accept="image/*" />
+    <div class="sketch-preview" data-for="g2-skitse"></div>
+  </div>
   <h3>Flowchart</h3>
   <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
   <div class="flowchart-canvas">
@@ -416,6 +452,11 @@
     <label for="g3-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
     <textarea id="g3-klasser" data-save></textarea>
   </div>
+  <div class="field sketch">
+    <label for="g3-skitse">Papirskitse — foto af det I har tegnet</label>
+    <input id="g3-skitse" data-image type="file" accept="image/*" />
+    <div class="sketch-preview" data-for="g3-skitse"></div>
+  </div>
   <h3>Flowchart</h3>
   <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
   <div class="flowchart-canvas">
@@ -457,19 +498,60 @@
 <script>
   var KEY = 'minigames-forproduktion'
   var fields = document.querySelectorAll('[data-save]')
+  var images = document.querySelectorAll('[data-image]')
   var status = document.getElementById('status')
   var saved = {}
   try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') } catch(e) {}
+  function readAll(){
+    var data = {}
+    try { data = JSON.parse(localStorage.getItem(KEY) || '{}') } catch(e) {}
+    fields.forEach(function(el){ data[el.id] = el.value })
+    return data
+  }
+  function store(){
+    localStorage.setItem(KEY, JSON.stringify(readAll()))
+    status.textContent = 'Gemt på denne computer'
+  }
+  function showPreview(id, src){
+    var box = document.querySelector('.sketch-preview[data-for="' + id + '"]')
+    if(!box) return
+    box.innerHTML = src ? '<img alt="Papirskitse" src="' + src + '">' : ''
+  }
+  function saveImage(id, file){
+    var img = new Image()
+    var url = URL.createObjectURL(file)
+    img.onload = function(){
+      URL.revokeObjectURL(url)
+      var max = 1200
+      var w = img.width
+      var h = img.height
+      if(w > max || h > max){
+        if(w > h){ h = Math.round(h * max / w); w = max }
+        else { w = Math.round(w * max / h); h = max }
+      }
+      var c = document.createElement('canvas')
+      c.width = w
+      c.height = h
+      c.getContext('2d').drawImage(img, 0, 0, w, h)
+      var src = c.toDataURL('image/jpeg', 0.72)
+      var data = readAll()
+      data[id] = src
+      localStorage.setItem(KEY, JSON.stringify(data))
+      showPreview(id, src)
+      status.textContent = 'Gemt på denne computer'
+    }
+    img.src = url
+  }
   fields.forEach(function(el){
     if(saved[el.id] != null) el.value = saved[el.id]
     el.addEventListener('input', store)
   })
-  function store(){
-    var data = {}
-    fields.forEach(function(el){ data[el.id] = el.value })
-    localStorage.setItem(KEY, JSON.stringify(data))
-    status.textContent = 'Gemt på denne computer'
-  }
+  images.forEach(function(el){
+    if(saved[el.id]) showPreview(el.id, saved[el.id])
+    el.addEventListener('change', function(){
+      if(this.files && this.files[0]) saveImage(this.id, this.files[0])
+    })
+  })
   if(Object.keys(saved).length) status.textContent = 'Hentet fra denne computer'
   var printLink = document.getElementById('print-ark')
   if(printLink) printLink.addEventListener('click', function(e){
