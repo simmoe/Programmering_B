@@ -65,6 +65,13 @@
     margin: 2.75rem 0 1rem;
     padding-top: 1.6rem;
     border-top: 1px solid var(--rule);
+    scroll-margin-top: 1.75rem;
+  }
+  h3 {
+    font-size: 1.02rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.55rem;
   }
   p { margin: 0 0 1rem; }
   ul {
@@ -76,17 +83,88 @@
     font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
     font-size: 0.88em;
   }
-  .page a {
-    color: inherit;
+  .page a { color: inherit; }
+  .names {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin: 0 0 1.5rem;
   }
-  .flowchart-canvas + p {
-    margin-top: 1.25rem;
+  label {
+    display: block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.35rem;
+  }
+  input[type="text"], textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    padding: 0.35rem 0 0.45rem;
+    outline: none;
+  }
+  input[type="text"]:focus, textarea:focus {
+    border-bottom-color: var(--ink);
+  }
+  textarea {
+    min-height: 5.5rem;
+    resize: vertical;
+    line-height: 1.45;
+    border: 1px solid var(--rule);
+    padding: 0.7rem 0.8rem;
+    margin-top: 0.15rem;
+  }
+  .field { margin: 0 0 1.35rem; }
+  .field.maal textarea { min-height: 4.2rem; }
+  .field.klasser textarea { min-height: 4.2rem; }
+  .game {
+    margin: 0 0 3.5rem;
+  }
+  .print-hint { margin: 0 0 1.5rem; }
+  .flowchart-canvas + p { margin-top: 1.25rem; }
+  .flowchart-blank { min-height: 22rem; }
+  .status {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  @media print {
+    @page { size: A4; margin: 14mm 15mm 16mm; }
+    html { scroll-behavior: auto; }
+    html, body { font-size: 11.5pt; background: #fff; }
+    .page { max-width: none; padding: 0; }
+    .status, .no-print { display: none !important; }
+    h1 { font-size: 1.7rem; margin: 0 0 1.1rem; }
+    h2 { font-size: 1.12rem; margin: 1.15rem 0 0.7rem; padding-top: 0.55rem; break-after: avoid; }
+    .game { break-before: page; }
+    .field, .flowchart-canvas { break-inside: avoid; }
+    textarea {
+      overflow: hidden;
+      background-image: repeating-linear-gradient(
+        transparent, transparent 1.4em,
+        #e6e6e6 1.4em, #e6e6e6 calc(1.4em + 1px)
+      );
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .flowchart-canvas svg { width: 100%; height: auto; }
+    .flowchart-blank { min-height: 16rem; border: 1px solid #d0d0d0; }
+    a { color: inherit; text-decoration: none; }
   }
 </style>
 </head>
 <body id="top">
 <div class="shell">
-<nav class="bar" aria-label="Indhold">
+<nav class="bar no-print" aria-label="Indhold">
   <a class="bar-title" href="index.html#top">miniGames med OOP</a>
   <details class="bar-fold">
     <summary><a href="opgaver.html">Opgave</a></summary>
@@ -113,6 +191,18 @@
 <main>
 <p class="kicker"><a href="index.html">miniGames med OOP</a> · <a href="projekt.html">projekt</a> · forproduktion</p>
 <h1><a href="#top">Forproduktion</a></h1>
+
+<div class="names">
+  <div>
+    <label for="n1">Navn</label>
+    <input id="n1" data-save type="text" autocomplete="name" />
+  </div>
+  <div>
+    <label for="n2">Navn</label>
+    <input id="n2" data-save type="text" autocomplete="name" />
+  </div>
+</div>
+<p class="print-hint no-print"><a href="#top" id="print-ark">Udskriv arket</a></p>
 
 <h2>Brainstorm</h2>
 <p>I skal lave tre minigames ved hjælp af de forskellige klasser med bolde.</p>
@@ -188,43 +278,204 @@
     </g>
   </svg>
 </div>
-<p>For hvert spil tegner I et flowchart. Det starter sådan.</p>
-<div class="flowchart-canvas">
-  <p class="flowchart-title">Spil</p>
-  <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for et spil">
-    <defs>
-      <marker id="arr-spil" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
-      </marker>
-    </defs>
-    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
-      <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
-      <text x="64" y="32" text-anchor="middle">Start</text>
-      <text x="64" y="48" text-anchor="middle">spil</text>
-      <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
 
-      <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
-      <text x="211" y="30" text-anchor="middle">Sæt globals</text>
-      <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
-      <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+<h2>Tre spil</h2>
+<p>Udfyld ét ark til hvert minigame. Målet skal være så tydeligt, at den anden i makkerparret kan spille uden at spørge, hvornår runden er i hus. I kan skrive her — det gemmes i browseren — og tegne flowchartet på en udskrift.</p>
 
-      <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
-      <text x="366" y="41" text-anchor="middle">Opret spiller</text>
-      <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+<section class="game" id="spil1">
+  <h2>Spil 1</h2>
+  <div class="field">
+    <label for="g1-titel">Titel</label>
+    <input id="g1-titel" data-save type="text" />
+  </div>
+  <div class="field">
+    <label for="g1-regler">Beskrivelse — regler</label>
+    <textarea id="g1-regler" data-save></textarea>
+  </div>
+  <div class="field maal">
+    <label for="g1-maal">Mål — ét tydeligt mål spilleren skal nå</label>
+    <textarea id="g1-maal" data-save></textarea>
+  </div>
+  <div class="field">
+    <label for="g1-styring">Styring — taster, mus, og hvad de gør</label>
+    <textarea id="g1-styring" data-save></textarea>
+  </div>
+  <div class="field klasser">
+    <label for="g1-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
+    <textarea id="g1-klasser" data-save></textarea>
+  </div>
+  <h3>Flowchart</h3>
+  <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
+  <div class="flowchart-canvas">
+    <p class="flowchart-title">Spil 1</p>
+    <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for spil 1">
+      <defs>
+        <marker id="arr-g1" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+        </marker>
+      </defs>
+      <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+        <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="64" y="32" text-anchor="middle">Start</text>
+        <text x="64" y="48" text-anchor="middle">spil</text>
+        <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g1)"/>
+        <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="211" y="30" text-anchor="middle">Sæt globals</text>
+        <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
+        <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g1)"/>
+        <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="366" y="41" text-anchor="middle">Opret spiller</text>
+        <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g1)"/>
+        <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
+        <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g1)"/>
+        <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="711" y="30" text-anchor="middle">Start timer</text>
+        <text x="711" y="46" text-anchor="middle">20 sek</text>
+      </g>
+    </svg>
+    <div class="flowchart-blank"></div>
+  </div>
+</section>
 
-      <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
-      <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
-      <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-spil)"/>
+<section class="game" id="spil2">
+  <h2>Spil 2</h2>
+  <div class="field">
+    <label for="g2-titel">Titel</label>
+    <input id="g2-titel" data-save type="text" />
+  </div>
+  <div class="field">
+    <label for="g2-regler">Beskrivelse — regler</label>
+    <textarea id="g2-regler" data-save></textarea>
+  </div>
+  <div class="field maal">
+    <label for="g2-maal">Mål — ét tydeligt mål spilleren skal nå</label>
+    <textarea id="g2-maal" data-save></textarea>
+  </div>
+  <div class="field">
+    <label for="g2-styring">Styring — taster, mus, og hvad de gør</label>
+    <textarea id="g2-styring" data-save></textarea>
+  </div>
+  <div class="field klasser">
+    <label for="g2-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
+    <textarea id="g2-klasser" data-save></textarea>
+  </div>
+  <h3>Flowchart</h3>
+  <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
+  <div class="flowchart-canvas">
+    <p class="flowchart-title">Spil 2</p>
+    <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for spil 2">
+      <defs>
+        <marker id="arr-g2" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+        </marker>
+      </defs>
+      <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+        <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="64" y="32" text-anchor="middle">Start</text>
+        <text x="64" y="48" text-anchor="middle">spil</text>
+        <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g2)"/>
+        <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="211" y="30" text-anchor="middle">Sæt globals</text>
+        <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
+        <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g2)"/>
+        <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="366" y="41" text-anchor="middle">Opret spiller</text>
+        <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g2)"/>
+        <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
+        <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g2)"/>
+        <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="711" y="30" text-anchor="middle">Start timer</text>
+        <text x="711" y="46" text-anchor="middle">20 sek</text>
+      </g>
+    </svg>
+    <div class="flowchart-blank"></div>
+  </div>
+</section>
 
-      <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
-      <text x="711" y="30" text-anchor="middle">Start timer</text>
-      <text x="711" y="46" text-anchor="middle">20 sek</text>
-    </g>
-  </svg>
-</div>
-<p>Herfra tegner I selv videre.</p>
+<section class="game" id="spil3">
+  <h2>Spil 3</h2>
+  <div class="field">
+    <label for="g3-titel">Titel</label>
+    <input id="g3-titel" data-save type="text" />
+  </div>
+  <div class="field">
+    <label for="g3-regler">Beskrivelse — regler</label>
+    <textarea id="g3-regler" data-save></textarea>
+  </div>
+  <div class="field maal">
+    <label for="g3-maal">Mål — ét tydeligt mål spilleren skal nå</label>
+    <textarea id="g3-maal" data-save></textarea>
+  </div>
+  <div class="field">
+    <label for="g3-styring">Styring — taster, mus, og hvad de gør</label>
+    <textarea id="g3-styring" data-save></textarea>
+  </div>
+  <div class="field klasser">
+    <label for="g3-klasser">Klasser der indgår — fra api_lib og dem I selv skriver</label>
+    <textarea id="g3-klasser" data-save></textarea>
+  </div>
+  <h3>Flowchart</h3>
+  <p>Starten er den samme i alle tre spil. Herfra tegner I selv videre.</p>
+  <div class="flowchart-canvas">
+    <p class="flowchart-title">Spil 3</p>
+    <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for spil 3">
+      <defs>
+        <marker id="arr-g3" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+        </marker>
+      </defs>
+      <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+        <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="64" y="32" text-anchor="middle">Start</text>
+        <text x="64" y="48" text-anchor="middle">spil</text>
+        <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g3)"/>
+        <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="211" y="30" text-anchor="middle">Sæt globals</text>
+        <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
+        <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g3)"/>
+        <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="366" y="41" text-anchor="middle">Opret spiller</text>
+        <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g3)"/>
+        <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
+        <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-g3)"/>
+        <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+        <text x="711" y="30" text-anchor="middle">Start timer</text>
+        <text x="711" y="46" text-anchor="middle">20 sek</text>
+      </g>
+    </svg>
+    <div class="flowchart-blank"></div>
+  </div>
+</section>
+
 </main>
 </div>
 </div>
+<p class="status no-print" id="status"></p>
+<script>
+  var KEY = 'minigames-forproduktion'
+  var fields = document.querySelectorAll('[data-save]')
+  var status = document.getElementById('status')
+  var saved = {}
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') } catch(e) {}
+  fields.forEach(function(el){
+    if(saved[el.id] != null) el.value = saved[el.id]
+    el.addEventListener('input', store)
+  })
+  function store(){
+    var data = {}
+    fields.forEach(function(el){ data[el.id] = el.value })
+    localStorage.setItem(KEY, JSON.stringify(data))
+    status.textContent = 'Gemt på denne computer'
+  }
+  if(Object.keys(saved).length) status.textContent = 'Hentet fra denne computer'
+  var printLink = document.getElementById('print-ark')
+  if(printLink) printLink.addEventListener('click', function(e){
+    e.preventDefault()
+    window.print()
+  })
+</script>
 </body>
 </html>
