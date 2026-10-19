@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A3-ark — miniGames med OOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+<link rel="stylesheet" href="api_lib/flowchart.css" />
+<style>
+  :root {
+    --ink: #111;
+    --soft: #5a5a5a;
+    --faint: #9a9a9a;
+    --rule: #cfd6dc;
+    --bg: #fff;
+    --dots: #d5dde4;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: #ececec;
+    color: var(--ink);
+    font: 300 15px/1.4 Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .print-hint {
+    max-width: 46rem;
+    margin: 0 auto 1rem;
+    padding: 0 1.5rem;
+    font-size: 0.95rem;
+  }
+  .print-hint a { color: inherit; }
+  .sheet {
+    width: 420mm;
+    height: 297mm;
+    margin: 0 auto 1.5rem;
+    padding: 12mm 14mm 12mm;
+    background: var(--bg);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 8mm;
+    box-shadow: 0 2px 24px rgba(0,0,0,.08);
+  }
+  .head {
+    display: grid;
+    grid-template-columns: 11rem 1fr 8rem 8rem;
+    gap: 8mm;
+    align-items: end;
+  }
+  .kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.25rem;
+  }
+  .head h1 {
+    font-weight: 300;
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .line {
+    border-bottom: 1px solid var(--ink);
+    min-height: 1.6rem;
+  }
+  .lbl {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.2rem;
+  }
+  .front-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 8mm;
+    min-height: 0;
+  }
+  .draw {
+    border: 1px solid var(--rule);
+    background: #f7f8f9;
+    background-image: radial-gradient(var(--dots) 1px, transparent 1px);
+    background-size: 14px 14px;
+    min-height: 0;
+    position: relative;
+  }
+  .draw .lbl {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+  }
+  .side {
+    display: grid;
+    grid-template-rows: 1.1fr 0.7fr 0.55fr auto;
+    gap: 5mm;
+    min-height: 0;
+  }
+  .side > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .box {
+    flex: 1;
+    border: 1px solid var(--rule);
+    padding: 6px 8px 8px;
+    min-height: 2.4rem;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 1.35em,
+        #ececec 1.35em,
+        #ececec calc(1.35em + 1px)
+      );
+    background-origin: content-box;
+  }
+  .box.maal {
+    background-color: #fafafa;
+  }
+  .klasser {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4mm;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .klass {
+    border: 1px solid #7b8c99;
+    min-height: 4.4rem;
+    background: #fff;
+    padding: 5px 6px;
+  }
+  .klass .top {
+    border-bottom: 1px solid var(--rule);
+    min-height: 1.15rem;
+    margin-bottom: 4px;
+  }
+  .back-grid {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 5mm;
+    min-height: 0;
+  }
+  .flow-rest {
+    border: 1px solid var(--rule);
+    background: #f3f5f7;
+    background-image: radial-gradient(#d5dde4 1px, transparent 1px);
+    background-size: 18px 18px;
+    min-height: 0;
+  }
+  .sheet .flowchart-canvas {
+    margin: 0;
+    padding: 0.7rem 0.7rem 0.5rem;
+  }
+  @media screen {
+    .sheet {
+      width: min(calc(100vw - 14rem), 1100px);
+      height: auto;
+      aspect-ratio: 420 / 297;
+      padding: 2.2%;
+    }
+  }
+  @media print {
+    @page { size: A3 landscape; margin: 0; }
+    html, body { background: #fff; }
+    .no-print { display: none !important; }
+    .sheet {
+      width: 420mm;
+      height: 297mm;
+      margin: 0;
+      padding: 12mm 14mm;
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+    }
+    .sheet:last-of-type { page-break-after: auto; break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+<nav class="bar no-print" aria-label="Indhold">
+  <a class="bar-title" href="index.html#top">miniGames med OOP</a>
+  <details class="bar-fold">
+    <summary><a href="opgaver.html">Opgave</a></summary>
+    <ul>
+      <li><a href="opgaver.html#ball">Ball</a></li>
+      <li><a href="opgaver.html#jumpingball">JumpingBall</a></li>
+      <li><a href="opgaver.html#springball">SpringBall</a></li>
+      <li><a href="opgaver.html#movingball">MovingBall</a></li>
+      <li><a href="opgaver.html#shootingball">ShootingBall</a></li>
+      <li><a href="opgaver.html#bullet">Bullet</a></li>
+      <li><a href="opgaver.html#firebase">Firebase</a></li>
+    </ul>
+  </details>
+  <a class="bar-item" href="myClasses_demo/" target="_blank" rel="noreferrer">Classes demo</a>
+  <details class="bar-fold" open>
+    <summary><a href="projekt.html">Projekt</a></summary>
+    <ul>
+      <li>
+        <details class="bar-fold bar-nested" open>
+          <summary><a href="forproduktion.html">1 Forproduktion</a></summary>
+          <ul>
+            <li><a href="forproduktion.html#spil">Tre spil</a></li>
+            <li><a href="a3.html">A3-ark</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="samarbejde.html">2 Samarbejde</a></li>
+    </ul>
+  </details>
+</nav>
+<div>
+<p class="print-hint no-print">Print på A3, tosidet, tre gange — ét ark pr. spil. Forside: spillet og klasserne. Bagside: flowchart. <a href="#top" id="print-ark">Udskriv</a></p>
+
+<section class="sheet" aria-label="Forside">
+  <header class="head">
+    <div>
+      <p class="kicker">miniGames med OOP</p>
+      <h1>Spilark</h1>
+    </div>
+    <div>
+      <p class="lbl">Titel</p>
+      <div class="line"></div>
+    </div>
+    <div>
+      <p class="lbl">Navn</p>
+      <div class="line"></div>
+    </div>
+    <div>
+      <p class="lbl">Navn</p>
+      <div class="line"></div>
+    </div>
+  </header>
+  <div class="front-grid">
+    <div class="draw">
+      <p class="lbl">Spillet</p>
+    </div>
+    <div class="side">
+      <div>
+        <p class="lbl">Beskrivelse — regler</p>
+        <div class="box"></div>
+      </div>
+      <div>
+        <p class="lbl">Mål — ét tydeligt mål spilleren skal nå</p>
+        <div class="box maal"></div>
+      </div>
+      <div>
+        <p class="lbl">Styring — taster, mus, og hvad de gør</p>
+        <div class="box"></div>
+      </div>
+      <div>
+        <p class="lbl">Klasser der indgår</p>
+        <div class="klasser">
+          <div class="klass"><div class="top"></div></div>
+          <div class="klass"><div class="top"></div></div>
+          <div class="klass"><div class="top"></div></div>
+          <div class="klass"><div class="top"></div></div>
+          <div class="klass"><div class="top"></div></div>
+          <div class="klass"><div class="top"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet" aria-label="Bagside">
+  <header class="head">
+    <div>
+      <p class="kicker">bagside</p>
+      <h1>Flowchart</h1>
+    </div>
+    <div>
+      <p class="lbl">Titel</p>
+      <div class="line"></div>
+    </div>
+    <div></div>
+    <div></div>
+  </header>
+  <div class="back-grid">
+    <div class="flowchart-canvas">
+      <p class="flowchart-title">Starten er den samme i alle tre spil. Herfra tegner I videre.</p>
+      <svg viewBox="0 0 800 72" role="img" aria-label="Starten på flowchartet for et spil">
+        <defs>
+          <marker id="arr-a3" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+          </marker>
+        </defs>
+        <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+          <rect x="8" y="8" width="112" height="56" rx="28" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+          <text x="64" y="32" text-anchor="middle">Start</text>
+          <text x="64" y="48" text-anchor="middle">spil</text>
+          <line x1="120" y1="36" x2="134" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-a3)"/>
+          <rect x="136" y="8" width="150" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+          <text x="211" y="30" text-anchor="middle">Sæt globals</text>
+          <text x="211" y="46" text-anchor="middle" font-size="12">point, tid etc</text>
+          <line x1="286" y1="36" x2="300" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-a3)"/>
+          <rect x="302" y="8" width="128" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+          <text x="366" y="41" text-anchor="middle">Opret spiller</text>
+          <line x1="430" y1="36" x2="444" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-a3)"/>
+          <rect x="446" y="8" width="168" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+          <text x="530" y="41" text-anchor="middle">Opret modstandere</text>
+          <line x1="614" y1="36" x2="628" y2="36" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#arr-a3)"/>
+          <rect x="630" y="8" width="162" height="56" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+          <text x="711" y="30" text-anchor="middle">Start timer</text>
+          <text x="711" y="46" text-anchor="middle">20 sek</text>
+        </g>
+      </svg>
+    </div>
+    <div class="flow-rest"></div>
+  </div>
+</section>
+</div>
+</div>
+<script>
+  var printLink = document.getElementById('print-ark')
+  if(printLink) printLink.addEventListener('click', function(e){
+    e.preventDefault()
+    window.print()
+  })
+</script>
+</body>
+</html>
