@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spilcentral</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+        integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../api_lib/myApiStyles.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+</head>
+
+<body>
+    <div id="toast"></div>
+    <main>
+        <div class="page show" id="splash">
+            <div class="panel">
+                <h1>Spilcentral</h1>
+                <button id="splash-go">Videre</button>
+            </div>
+        </div>
+
+        <div class="page" id="forside">
+            <div class="panel">
+                <h1>Spilcentral</h1>
+                <div id="swatch"></div>
+                <p id="coins-front"></p>
+                <div class="row">
+                    <button id="play-hop">Hop</button>
+                    <button id="play-skyd">Skyd</button>
+                    <button id="play-traek">Træk</button>
+                </div>
+                <div class="row">
+                    <button id="to-settings">Indstillinger</button>
+                    <button id="to-scores">High score</button>
+                    <button id="to-shop">Shop</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="indstillinger">
+            <div class="panel">
+                <h1>Indstillinger</h1>
+                <label>Navn
+                    <input id="set-name" type="text" value="Spiller">
+                </label>
+                <label class="check">
+                    <input id="set-sound" type="checkbox" checked> Lyd
+                </label>
+                <label>Sværhedsgrad
+                    <select id="set-diff">
+                        <option value="let">Let</option>
+                        <option value="middel" selected>Middel</option>
+                        <option value="svær">Svær</option>
+                    </select>
+                </label>
+                <div class="row">
+                    <button id="set-save">Gem</button>
+                    <button id="set-back">Tilbage</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="highscore">
+            <div class="panel wide">
+                <h1>High score</h1>
+                <div class="boards">
+                    <section>
+                        <h2>Hop</h2>
+                        <div id="board-hop"></div>
+                    </section>
+                    <section>
+                        <h2>Skyd</h2>
+                        <div id="board-skyd"></div>
+                    </section>
+                    <section>
+                        <h2>Træk</h2>
+                        <div id="board-traek"></div>
+                    </section>
+                </div>
+                <button id="score-back">Tilbage</button>
+            </div>
+        </div>
+
+        <div class="page" id="shop">
+            <div class="panel">
+                <h1>Shop</h1>
+                <p id="coins"></p>
+                <div id="wares" class="wares"></div>
+                <button id="shop-back">Tilbage</button>
+            </div>
+        </div>
+
+        <div class="page" id="spil">
+            <div class="hud">
+                <button id="stop">Stop</button>
+                <strong id="hud-title"></strong>
+                <span id="hud-score">0</span>
+            </div>
+            <p id="hud-help" class="help"></p>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore-compat.js"></script>
+    <script src="../api_lib/firebase.js"></script>
+    <script src="../api_lib/myApi.js"></script>
+    <script src="../api_lib/myClasses.js"></script>
+    <script src="./klasser.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>

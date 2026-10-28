@@ -9,5 +9,5 @@ This course lives on GitHub `main`. Students and the other computer read that, n
 
 1. Stay on `main`. No branches, no PRs.
 2. `git fetch` at the start of work. If HEAD is not `origin/main`, pull before editing or pushing.
-3. Do not push a dirty tree. Commit the course files that belong on GitHub; leave secrets and `node_modules` out.
+3. Do not leave course files only on this machine. In the same turn: commit what belongs on GitHub (leave secrets and `node_modules` out) and `git push` to `main`. That push is the deploy. Students read GitHub Pages from `main`.
 4. This repo is not Firebase Hosting. Do not `firebase deploy` from here.
