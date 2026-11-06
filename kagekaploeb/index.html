@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kagekapløb — fællesskærm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../api_lib/myApiStyles.css" />
+  <link rel="stylesheet" href="index.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.15.2/mqtt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+</head>
+<body>
+  <div id="toast"></div>
+
+  <header class="top">
+    <div>
+      <p class="kicker">2T · MQTT</p>
+      <h1>Kagekapløb</h1>
+      <p class="lead">Seks stykker kage. Første seks efter «NU!» får dem.</p>
+    </div>
+    <div class="qr-box">
+      <div id="qr"></div>
+      <p id="phone-url"></p>
+      <p class="hint">Scan med telefonen</p>
+    </div>
+  </header>
+
+  <section class="cakes" id="cakes" aria-label="Seks stykker kage"></section>
+
+  <section class="board">
+    <div class="panel">
+      <h2>Med</h2>
+      <ul id="joined"></ul>
+    </div>
+    <div class="panel center">
+      <p id="status">Vent på spillere…</p>
+      <p id="countdown" class="countdown"></p>
+      <div class="row">
+        <button id="start" class="primary">Start runde</button>
+        <button id="reset">Nulstil</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Taps</h2>
+      <ol id="scores"></ol>
+    </div>
+  </section>
+
+  <script src="../api_lib/myApi.js"></script>
+  <script src="players.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

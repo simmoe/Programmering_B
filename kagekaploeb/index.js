@@ -1,0 +1,216 @@
+var client
+var joined = {}
+var taps = {}
+var phase = 'lobby'
+var roundTimer
+var countTimer
+var endsAt = 0
+
+function setup() {
+  noCanvas()
+  buildCakes()
+  makeQr()
+  wire()
+  connectMqtt()
+  render()
+}
+
+function makeQr() {
+  var base = window.location.origin + window.location.pathname.replace(/index\.html$/, '')
+  var url = base + (base.endsWith('/') ? '' : '/') + 'phone.html'
+  select('#phone-url').html(url)
+  select('#qr').html('')
+  new QRCode(document.getElementById('qr'), {
+    text: url,
+    width: 148,
+    height: 148,
+    correctLevel: QRCode.CorrectLevel.M
+  })
+}
+
+function buildCakes() {
+  var box = select('#cakes')
+  box.html('')
+  for (var i = 0; i < CAKE_SLOTS; i++) {
+    var el = createDiv('').addClass('cake')
+    el.attribute('data-i', i)
+    box.child(el)
+  }
+}
+
+function wire() {
+  select('#start').mousePressed(startRound)
+  select('#reset').mousePressed(resetAll)
+}
+
+function connectMqtt() {
+  client = mqtt.connect('wss://mqtt.nextservices.dk')
+  client.on('connect', function() {
+    client.subscribe(TOPIC)
+    showToast('MQTT forbundet')
+    publish({ action: 'hello', phase: phase })
+  })
+  client.on('message', function(_topic, buf) {
+    var msg
+    try { msg = JSON.parse(buf.toString()) } catch (e) { return }
+    if (!msg || !msg.action) return
+    if (msg.action == 'join') onJoin(msg)
+    if (msg.action == 'tap') onTap(msg)
+    if (msg.action == 'who') publishState()
+  })
+}
+
+function publish(obj) {
+  if (!client || !client.connected) return
+  client.publish(TOPIC, JSON.stringify(obj))
+}
+
+function publishState() {
+  publish({
+    action: 'state',
+    phase: phase,
+    joined: Object.keys(joined),
+    taps: taps,
+    endsAt: endsAt,
+    winners: currentWinners()
+  })
+}
+
+function onJoin(msg) {
+  if (!msg.name || PLAYERS.indexOf(msg.name) < 0) return
+  if (phase != 'lobby' && phase != 'done') {
+    publish({ action: 'denied', name: msg.name, reason: 'Runden er i gang' })
+    return
+  }
+  joined[msg.name] = true
+  if (taps[msg.name] == null) taps[msg.name] = 0
+  showToast(msg.name + ' er med')
+  render()
+  publishState()
+}
+
+function onTap(msg) {
+  if (phase != 'play') return
+  if (!joined[msg.name]) return
+  taps[msg.name] = (taps[msg.name] || 0) + 1
+  renderScores()
+}
+
+function startRound() {
+  if (Object.keys(joined).length < 1) {
+    showToast('Ingen spillere endnu', 2000, 'warning')
+    return
+  }
+  clearTimers()
+  Object.keys(joined).forEach(function(n) { taps[n] = 0 })
+  phase = 'countdown'
+  select('#start').attribute('disabled', true)
+  render()
+  publish({ action: 'countdown', from: 3 })
+  var n = 3
+  select('#countdown').html(String(n))
+  select('#status').html('Gør klar…')
+  countTimer = setInterval(function() {
+    n--
+    if (n > 0) {
+      select('#countdown').html(String(n))
+      publish({ action: 'countdown', from: n })
+      return
+    }
+    clearInterval(countTimer)
+    goPlay()
+  }, 1000)
+}
+
+function goPlay() {
+  phase = 'play'
+  endsAt = Date.now() + ROUND_MS
+  select('#countdown').html('NU!')
+  select('#status').html('Bank løs — ' + (ROUND_MS / 1000) + ' sekunder')
+  publish({ action: 'go', endsAt: endsAt, ms: ROUND_MS })
+  renderScores()
+  roundTimer = setTimeout(finishRound, ROUND_MS)
+}
+
+function finishRound() {
+  phase = 'done'
+  select('#countdown').html('')
+  select('#status').html('Seks stykker er fordelt')
+  select('#start').removeAttribute('disabled')
+  var winners = currentWinners()
+  paintCakes(winners)
+  renderScores()
+  publish({ action: 'done', winners: winners, taps: taps })
+  showToast('Kagen er fordelt')
+}
+
+function currentWinners() {
+  return Object.keys(joined)
+    .map(function(n) { return { name: n, taps: taps[n] || 0 } })
+    .sort(function(a, b) { return b.taps - a.taps || a.name.localeCompare(b.name) })
+    .slice(0, CAKE_SLOTS)
+    .filter(function(p) { return p.taps > 0 })
+}
+
+function paintCakes(winners) {
+  var slices = selectAll('.cake')
+  slices.forEach(function(el, i) {
+    el.removeClass('won')
+    el.html('')
+    if (winners[i]) {
+      el.addClass('won')
+      el.html(winners[i].name)
+    }
+  })
+}
+
+function resetAll() {
+  clearTimers()
+  joined = {}
+  taps = {}
+  phase = 'lobby'
+  endsAt = 0
+  select('#start').removeAttribute('disabled')
+  select('#countdown').html('')
+  select('#status').html('Vent på spillere…')
+  paintCakes([])
+  render()
+  publish({ action: 'reset' })
+}
+
+function clearTimers() {
+  if (countTimer) clearInterval(countTimer)
+  if (roundTimer) clearTimeout(roundTimer)
+  countTimer = null
+  roundTimer = null
+}
+
+function render() {
+  var list = select('#joined')
+  list.html('')
+  Object.keys(joined).sort().forEach(function(n) {
+    list.child(createElement('li', n))
+  })
+  if (phase == 'lobby') {
+    select('#status').html(
+      Object.keys(joined).length
+        ? Object.keys(joined).length + ' med · klar til start'
+        : 'Vent på spillere…'
+    )
+  }
+  renderScores()
+  if (phase == 'done') paintCakes(currentWinners())
+}
+
+function renderScores() {
+  var list = select('#scores')
+  list.html('')
+  Object.keys(joined)
+    .map(function(n) { return { name: n, taps: taps[n] || 0 } })
+    .sort(function(a, b) { return b.taps - a.taps || a.name.localeCompare(b.name) })
+    .forEach(function(p) {
+      var li = createElement('li')
+      li.html(p.name + ' <strong>' + p.taps + '</strong>')
+      list.child(li)
+    })
+}

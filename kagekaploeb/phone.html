@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kagekapløb — telefon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../api_lib/myApiStyles.css" />
+  <link rel="stylesheet" href="phone.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.15.2/mqtt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
+</head>
+<body>
+  <div id="toast"></div>
+
+  <div class="page show" id="join">
+    <p class="kicker">Kagekapløb</p>
+    <h1>Hvem er du?</h1>
+    <label for="name">Navn</label>
+    <select id="name"></select>
+    <button id="join-btn" class="primary">Jeg er med</button>
+  </div>
+
+  <div class="page" id="wait">
+    <p class="kicker" id="me-label"></p>
+    <h1>Klar</h1>
+    <p>Vent på fællesskærmen. Når der står NU, banker du løs.</p>
+  </div>
+
+  <div class="page" id="play">
+    <p class="kicker" id="play-me"></p>
+    <p id="play-status">…</p>
+    <button id="tap" class="tap" disabled>KAGE</button>
+    <p id="my-taps">0</p>
+  </div>
+
+  <div class="page" id="done">
+    <p class="kicker" id="done-me"></p>
+    <h1 id="done-title">Runden er slut</h1>
+    <p id="done-text"></p>
+  </div>
+
+  <script src="../api_lib/myApi.js"></script>
+  <script src="players.js"></script>
+  <script src="phone.js"></script>
+</body>
+</html>
