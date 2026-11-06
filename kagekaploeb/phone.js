@@ -15,14 +15,18 @@ function setup() {
 function fillNames() {
   var sel = select('#name')
   PLAYERS.forEach(function(n) {
-    sel.child(createElement('option', n).attribute('value', n))
+    var opt = createElement('option', n)
+    opt.attribute('value', n)
+    sel.child(opt)
   })
 }
 
 function wire() {
-  select('#join-btn').mousePressed(join)
-  var tap = select('#tap')
-  tap.elt.addEventListener('pointerdown', function(e) {
+  document.getElementById('join-btn').addEventListener('click', function(e) {
+    e.preventDefault()
+    joinGame()
+  })
+  document.getElementById('tap').addEventListener('pointerdown', function(e) {
     e.preventDefault()
     sendTap()
   }, { passive: false })
@@ -62,8 +66,9 @@ function publish(obj) {
   client.publish(TOPIC, JSON.stringify(obj))
 }
 
-function join() {
-  me = select('#name').value()
+function joinGame() {
+  var nameEl = document.getElementById('name')
+  me = nameEl.value
   if (!me) return
   publish({ action: 'join', name: me })
   select('#me-label').html(me)
