@@ -8,6 +8,25 @@
   --panel: rgba(255, 248, 239, 0.88);
 }
 
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+#toast {
+  position: fixed;
+  top: -12rem;
+  right: 1.5rem;
+  z-index: 20;
+  width: 16rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.85rem;
+  background: #f1f1f1;
+  color: #333;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  transition: top .4s ease;
+}
+#toast.toastShow { top: 1.25rem; }
+#toast.toastShow.warning { background: #f7c9d2; }
+
 html, body {
   min-height: 100%;
   background:

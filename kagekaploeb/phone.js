@@ -4,8 +4,7 @@ var myTaps = 0
 var phase = 'lobby'
 var tapArmed = false
 
-function setup() {
-  noCanvas()
+function boot() {
   currentPage = '#join'
   fillNames()
   wire()
@@ -13,11 +12,13 @@ function setup() {
 }
 
 function fillNames() {
-  var sel = select('#name')
+  var sel = document.getElementById('name')
+  sel.innerHTML = ''
   PLAYERS.forEach(function(n) {
-    var opt = createElement('option', n)
-    opt.attribute('value', n)
-    sel.child(opt)
+    var opt = document.createElement('option')
+    opt.value = n
+    opt.textContent = n
+    sel.appendChild(opt)
   })
 }
 
@@ -67,13 +68,12 @@ function publish(obj) {
 }
 
 function joinGame() {
-  var nameEl = document.getElementById('name')
-  me = nameEl.value
+  me = document.getElementById('name').value
   if (!me) return
   publish({ action: 'join', name: me })
-  select('#me-label').html(me)
-  select('#play-me').html(me)
-  select('#done-me').html(me)
+  $('#me-label').text(me)
+  $('#play-me').text(me)
+  $('#done-me').text(me)
   shiftPage('#wait')
 }
 
@@ -81,9 +81,9 @@ function onCountdown(msg) {
   if (!me) return
   phase = 'countdown'
   tapArmed = false
-  select('#tap').attribute('disabled', true)
-  select('#play-status').html(msg.from > 0 ? String(msg.from) : '…')
-  select('#my-taps').html('0')
+  $('#tap').attr('disabled', true)
+  $('#play-status').text(msg.from > 0 ? String(msg.from) : '…')
+  $('#my-taps').text('0')
   myTaps = 0
   shiftPage('#play')
 }
@@ -93,16 +93,16 @@ function onGo(msg) {
   phase = 'play'
   tapArmed = true
   myTaps = 0
-  select('#tap').removeAttribute('disabled')
-  select('#play-status').html('NU — bank løs!')
-  select('#my-taps').html('0')
+  $('#tap').removeAttr('disabled')
+  $('#play-status').text('NU — bank løs!')
+  $('#my-taps').text('0')
   shiftPage('#play')
   if (msg.ms) {
     setTimeout(function() {
       if (phase == 'play') {
         tapArmed = false
-        select('#tap').attribute('disabled', true)
-        select('#play-status').html('Tid!')
+        $('#tap').attr('disabled', true)
+        $('#play-status').text('Tid!')
       }
     }, msg.ms)
   }
@@ -111,7 +111,7 @@ function onGo(msg) {
 function sendTap() {
   if (!tapArmed || phase != 'play' || !me) return
   myTaps++
-  select('#my-taps').html(String(myTaps))
+  $('#my-taps').text(String(myTaps))
   publish({ action: 'tap', name: me })
 }
 
@@ -121,8 +121,8 @@ function onDone(msg) {
   tapArmed = false
   var winners = (msg.winners || []).map(function(w) { return w.name })
   var won = winners.indexOf(me) >= 0
-  select('#done-title').html(won ? 'Du får kage' : 'Ikke denne gang')
-  select('#done-text').html(
+  $('#done-title').text(won ? 'Du får kage' : 'Ikke denne gang')
+  $('#done-text').text(
     won
       ? 'Plads ' + (winners.indexOf(me) + 1) + ' · ' + myTaps + ' taps'
       : myTaps + ' taps. Vinderne: ' + winners.join(', ')
@@ -137,3 +137,5 @@ function onReset() {
   tapArmed = false
   shiftPage('#join')
 }
+
+document.addEventListener('DOMContentLoaded', boot)

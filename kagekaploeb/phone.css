@@ -5,6 +5,25 @@
   --icing: #5b8c6a;
 }
 
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+#toast {
+  position: fixed;
+  top: -10rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 20;
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: #f1f1f1;
+  color: #333;
+  text-align: center;
+  transition: top .4s ease;
+}
+#toast.toastShow { top: 1rem; }
+#toast.toastShow.warning { background: #f7c9d2; }
+
 html, body {
   min-height: 100%;
   background: linear-gradient(165deg, #2a211c, #4a3428 60%, #1f1814);

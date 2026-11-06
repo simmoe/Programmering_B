@@ -6,8 +6,7 @@ var roundTimer
 var countTimer
 var endsAt = 0
 
-function setup() {
-  noCanvas()
+function boot() {
   buildCakes()
   makeQr()
   wire()
@@ -18,8 +17,8 @@ function setup() {
 function makeQr() {
   var base = window.location.origin + window.location.pathname.replace(/index\.html$/, '')
   var url = base + (base.endsWith('/') ? '' : '/') + 'phone.html'
-  select('#phone-url').html(url)
-  select('#qr').html('')
+  $('#phone-url').text(url)
+  $('#qr').clear()
   new QRCode(document.getElementById('qr'), {
     text: url,
     width: 148,
@@ -29,18 +28,16 @@ function makeQr() {
 }
 
 function buildCakes() {
-  var box = select('#cakes')
-  box.html('')
+  var box = $('#cakes').clear()
   for (var i = 0; i < CAKE_SLOTS; i++) {
-    var el = createDiv('').addClass('cake')
-    el.attribute('data-i', i)
-    box.child(el)
+    var slice = el('div').addClass('cake').attr('data-i', String(i))
+    box.child(slice)
   }
 }
 
 function wire() {
-  select('#start').mousePressed(startRound)
-  select('#reset').mousePressed(resetAll)
+  $('#start').on('click', startRound)
+  $('#reset').on('click', resetAll)
 }
 
 function connectMqtt() {
@@ -104,16 +101,16 @@ function startRound() {
   clearTimers()
   Object.keys(joined).forEach(function(n) { taps[n] = 0 })
   phase = 'countdown'
-  select('#start').attribute('disabled', true)
+  $('#start').attr('disabled', true)
   render()
   publish({ action: 'countdown', from: 3 })
   var n = 3
-  select('#countdown').html(String(n))
-  select('#status').html('Gør klar…')
+  $('#countdown').text(String(n))
+  $('#status').text('Gør klar…')
   countTimer = setInterval(function() {
     n--
     if (n > 0) {
-      select('#countdown').html(String(n))
+      $('#countdown').text(String(n))
       publish({ action: 'countdown', from: n })
       return
     }
@@ -125,8 +122,8 @@ function startRound() {
 function goPlay() {
   phase = 'play'
   endsAt = Date.now() + ROUND_MS
-  select('#countdown').html('NU!')
-  select('#status').html('Bank løs — ' + (ROUND_MS / 1000) + ' sekunder')
+  $('#countdown').text('NU!')
+  $('#status').text('Bank løs — ' + (ROUND_MS / 1000) + ' sekunder')
   publish({ action: 'go', endsAt: endsAt, ms: ROUND_MS })
   renderScores()
   roundTimer = setTimeout(finishRound, ROUND_MS)
@@ -134,9 +131,9 @@ function goPlay() {
 
 function finishRound() {
   phase = 'done'
-  select('#countdown').html('')
-  select('#status').html('Seks stykker er fordelt')
-  select('#start').removeAttribute('disabled')
+  $('#countdown').text('')
+  $('#status').text('Kagestykkerne er fordelt')
+  $('#start').removeAttr('disabled')
   var winners = currentWinners()
   paintCakes(winners)
   renderScores()
@@ -153,14 +150,9 @@ function currentWinners() {
 }
 
 function paintCakes(winners) {
-  var slices = selectAll('.cake')
-  slices.forEach(function(el, i) {
-    el.removeClass('won')
-    el.html('')
-    if (winners[i]) {
-      el.addClass('won')
-      el.html(winners[i].name)
-    }
+  $$('.cake').forEach(function(slice, i) {
+    slice.removeClass('won').html('')
+    if (winners[i]) slice.addClass('won').text(winners[i].name)
   })
 }
 
@@ -170,9 +162,9 @@ function resetAll() {
   taps = {}
   phase = 'lobby'
   endsAt = 0
-  select('#start').removeAttribute('disabled')
-  select('#countdown').html('')
-  select('#status').html('Vent på spillere…')
+  $('#start').removeAttr('disabled')
+  $('#countdown').text('')
+  $('#status').text('Vent på spillere…')
   paintCakes([])
   render()
   publish({ action: 'reset' })
@@ -186,13 +178,12 @@ function clearTimers() {
 }
 
 function render() {
-  var list = select('#joined')
-  list.html('')
+  var list = $('#joined').clear()
   Object.keys(joined).sort().forEach(function(n) {
-    list.child(createElement('li', n))
+    list.child(el('li', n))
   })
   if (phase == 'lobby') {
-    select('#status').html(
+    $('#status').text(
       Object.keys(joined).length
         ? Object.keys(joined).length + ' med · klar til start'
         : 'Vent på spillere…'
@@ -203,14 +194,13 @@ function render() {
 }
 
 function renderScores() {
-  var list = select('#scores')
-  list.html('')
+  var list = $('#scores').clear()
   Object.keys(joined)
     .map(function(n) { return { name: n, taps: taps[n] || 0 } })
     .sort(function(a, b) { return b.taps - a.taps || a.name.localeCompare(b.name) })
     .forEach(function(p) {
-      var li = createElement('li')
-      li.html(p.name + ' <strong>' + p.taps + '</strong>')
-      list.child(li)
+      list.child(el('li', p.name + ' <strong>' + p.taps + '</strong>'))
     })
 }
+
+document.addEventListener('DOMContentLoaded', boot)

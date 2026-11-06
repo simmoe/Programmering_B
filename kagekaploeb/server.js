@@ -6,7 +6,6 @@ var os = require('os')
 
 var PORT = Number(process.env.PORT) || 8787
 var ROOT = __dirname
-var REPO = path.join(__dirname, '..')
 
 var TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -15,7 +14,6 @@ var TYPES = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.svg': 'image/svg+xml',
-  '.mp3': 'audio/mpeg',
   '.ico': 'image/x-icon'
 }
 
@@ -30,17 +28,16 @@ function lanIp() {
 }
 
 function resolve(urlPath) {
-  var clean = decodeURIComponent(urlPath.split('?')[0])
+  var clean = decodeURIComponent((urlPath || '/').split('?')[0])
   if (clean === '/') clean = '/index.html'
-  if (clean.startsWith('/api_lib/')) {
-    return path.join(REPO, clean.slice(1))
-  }
-  return path.join(ROOT, clean.replace(/^\//, ''))
+  var file = path.join(ROOT, clean.replace(/^\//, ''))
+  if (!file.startsWith(ROOT)) return null
+  return file
 }
 
 var server = http.createServer(function(req, res) {
-  var file = resolve(req.url || '/')
-  if (!file.startsWith(ROOT) && !file.startsWith(path.join(REPO, 'api_lib'))) {
+  var file = resolve(req.url)
+  if (!file) {
     res.writeHead(403)
     res.end('Forbidden')
     return
