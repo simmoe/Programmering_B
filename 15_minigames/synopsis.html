@@ -75,6 +75,53 @@
     font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
     font-size: 0.88em;
   }
+  h3 {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 1.8rem 0 0.75rem;
+  }
+  .uml {
+    margin: 0.4rem 0 1.4rem;
+    break-inside: avoid;
+  }
+  .uml svg {
+    width: min(100%, 26rem);
+    height: auto;
+    display: block;
+  }
+  .legend {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    font-size: 0.92rem;
+  }
+  .legend li {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.7rem;
+    align-items: center;
+    margin: 0 0 0.45rem;
+  }
+  .mark {
+    justify-self: center;
+  }
+  .mark-class {
+    width: 1.35rem;
+    height: 1.05rem;
+    border: 1.5px solid var(--ink);
+    background:
+      linear-gradient(var(--ink), var(--ink)) 0 35% / 100% 1px no-repeat,
+      linear-gradient(var(--ink), var(--ink)) 0 68% / 100% 1px no-repeat;
+  }
+  .mark-plus {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 1rem;
+  }
+  .mark-inherit {
+    display: flex;
+  }
   .print-hint {
     font-size: 0.85rem;
     color: var(--soft);
@@ -125,43 +172,102 @@
 <main>
 <p class="kicker"><a href="index.html">miniGames med OOP</a> · <a href="projekt.html">projekt</a> · synopsis</p>
 <h1><a href="#top">Synopsis</a></h1>
-<p>I skal hver især skrive en synopsis over jeres spilcentral. I arbejder sammen om produktet. Synopsen skriver I alene.</p>
-<p>Den samler forproduktionen, A3-arkene, flowcharts og det, I har læst i <code>api_lib/myClasses.js</code>. Omfanget er 3–4 normalsider. Skitser, flowcharts og kodeudklip ligger i bilag og tæller ikke med.</p>
-<p class="print-hint no-print"><a href="#top" id="print-ark">Udskriv siden</a>, hvis I vil have overskrifterne ved siden af, mens I skriver.</p>
+<p>I skal hver især udarbejde en synopsis over jeres fælles spilcentral. Synopsen skal dokumentere spillets funktioner og opbygning og vise jeres forståelse af de programmeringsmæssige løsninger, I har anvendt.</p>
+<p>I udvikler spilcentralen sammen, men skriver synopsen individuelt.</p>
+<p><strong>Omfang:</strong> 3–4 normalsider. Diagrammer, skitser og kodeuddrag tæller ikke med.</p>
+<p class="print-hint no-print"><a href="#top" id="print-ark">Udskriv siden</a>, hvis I vil have overskrifterne og diagrammet ved siden af, mens I skriver.</p>
 
 <h2 id="forblad">Forblad</h2>
-<p>Titel på spilcentralen, jeres navne, hold og link til repoet.</p>
+<p>Titel på spilcentralen, navn, hold og link til GitHub-repository.</p>
 
 <h2 id="abstract">Abstract</h2>
-<p>En kort tekst, så en udenforstående kan se, hvad centralen er, og hvad de tre spil går ud på.</p>
+<p>Præsentér kort spilcentralen, de tre minispil og de vigtigste funktioner.</p>
 
 <h2 id="problem">Problemformulering</h2>
-<p>Hvilken spilcentral I bygger, og hvordan I har afgrænset den. Her skal det kunne læses, at I laver tre minigames ud fra klasserne med bolde, at hvert spil varer 20 sekunder, at spilleren får ét point ad gangen for at ramme andre objekter, og at skallen har splash, forside, indstillinger og high score. Husk at en problemformulering slutter med et spørgsmålstegn.</p>
+<p>Formulér kort, hvad I vil udvikle, og hvilke centrale programmeringsmæssige udfordringer projektet indebærer. Husk at en problemformulering slutter med et spørgsmålstegn.</p>
 
 <h2 id="funktion">Funktionsbeskrivelse</h2>
-<p>Skallen og de tre spil: regler, mål og styring. Brug papirskitserne. Målet skal være så tydeligt, at den anden i parret kan se, hvornår en runde er færdig.</p>
+<p>Beskriv spilcentralens opbygning og brugergrænseflade med udgangspunkt i jeres skitser fra forproduktionen.</p>
+<p>Forklar kort de tre spils regler, styring og pointgivning samt spilcentralens fælles funktioner, herunder indstillinger og high scores.</p>
 
-<h2 id="dokumentation">Dokumentation</h2>
+<h2 id="struktur">Programstruktur og dokumentation</h2>
+
+<h3 id="klasser">Klassediagram og objektorientering</h3>
+<p>I får udleveret et delvist udfyldt klassediagram over klasserne i <code>api_lib/myClasses.js</code>.</p>
 <ul>
-  <li>Klasserne, der indgår, både fra <code>api_lib</code> og dem I selv skriver. Mindst to spil deler stamklasse. Med den nye klasse og den nye metode skal det fremgå, hvordan indstillinger rammer instanserne gennem constructoren.</li>
-  <li>Flowchart for skallen og for hvert spil. I forklarer ét af dem: hvad der er proces, hvad der er valg, og hvad de to udgange fra et valg fører til.</li>
-  <li>Ét eller to kodestumper, som I kan forklare. Lige nu er det et uddrag fra <code>myClasses.js</code>, som jeres spil bruger. Når I har skrevet jeres egen klasse eller metode, skifter I uddraget ud med den.</li>
+  <li>Undersøg kildekoden, og færdiggør diagrammet med manglende attributter, metoder og nedarvningsforbindelser.</li>
+  <li>Tilføj jeres egne klasser med konstruktører, væsentlige attributter og metoder.</li>
+  <li>Vis med pile, hvilke klasser der nedarver fra hinanden.</li>
 </ul>
+<p>Forklar med konkrete eksempler, hvordan I bruger nedarvning til at genbruge og udvide eksisterende klasser. Vis desuden, hvordan forskellige argumenter til en constructor kan skabe instanser med forskellige egenskaber.</p>
 
-<h2 id="bidrag">Eget bidrag</h2>
-<p>Skriv, hvilken del der er din. Den anden skriver om sin. I må beskrive det fælles, men forklaringen af koden og flowet skal være din.</p>
+<figure class="uml">
+  <svg viewBox="0 0 400 512" role="img" aria-label="Delvist UML-klassediagram for Ball, MovingBall og ShootingBall">
+    <g fill="none" stroke="#111" stroke-width="1.4">
+      <rect x="30" y="8" width="340" height="168"/>
+      <line x1="30" y1="40" x2="370" y2="40"/>
+      <line x1="30" y1="110" x2="370" y2="110"/>
+      <polygon points="200,176 190,190 210,190" fill="#fff"/>
+      <line x1="200" y1="190" x2="200" y2="208"/>
 
-<h2 id="test">Test</h2>
-<p>Tre afprøvninger pr. spil, skrevet ud fra målet og styringen. Hver afprøvning siger, hvad I gør, og hvad der skal ske. Når spillet kører, skriver I, om det skete.</p>
+      <rect x="30" y="208" width="340" height="140"/>
+      <line x1="30" y1="240" x2="370" y2="240"/>
+      <line x1="30" y1="292" x2="370" y2="292"/>
+      <polygon points="200,348 190,362 210,362" fill="#fff"/>
+      <line x1="200" y1="362" x2="200" y2="380"/>
+
+      <rect x="30" y="380" width="340" height="116"/>
+      <line x1="30" y1="412" x2="370" y2="412"/>
+      <line x1="30" y1="454" x2="370" y2="454"/>
+    </g>
+    <g fill="#111" stroke="none" font-family="IBM Plex Mono, Menlo, Consolas, monospace">
+      <g font-size="15" text-anchor="middle">
+        <text x="200" y="30">Ball</text>
+        <text x="200" y="230">MovingBall</text>
+        <text x="200" y="402">ShootingBall</text>
+      </g>
+      <g font-size="13" text-anchor="start">
+        <text x="42" y="62">+ position</text>
+        <text x="42" y="80">+ diam</text>
+        <text x="42" y="98">+ velocity</text>
+        <text x="42" y="132">+ constructor(…)</text>
+        <text x="42" y="150">+ update()</text>
+        <text x="42" y="262">+ speed</text>
+        <text x="42" y="314">+ left()</text>
+      </g>
+    </g>
+  </svg>
+  <ul class="legend">
+    <li><span class="mark mark-class" aria-hidden="true"></span><span>Klasse. Øverste rum er navnet, det midterste attributter, det nederste metoder.</span></li>
+    <li><span class="mark mark-plus" aria-hidden="true">+</span><span>Public. Attributten eller metoden kan bruges uden for klassen.</span></li>
+    <li><span class="mark mark-inherit" aria-hidden="true"><svg viewBox="0 0 16 14" width="16" height="14"><polygon points="8,1 15,13 1,13" fill="#fff" stroke="#111" stroke-width="1.4"/></svg></span><span>Nedarvning. Den hule trekant peger mod den klasse, der arves fra.</span></li>
+  </ul>
+</figure>
+<p>Ikke alle klasser fra <code>myClasses.js</code> er med. De tomme rum skal udfyldes ud fra koden.</p>
+
+<h3 id="flow">Flowcharts og programlogik</h3>
+<p>Udarbejd to flowcharts:</p>
+<ul>
+  <li>Et over spilcentralens navigation mellem de forskellige skærmbilleder.</li>
+  <li>Et over den centrale spillogik i et af jeres minispil.</li>
+</ul>
+<p>Forklar kort, hvordan betingelser, løkker og hændelser styrer programmets forløb. Begrund de vigtigste valg i opbygningen.</p>
+
+<h3 id="kode">Kodeanalyse</h3>
+<p>Udvælg 1–2 centrale kodeuddrag fra jeres program, herunder mindst ét fra jeres egne tilføjelser til <code>myClasses.js</code>.</p>
+<p>Forklar, hvordan koden fungerer, med relevante programmeringsfaglige begreber. Inddrag eksempelvis nedarvning, metoder, parametre, betingelser eller løkker.</p>
+<p>Beskriv desuden kort, hvordan I anvender funktioner fra <code>myApi.js</code>, og hvordan high scores gemmes og hentes med Firebase.</p>
+<p>Det skal fremgå, hvilke dele af programmet du selv har arbejdet med.</p>
 
 <h2 id="konklusion">Konklusion</h2>
-<p>Hvad der er afgjort, og hvad I ville ændre, hvis I havde mere tid.</p>
+<p>Vurdér kort, i hvilken grad spilcentralen opfylder projektets krav. Fremhæv væsentlige programmeringsmæssige udfordringer og mulige forbedringer.</p>
 
 <h2 id="bilag">Bilag</h2>
-<p>Foto af A3-arkene og flowcharts. Hele koden, når den ligger i repoet.</p>
+<p>Vedlæg det færdiggjorte klassediagram, flowcharts, relevante kodeuddrag og eventuelle skitser fra forproduktionen.</p>
+<p>Den samlede kildekode findes i jeres GitHub-repository.</p>
 
 <h2 id="aflevering">Aflevering</h2>
-<p>PDF. Repoet er fælles. Synopsen er personlig.</p>
+<p>Synopsen afleveres individuelt som PDF. GitHub-repository er fælles.</p>
 </main>
 </div>
 </div>
