@@ -14,6 +14,6 @@ Opgaverne kan I kun besvare ved at læse koden. Klasserne ligger i `api_lib/myCl
 
 I arbejder i makkerpar. Svarene gemmes i browserens localStorage, så I kan fortsætte ved computeren. Til det, der skal tegnes — blandt andet flowcharts — skal I også have en udprintet udgave. Fotografér arkene, gem som PDF og aflever.
 
-[miniGames med OOP](https://simmoe.github.io/Programmering_B/15_minigames/) · [Opgaver](https://simmoe.github.io/Programmering_B/15_minigames/opgaver.html) · [Projekt](https://simmoe.github.io/Programmering_B/15_minigames/projekt.html) · [Demo side](https://simmoe.github.io/Programmering_B/15_minigames/myClasses_demo/)
+[miniGames med OOP](https://simmoe.github.io/Programmering_B/15_minigames/) · [Opgaver](https://simmoe.github.io/Programmering_B/15_minigames/opgaver.html) · [Projekt](https://simmoe.github.io/Programmering_B/15_minigames/projekt.html) · [Synopsis](https://simmoe.github.io/Programmering_B/15_minigames/synopsis.html) · [Demo side](https://simmoe.github.io/Programmering_B/15_minigames/myClasses_demo/)
 
 ← [Forrige: Canvas og OOP](../14_canvas_og_OOP/README.md) · [Pensum](../PENSUM.md) · → [Næste: Rekursion](../15_REKURSION/README.md)

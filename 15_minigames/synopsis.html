@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Synopsis — miniGames med OOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+<style>
+  :root {
+    --ink: #111;
+    --soft: #5a5a5a;
+    --faint: #9a9a9a;
+    --rule: #e4e4e4;
+    --bg: #fff;
+  }
+  * { box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1.75rem;
+    overflow-y: scroll;
+  }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 300 16px/1.55 Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 46rem;
+    padding: 3.5rem 0 7rem;
+  }
+  .kicker {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.75rem;
+    font-weight: 400;
+  }
+  .kicker a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 2.35rem;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    margin: 0 0 2rem;
+  }
+  h1 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h2 {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 2.75rem 0 1rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  p { margin: 0 0 1rem; }
+  ul {
+    margin: 0 0 1.15rem;
+    padding: 0 0 0 1.15rem;
+  }
+  li { margin: 0 0 0.4rem; }
+  code {
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+  .print-hint {
+    font-size: 0.85rem;
+    color: var(--soft);
+  }
+  .print-hint a { color: inherit; }
+  @media print {
+    .print-hint { display: none; }
+    .page { padding: 0 0 1rem; max-width: none; }
+    h2 { break-after: avoid; }
+  }
+</style>
+</head>
+<body id="top">
+<div class="shell">
+<nav class="bar" aria-label="Indhold">
+  <a class="bar-title" href="index.html#top">miniGames med OOP</a>
+  <details class="bar-fold">
+    <summary><a href="opgaver.html">Opgave</a></summary>
+    <ul>
+      <li><a href="opgaver.html#ball">Ball</a></li>
+      <li><a href="opgaver.html#jumpingball">JumpingBall</a></li>
+      <li><a href="opgaver.html#springball">SpringBall</a></li>
+      <li><a href="opgaver.html#movingball">MovingBall</a></li>
+      <li><a href="opgaver.html#shootingball">ShootingBall</a></li>
+      <li><a href="opgaver.html#bullet">Bullet</a></li>
+      <li><a href="opgaver.html#firebase">Firebase</a></li>
+    </ul>
+  </details>
+  <a class="bar-item" href="myClasses_demo/" target="_blank" rel="noreferrer">Classes demo</a>
+  <details class="bar-fold" open>
+    <summary><a href="projekt.html">Projekt</a></summary>
+    <ul>
+      <li>
+        <details class="bar-fold bar-nested">
+          <summary><a href="forproduktion.html">1 Forproduktion</a></summary>
+          <ul>
+            <li><a href="forproduktion.html#spil">Tre spil</a></li>
+            <li><a href="a3.html">A3-ark</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="samarbejde.html">2 Samarbejde</a></li>
+      <li><a href="synopsis.html">3 Synopsis</a></li>
+    </ul>
+  </details>
+</nav>
+<div class="page">
+<main>
+<p class="kicker"><a href="index.html">miniGames med OOP</a> · <a href="projekt.html">projekt</a> · synopsis</p>
+<h1><a href="#top">Synopsis</a></h1>
+<p>I skal hver især skrive en synopsis over jeres spilcentral. I arbejder sammen om produktet. Synopsen skriver I alene.</p>
+<p>Den samler forproduktionen, A3-arkene, flowcharts og det, I har læst i <code>api_lib/myClasses.js</code>. Omfanget er 3–4 normalsider. Skitser, flowcharts og kodeudklip ligger i bilag og tæller ikke med.</p>
+<p class="print-hint no-print"><a href="#top" id="print-ark">Udskriv siden</a>, hvis I vil have overskrifterne ved siden af, mens I skriver.</p>
+
+<h2 id="forblad">Forblad</h2>
+<p>Titel på spilcentralen, jeres navne, hold og link til repoet.</p>
+
+<h2 id="abstract">Abstract</h2>
+<p>En kort tekst, så en udenforstående kan se, hvad centralen er, og hvad de tre spil går ud på.</p>
+
+<h2 id="problem">Problemformulering</h2>
+<p>Hvilken spilcentral I bygger, og hvordan I har afgrænset den. Her skal det kunne læses, at I laver tre minigames ud fra klasserne med bolde, at hvert spil varer 20 sekunder, at spilleren får ét point ad gangen for at ramme andre objekter, og at skallen har splash, forside, indstillinger og high score.</p>
+
+<h2 id="funktion">Funktionsbeskrivelse</h2>
+<p>Skallen og de tre spil: regler, mål og styring. Brug papirskitserne. Målet skal være så tydeligt, at den anden i parret kan se, hvornår en runde er færdig.</p>
+
+<h2 id="dokumentation">Dokumentation</h2>
+<ul>
+  <li>Klasserne, der indgår, både fra <code>api_lib</code> og dem I selv skriver. Mindst to spil deler stamklasse. Med den nye klasse og den nye metode skal det fremgå, hvordan indstillinger rammer instanserne gennem constructoren.</li>
+  <li>Flowchart for skallen og for hvert spil. I forklarer ét af dem: hvad der er proces, hvad der er valg, og hvad de to udgange fra et valg fører til.</li>
+  <li>Ét eller to kodestumper, som I kan forklare. Lige nu er det et uddrag fra <code>myClasses.js</code>, som jeres spil bruger. Når I har skrevet jeres egen klasse eller metode, skifter I uddraget ud med den.</li>
+</ul>
+
+<h2 id="bidrag">Eget bidrag</h2>
+<p>Skriv, hvilken del der er din. Den anden skriver om sin. I må beskrive det fælles, men forklaringen af koden og flowet skal være din.</p>
+
+<h2 id="test">Test</h2>
+<p>Tre afprøvninger pr. spil, skrevet ud fra målet og styringen. Hver afprøvning siger, hvad I gør, og hvad der skal ske. Når spillet kører, skriver I, om det skete.</p>
+
+<h2 id="konklusion">Konklusion</h2>
+<p>Hvad der er afgjort, og hvad I ville ændre, hvis I havde mere tid.</p>
+
+<h2 id="bilag">Bilag</h2>
+<p>Foto af A3-arkene og flowcharts. Hele koden, når den ligger i repoet.</p>
+
+<h2 id="aflevering">Aflevering</h2>
+<p>PDF. Repoet er fælles. Synopsen er personlig.</p>
+</main>
+</div>
+</div>
+<script>
+  document.getElementById('print-ark').addEventListener('click', function (e) {
+    e.preventDefault()
+    window.print()
+  })
+</script>
+</body>
+</html>
