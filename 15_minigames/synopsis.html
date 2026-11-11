@@ -91,6 +91,13 @@
     height: auto;
     display: block;
   }
+  .uml-start {
+    margin: 0 0 0.7rem;
+    font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
   .legend {
     list-style: none;
     margin: 0.9rem 0 0;
@@ -192,17 +199,13 @@
 
 <h2 id="struktur">Programstruktur og dokumentation</h2>
 
-<h3 id="klasser">Klassediagram og objektorientering</h3>
-<p>I får udleveret et delvist udfyldt klassediagram over klasserne i <code>api_lib/myClasses.js</code>.</p>
-<ul>
-  <li>Undersøg kildekoden, og færdiggør diagrammet med manglende attributter, metoder og nedarvningsforbindelser.</li>
-  <li>Tilføj jeres egne klasser med konstruktører, væsentlige attributter og metoder.</li>
-  <li>Vis med pile, hvilke klasser der nedarver fra hinanden.</li>
-</ul>
-<p>Forklar med konkrete eksempler, hvordan I bruger nedarvning til at genbruge og udvide eksisterende klasser. Vis desuden, hvordan forskellige argumenter til en constructor kan skabe instanser med forskellige egenskaber.</p>
+<h3 id="klasser">Klassediagram</h3>
+<p>Figuren viser, hvordan I kan begynde klassediagrammet.</p>
+<p>I skal selv udfylde det samlede diagram. Det skal have variabler, funktioner og nedarvning for alle klasser i <code>myClasses.js</code>, og for de klasser I selv har tilføjet.</p>
 
 <figure class="uml">
-  <svg viewBox="0 0 400 512" role="img" aria-label="Delvist UML-klassediagram for Ball, MovingBall og ShootingBall">
+  <p class="uml-start">Sådan begynder I</p>
+  <svg viewBox="0 0 400 512" role="img" aria-label="Start på klassediagrammet. Ball og MovingBall er begyndt. ShootingBall har tomme rum til variabler og funktioner.">
     <g fill="none" stroke="#111" stroke-width="1.4">
       <rect x="30" y="8" width="340" height="168"/>
       <line x1="30" y1="40" x2="370" y2="40"/>
@@ -234,16 +237,20 @@
         <text x="42" y="150">+ update()</text>
         <text x="42" y="262">+ speed</text>
         <text x="42" y="314">+ left()</text>
+        <text x="42" y="436" fill="#9a9a9a">variabler</text>
+        <text x="42" y="476" fill="#9a9a9a">funktioner</text>
       </g>
     </g>
   </svg>
   <ul class="legend">
-    <li><span class="mark mark-class" aria-hidden="true"></span><span>Klasse. Øverste rum er navnet, det midterste attributter, det nederste metoder.</span></li>
+    <li><span class="mark mark-class" aria-hidden="true"></span><span>Klasse. Øverste rum er navnet, det midterste variabler, det nederste funktioner. De grå ord viser, hvor I selv skriver.</span></li>
     <li><span class="mark mark-plus" aria-hidden="true">+</span><span>Public. Attributten eller metoden kan bruges uden for klassen.</span></li>
     <li><span class="mark mark-inherit" aria-hidden="true"><svg viewBox="0 0 16 14" width="16" height="14"><polygon points="8,1 15,13 1,13" fill="#fff" stroke="#111" stroke-width="1.4"/></svg></span><span>Nedarvning. Den hule trekant peger mod den klasse, der arves fra.</span></li>
   </ul>
 </figure>
-<p>Ikke alle klasser fra <code>myClasses.js</code> er med. De tomme rum skal udfyldes ud fra koden.</p>
+
+<h3 id="eksempler">Eksempler fra koden</h3>
+<p>Forklar med konkrete eksempler fra jeres kode, hvordan I bruger nedarvning til at genbruge og udvide eksisterende klasser. Vis, hvordan forskellige argumenter til en constructor kan skabe instanser med forskellige egenskaber.</p>
 
 <h3 id="flow">Flowcharts og programlogik</h3>
 <p>Udarbejd to flowcharts:</p>
