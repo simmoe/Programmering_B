@@ -82,9 +82,6 @@
     letter-spacing: -0.02em;
     margin: 1.8rem 0 0.75rem;
   }
-  .senere {
-    color: #b5b5b5;
-  }
   .uml {
     margin: 0.4rem 0 1.4rem;
     break-inside: avoid;
@@ -137,10 +134,18 @@
     color: var(--soft);
   }
   .print-hint a { color: inherit; }
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm;
+  }
   @media print {
-    .print-hint { display: none; }
-    .page { padding: 0 0 1rem; max-width: none; }
-    h2 { break-after: avoid; }
+    .print-hint, .bar { display: none !important; }
+    .shell { display: block; padding: 0; }
+    .page { padding: 0; max-width: none; }
+    h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+    h2, h3 { break-after: avoid; }
+    h2 { margin-top: 1.4rem; }
+    .uml, figure, ul, h2, h3 { break-inside: avoid; }
   }
 </style>
 </head>
@@ -263,9 +268,6 @@
 </ul>
 <p>Forklar kort, hvordan betingelser, løkker og hændelser styrer programmets forløb. Begrund de vigtigste valg i opbygningen.</p>
 
-<p>På søndag afleverer I til og med flowcharts, individuelt som PDF. Repository er fælles.</p>
-
-<div class="senere">
 <h3 id="kode">Kodeanalyse</h3>
 <p>Udvælg 1–2 centrale kodeuddrag fra jeres program, herunder mindst ét fra jeres egne tilføjelser til <code>myClasses.js</code>.</p>
 <p>Forklar, hvordan koden fungerer, med relevante programmeringsfaglige begreber. Inddrag eksempelvis nedarvning, metoder, parametre, betingelser eller løkker.</p>
@@ -281,7 +283,6 @@
 
 <h2 id="aflevering">Aflevering</h2>
 <p>Synopsen afleveres individuelt som PDF. GitHub-repository er fælles.</p>
-</div>
 </main>
 </div>
 </div>
