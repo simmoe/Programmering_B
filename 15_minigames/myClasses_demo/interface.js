@@ -9,6 +9,7 @@ function startDemo(){
 
     select('#page1').child(canvas)
     createMenu('.sidebar', setCanvasShiftPage)
+    select('#life').mousePressed(closeLife)
     setCanvasShiftPage('#page1')
 
     selectAll('.params').map(box => {
@@ -43,10 +44,81 @@ function setCanvasShiftPage(id){
         other.position.set(width * 0.55, height * 0.45)
     }
     select('#g-points').html(0)
-    if(id != '#page6'){
+    closeLife()
+    markMenu(id)
+    if(id == '#page2') addSub('JumpingBall', 'livscyklus', 'jump')
+    if(id == '#page7'){
+        openHop()
+        addSub('Spil eksempel', 'klasser', 'klasser')
+        addSub('Spil eksempel', 'player', 'player')
+        addSub('Spil eksempel', 'pointbolde', 'point')
+    }
+    if(id != '#page6' && id != '#page7'){
         select(id).child(canvas)
         select(id + ' .dock').child(select('#globals'))
     }
+}
+
+function markMenu(id){
+    var title = select(id).attribute('title')
+    selectAll('.sidebar a').map(a => {
+        if(a.hasClass('sub')){
+            a.remove()
+            return
+        }
+        if(a.html() == title) a.addClass('on')
+        else a.removeClass('on')
+    })
+}
+
+function addSub(parentTitle, label, sheet){
+    var anchor = null
+    selectAll('.sidebar a').map(a => {
+        if(a.hasClass('sub')){
+            if(a.attribute('data-parent') == parentTitle) anchor = a
+            return
+        }
+        if(a.html() == parentTitle) anchor = a
+    })
+    if(!anchor) return
+    var sub = createElement('a')
+    sub.html(label)
+    sub.addClass('sub')
+    sub.attribute('data-sheet', sheet)
+    sub.attribute('data-parent', parentTitle)
+    sub.mousePressed(() => openSheet(sheet))
+    anchor.elt.insertAdjacentElement('afterend', sub.elt)
+}
+
+function closeLife(){
+    var col = select('#life')
+    if(!col || !col.hasClass('open')) return
+    col.removeClass('open')
+    col.attribute('data-open', '')
+    selectAll('.sidebar a.sub').map(a => a.removeClass('on'))
+}
+
+function openSheet(name){
+    var col = select('#life')
+    if(col.hasClass('open') && col.attribute('data-open') == name){
+        closeLife()
+        selectAll('.sidebar a.sub').map(a => a.removeClass('on'))
+        return
+    }
+    selectAll('#life [data-sheet]').map(el => el.removeClass('on'))
+    selectAll('#life [data-sheet="' + name + '"]').map(el => el.addClass('on'))
+    col.attribute('data-open', name)
+    col.addClass('open')
+    selectAll('.sidebar a.sub').map(a => {
+        if(a.attribute('data-sheet') == name) a.addClass('on')
+        else a.removeClass('on')
+    })
+}
+
+function openHop(){
+    var frame = select('#hop-frame')
+    if(frame.attribute('src')) return
+    frame.attribute('src', frame.attribute('data-src'))
 }
 
 function setGlobals(){

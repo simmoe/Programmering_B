@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="site.css" />
+<link rel="stylesheet" href="api_lib/flowchart.css" />
 <style>
   :root {
     --ink: #111;
@@ -30,7 +31,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .page {
-    max-width: 46rem;
+    max-width: 72rem;
     padding: 3.5rem 0 7rem;
   }
   .kicker {
@@ -87,6 +88,9 @@
     color: inherit;
     text-underline-offset: 0.18em;
   }
+  .shell {
+    grid-template-columns: 11rem minmax(0, 72rem);
+  }
 </style>
 </head>
 <body id="top">
@@ -132,7 +136,55 @@
 <p>Sørg for at <code>15_minigames</code> ligger i dit programmerings-repo. Hele mappen skal med — den indeholder <code>api_lib</code> og virker uden resten af fællesrepoet.</p>
 
 <h2 id="demo"><span class="n">2</span> Demo side</h2>
-<p>Åbn <a href="myClasses_demo/" target="_blank" rel="noreferrer">demosiden med klassediagrammer</a> og orienter jer i de forskellige klasser og funktioner.</p>
+<p>Åbn <a href="myClasses_demo/" target="_blank" rel="noreferrer">demosiden</a>. Klasserne herunder er dem, spillene er bygget af. Hul pil betyder <code>extends</code>. <code>ShootingBall</code> ejer et array af <code>Bullet</code>.</p>
+<div class="flowchart-canvas">
+  <p class="flowchart-title">Klasser</p>
+  <div class="flowchart">classDiagram
+direction LR
+class Ball {
+  +position
+  +velocity
+  +diam
+  +update()
+  +constrain()
+  +show()
+  +hit(other)
+  +bounce(other)
+}
+class JumpingBall {
+  +jumpForce
+  +update()
+  +jump()
+}
+class SpringBall {
+  +start
+  +isFlying
+  +drag()
+  +launch()
+  +reset()
+}
+class MovingBall {
+  +speed
+  +heading
+  +forward()
+  +back()
+}
+class ShootingBall {
+  +bullets
+  +shoot()
+}
+class Bullet {
+  +isGone()
+}
+Ball <|-- JumpingBall
+Ball <|-- SpringBall
+Ball <|-- MovingBall
+Ball <|-- Bullet
+MovingBall <|-- ShootingBall
+ShootingBall "1" *-- "*" Bullet : bullets
+  </div>
+</div>
+<p>På JumpingBall-siden ligger livscyklussen for instansen <code>jump</code>.</p>
 
 <h2 id="opgaver"><span class="n">3</span> Opgaver</h2>
 <p>Find en makker og arbejd med <a href="opgaver.html">opgaverne</a>. Svarene står i <code>api_lib/myClasses.js</code> og <code>myClasses_demo/index.js</code> — ikke i demoen alene.</p>
@@ -142,5 +194,6 @@
 </main>
 </div>
 </div>
+<script src="api_lib/flowchart.js"></script>
 </body>
 </html>

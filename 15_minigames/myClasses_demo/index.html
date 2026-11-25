@@ -9,6 +9,7 @@
         integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../api_lib/myApiStyles.css">
+    <link rel="stylesheet" href="../api_lib/flowchart.css">
     <link rel="stylesheet" href="index.css">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.min.js"></script>
 </head>
@@ -16,6 +17,468 @@
 <body>
     <div id="toast"></div>
     <div class="menu-wrapper">
+        <div class="life-col" id="life">
+            <div class="flowchart-canvas" data-sheet="jump">
+                <p class="flowchart-title">jump</p>
+                <svg viewBox="0 0 360 700" role="img" aria-label="Livscyklus for instansen jump">
+                    <defs>
+                        <marker id="jump-arr" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                            <path d="M0 1.2 L9.2 5 L0 8.8 z" fill="#7b8c99"/>
+                        </marker>
+                    </defs>
+                    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+                        <rect x="70" y="8" width="160" height="42" rx="21" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="34" text-anchor="middle">new JumpingBall</text>
+                        <line x1="150" y1="50" x2="150" y2="64" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="80" y="66" width="140" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="90" text-anchor="middle">update()</text>
+                        <line x1="150" y1="104" x2="150" y2="118" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="80" y="120" width="140" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="144" text-anchor="middle">constrain()</text>
+                        <line x1="150" y1="158" x2="150" y2="176" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="150,178 216,236 150,294 84,236" fill="#fff" stroke="#7b8c99" stroke-width="1.55" stroke-linejoin="miter"/>
+                        <text x="150" y="241" text-anchor="middle">ny hit?</text>
+                        <line x1="216" y1="236" x2="236" y2="236" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="222" y="226" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="238" y="216" width="100" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="288" y="240" text-anchor="middle">hits++</text>
+                        <path d="M288 254 V349 H220" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="138" y="314" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+
+                        <rect x="80" y="330" width="140" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="354" text-anchor="middle">wasHit = hit</text>
+                        <line x1="150" y1="294" x2="150" y2="328" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <line x1="150" y1="368" x2="150" y2="382" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="80" y="384" width="140" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="408" text-anchor="middle">bounce()</text>
+                        <line x1="150" y1="422" x2="150" y2="436" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="80" y="438" width="140" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="150" y="462" text-anchor="middle">show()</text>
+                        <line x1="150" y1="476" x2="150" y2="494" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="150,496 216,554 150,612 84,554" fill="#fff" stroke="#7b8c99" stroke-width="1.55" stroke-linejoin="miter"/>
+                        <text x="150" y="559" text-anchor="middle">mellemrum?</text>
+                        <line x1="216" y1="554" x2="236" y2="554" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="222" y="544" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="238" y="534" width="100" height="38" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="288" y="558" text-anchor="middle">jump()</text>
+
+                        <path d="M150 612 V656" fill="none" stroke="#7b8c99" stroke-width="1.55"/>
+                        <path d="M288 572 V656 H24 V85 H80" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="134" y="634" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="flowchart-canvas" data-sheet="klasser">
+                <p class="flowchart-title">Spil eksempel</p>
+                <svg viewBox="0 0 640 680" role="img" aria-label="Klassediagram for Spil eksempel">
+                    <g font-family="Inter, system-ui, sans-serif" fill="#3d4c57">
+                        <rect x="190" y="8" width="260" height="336" fill="#fff" stroke="#6d7c88" stroke-width="1.35"/>
+                        <text x="320" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1c2830">Ball</text>
+                        <line x1="190" y1="46" x2="450" y2="46" stroke="#6d7c88" stroke-width="1.15"/>
+                        <g font-size="13">
+                            <text x="206" y="70">diam</text>
+                            <text x="206" y="90">velocity</text>
+                            <text x="206" y="110">position</text>
+                            <text x="206" y="130">img</text>
+                            <text x="206" y="150">col</text>
+                            <text x="206" y="170">bounds</text>
+                            <text x="206" y="190">mass</text>
+                            <text x="206" y="210">fixed</text>
+                        </g>
+                        <line x1="190" y1="226" x2="450" y2="226" stroke="#6d7c88" stroke-width="1.15"/>
+                        <g font-size="13">
+                            <text x="206" y="250">update()</text>
+                            <text x="206" y="270">show()</text>
+                            <text x="206" y="290">constrain()</text>
+                            <text x="206" y="310">hit(anotherBall)</text>
+                            <text x="206" y="330">bounce(other)</text>
+                        </g>
+
+                        <polygon points="320,344 311,362 329,362" fill="#fff" stroke="#6d7c88" stroke-width="1.35"/>
+                        <path d="M320 362 V396 H153 V412 M320 396 H487 V412" fill="none" stroke="#6d7c88" stroke-width="1.35"/>
+
+                        <rect x="28" y="412" width="250" height="132" fill="#fff" stroke="#6d7c88" stroke-width="1.35"/>
+                        <text x="153" y="436" text-anchor="middle" font-size="16" font-weight="600" fill="#1c2830">JumpingBall</text>
+                        <line x1="28" y1="450" x2="278" y2="450" stroke="#6d7c88" stroke-width="1.15"/>
+                        <text x="44" y="474" font-size="13">jumpForce</text>
+                        <line x1="28" y1="488" x2="278" y2="488" stroke="#6d7c88" stroke-width="1.15"/>
+                        <text x="44" y="512" font-size="13">update()</text>
+                        <text x="44" y="532" font-size="13">jump()</text>
+                        <line x1="153" y1="544" x2="153" y2="562" stroke="#6d7c88" stroke-width="1.15" stroke-dasharray="4 3"/>
+                        <rect x="93" y="562" width="120" height="30" fill="#fff" stroke="#6d7c88" stroke-width="1.15" stroke-dasharray="4 3"/>
+                        <text x="153" y="582" text-anchor="middle" font-size="13" fill="#3d4c57">player</text>
+
+                        <rect x="362" y="412" width="250" height="172" fill="#fff" stroke="#6d7c88" stroke-width="1.35"/>
+                        <text x="487" y="436" text-anchor="middle" font-size="16" font-weight="600" fill="#1c2830">Target</text>
+                        <line x1="362" y1="450" x2="612" y2="450" stroke="#6d7c88" stroke-width="1.15"/>
+                        <text x="378" y="474" font-size="13">worth</text>
+                        <text x="378" y="494" font-size="13">taken</text>
+                        <line x1="362" y1="508" x2="612" y2="508" stroke="#6d7c88" stroke-width="1.15"/>
+                        <text x="378" y="532" font-size="13">take()</text>
+                        <text x="378" y="552" font-size="13">place(x, y)</text>
+                        <text x="378" y="572" font-size="13">show()</text>
+                        <line x1="487" y1="584" x2="487" y2="602" stroke="#6d7c88" stroke-width="1.15" stroke-dasharray="4 3"/>
+                        <rect x="417" y="602" width="140" height="30" fill="#fff" stroke="#6d7c88" stroke-width="1.15" stroke-dasharray="4 3"/>
+                        <text x="487" y="622" text-anchor="middle" font-size="13" fill="#3d4c57">pointbolde</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="flowchart-canvas" data-sheet="player">
+                <p class="flowchart-title">player</p>
+                <svg viewBox="0 0 440 820" role="img" aria-label="Livscyklus for player i Spil eksempel">
+                    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+                        <rect x="55" y="8" width="170" height="38" rx="19" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="32" text-anchor="middle">new JumpingBall</text>
+                        <line x1="140" y1="46" x2="140" y2="58" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="140,60 206,116 140,172 74,116" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="120" text-anchor="middle">hop?</text>
+                        <line x1="206" y1="116" x2="228" y2="116" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="212" y="106" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="230" y="98" width="88" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="274" y="121" text-anchor="middle">jump()</text>
+                        <path d="M274 134 V188 H140" fill="none" stroke="#7b8c99" stroke-width="1.55"/>
+                        <line x1="140" y1="172" x2="140" y2="188" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="128" y="186" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+                        <line x1="140" y1="188" x2="140" y2="204" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="140,206 206,262 140,318 74,262" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="266" text-anchor="middle">venstre?</text>
+                        <line x1="206" y1="262" x2="220" y2="262" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="210" y="252" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="222" y="244" width="176" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="310" y="267" text-anchor="middle">velocity.x = -glide</text>
+
+                        <polygon points="140,336 206,392 140,448 74,392" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="396" text-anchor="middle">højre?</text>
+                        <line x1="140" y1="318" x2="140" y2="334" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="128" y="332" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+                        <line x1="206" y1="392" x2="220" y2="392" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="210" y="382" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="222" y="374" width="168" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="306" y="397" text-anchor="middle">velocity.x = glide</text>
+
+                        <rect x="40" y="466" width="200" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="489" text-anchor="middle">velocity.x *= 0.8</text>
+                        <line x1="140" y1="448" x2="140" y2="464" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="128" y="462" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+
+                        <rect x="55" y="528" width="170" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="551" text-anchor="middle">update()</text>
+                        <line x1="140" y1="502" x2="140" y2="526" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <path d="M398 262 H420 V546 H225" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <path d="M390 392 H420" fill="none" stroke="#7b8c99" stroke-width="1.55"/>
+                        <line x1="140" y1="564" x2="140" y2="578" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="55" y="580" width="170" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="603" text-anchor="middle">constrain()</text>
+                        <line x1="140" y1="616" x2="140" y2="630" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="40" y="632" width="200" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="655" text-anchor="middle">hitTargets(player)</text>
+                        <line x1="140" y1="668" x2="140" y2="682" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="55" y="684" width="170" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="140" y="707" text-anchor="middle">show()</text>
+                        <path d="M140 720 V760 H28 V116 H74" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="flowchart-canvas" data-sheet="point">
+                <p class="flowchart-title">pointbolde</p>
+                <svg viewBox="0 0 520 680" role="img" aria-label="Livscyklus for en pointbold i Hop">
+                    <g font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="400" fill="#4a5a66">
+                        <rect x="40" y="8" width="160" height="40" rx="20" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="120" y="33" text-anchor="middle">new Target</text>
+                        <line x1="120" y1="48" x2="120" y2="62" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="50" y="64" width="140" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="120" y="87" text-anchor="middle">update()</text>
+                        <line x1="120" y1="100" x2="120" y2="114" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <rect x="50" y="116" width="140" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="120" y="139" text-anchor="middle">constrain()</text>
+                        <line x1="120" y1="152" x2="120" y2="168" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="120,170 186,226 120,282 54,226" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="120" y="231" text-anchor="middle">hit?</text>
+                        <line x1="186" y1="226" x2="214" y2="226" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="192" y="216" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="216" y="208" width="100" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="266" y="231" text-anchor="middle">take()</text>
+                        <line x1="266" y1="244" x2="266" y2="262" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <polygon points="266,264 326,316 266,368 206,316" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="266" y="321" text-anchor="middle">n?</text>
+                        <line x1="326" y1="316" x2="348" y2="316" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="332" y="306" font-size="12" fill="#8a9aa8">ja</text>
+                        <rect x="350" y="298" width="150" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="425" y="321" text-anchor="middle">score += n</text>
+                        <line x1="425" y1="334" x2="425" y2="348" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <rect x="365" y="350" width="120" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="425" y="373" text-anchor="middle">place(x, y)</text>
+
+                        <rect x="50" y="430" width="140" height="36" fill="#fff" stroke="#7b8c99" stroke-width="1.55"/>
+                        <text x="120" y="453" text-anchor="middle">show()</text>
+                        <path d="M120 282 V428" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="108" y="300" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+                        <path d="M266 368 V448 H190" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                        <text x="254" y="390" text-anchor="end" font-size="12" fill="#8a9aa8">nej</text>
+                        <path d="M425 386 V448 H190" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+
+                        <path d="M120 466 V520 H24 V82 H50" fill="none" stroke="#7b8c99" stroke-width="1.55" marker-end="url(#jump-arr)"/>
+                    </g>
+                </svg>
+            </div>
+            <aside class="code-col" data-sheet="klasser">
+                <pre><code><span class="cm">// api_lib/myClasses.js</span>
+<span class="cm">// Ball er kassen øverst. Felterne i diagrammet sættes i constructoren.</span>
+class Ball {
+  constructor(x, y, r, img, col, xSpeed, ySpeed, bounds){ 
+    this.diam = r
+    this.velocity = createVector(xSpeed || 0, ySpeed || 0)
+    this.position = createVector(x, y)
+    this.img = null
+    this.col = null
+    if(typeof img === 'string'){
+      this.col = img
+    } else if(img){
+      this.img = img
+    }
+    if(col) this.col = col
+    this.bounds = bounds || [false, false, false, false]
+    this.mass = this.diam
+    this.fixed = false
+  }
+  <span class="cm">// update() lægger velocity oven i position</span>
+  update(){
+    this.position.add(this.velocity)
+  }
+  show(){
+    if(this.img){
+      imageMode(CENTER)
+      image(this.img, this.position.x, this.position.y, this.diam, this.diam)
+    }else if(this.col){
+      noStroke()
+      fill(this.col)
+      circle(this.position.x, this.position.y, this.diam)
+    }
+  }
+  <span class="cm">// constrain() vender farten, når bolden rammer en væg der er slået til</span>
+  constrain(){
+    var r = this.diam / 2
+    var b = this.bounds
+    if(b[0] &amp;&amp; this.position.x &lt; r){
+      this.position.x = r
+      this.velocity.x *= -1
+    }
+    if(b[1] &amp;&amp; this.position.x &gt; width - r){
+      this.position.x = width - r
+      this.velocity.x *= -1
+    }
+    if(b[2] &amp;&amp; this.position.y &lt; r){
+      this.position.y = r
+      this.velocity.y *= -1
+    }
+    if(b[3] &amp;&amp; this.position.y &gt; height - r){
+      this.position.y = height - r
+      this.velocity.y *= -1
+    }
+  }
+  <span class="cm">// hit? er sand, når afstanden er mindre end de to radier lagt sammen</span>
+  hit(anotherBall){
+    var b = anotherBall
+    var totalR = (this.diam + b.diam) / 2
+    var d = dist(this.position.x, this.position.y, b.position.x, b.position.y)
+    return d &lt;= totalR
+  }
+}
+
+<span class="cm">// Hul pil: JumpingBall extends Ball. player i Hop er en af de her.</span>
+class JumpingBall extends Ball{
+  constructor(x, y, r, img, jump, col, bounds){
+    super(x, y, r, img, col, 0, 0, bounds || [false, false, false, true])
+    this.jumpForce = jump
+  }
+  <span class="cm">// først tyngde og friktion, så Balls update som flytter positionen</span>
+  update(){
+    this.velocity.add(gravity)
+    this.velocity.y *= friction
+    super.update()
+  }
+  <span class="cm">// hop? ja. Trækker jumpForce fra velocity.y</span>
+  jump(){
+    this.velocity.y -= this.jumpForce
+  }
+}
+
+<span class="cm">// minigame_helper/klasser.js</span>
+<span class="cm">// Hul pil igen: Target extends Ball. Det er pointboldene.</span>
+class Target extends Ball {
+  constructor(x, y, r, img, col, xSpeed, ySpeed, bounds, worth) {
+    super(x, y, r, img, col, xSpeed, ySpeed, bounds)
+    this.worth = worth
+    this.taken = false
+  }
+
+  <span class="cm">// n i flowchartet. 0 hvis den allerede er taget, ellers worth</span>
+  take() {
+    if (this.taken) return 0
+    this.taken = true
+    return this.worth
+  }
+
+  <span class="cm">// place(x, y) flytter den og gør den klar til at blive ramt igen</span>
+  place(x, y) {
+    this.position.set(x, y)
+    this.taken = false
+  }
+
+  show() {
+    if (this.taken) return
+    super.show()
+    fill(0)
+    noStroke()
+    textAlign(CENTER, CENTER)
+    textSize(this.diam * 0.28)
+    text(this.worth, this.position.x, this.position.y)
+  }
+}</code></pre>
+            </aside>
+            <aside class="code-col" data-sheet="player">
+                <pre><code><span class="cm">// minigame_helper/index.js — startGame</span>
+<span class="cm">// new JumpingBall. De fire true er vægge: venstre, højre, top, bund.</span>
+        if (kind == 'hop') {
+            player = new JumpingBall(width / 2, height - 40, 70, null, t.jump, settings.color, [true, true, true, true])
+        }
+
+<span class="cm">// Én frame. hop? er ikke herinde — den sker i keyPressed og mousePressed, før næste frame.</span>
+function runHop() {
+    var glide = tuning().speed * 2.1
+    <span class="cm">// venstre? ja</span>
+    if (keyIsDown(LEFT_ARROW)) player.velocity.x = -glide
+    <span class="cm">// højre? ja. else if, så de to ikke kan ske samtidig</span>
+    else if (keyIsDown(RIGHT_ARROW)) player.velocity.x = glide
+    <span class="cm">// nej til begge: dæmp farten</span>
+    else player.velocity.x *= 0.8
+    noStroke()
+    fill(255, 28)
+    rect(0, height - 14, width, 14)
+    <span class="cm">// JumpingBall.update: tyngde, friktion, så flyt</span>
+    player.update()
+    player.constrain()
+    <span class="cm">// pointboldene kører her. Se det ark.</span>
+    hitTargets(player)
+    player.show()
+}
+
+<span class="cm">// hop? ja, når der trykkes mellemrum</span>
+function keyPressed() {
+    if (currentPage == '#spil' &amp;&amp; game == 'hop' &amp;&amp; key == ' ') player.jump()
+    if (key == ' ' || keyCode == LEFT_ARROW || keyCode == RIGHT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW) return false
+}
+
+<span class="cm">// hop? ja, når der klikkes på banen</span>
+function mousePressed() {
+    if (millis() &lt; skipPointer) return
+    if (currentPage != '#spil' || mouseY &lt; 72) return
+    if (game == 'hop') player.jump()
+    if (game == 'skyd') player.shoot()
+}
+
+<span class="cm">// api_lib/myClasses.js — det de to kald rammer</span>
+  update(){
+    this.velocity.add(gravity)
+    this.velocity.y *= friction
+    super.update()
+  }
+  jump(){
+    this.velocity.y -= this.jumpForce
+  }</code></pre>
+            </aside>
+            <aside class="code-col" data-sheet="point">
+                <pre><code><span class="cm">// minigame_helper/index.js — makeTargets</span>
+<span class="cm">// new Target. I Hop er kun venstre og højre væg slået til, og ySpeed er 0.</span>
+        if (game == 'hop') {
+            bounds = [true, true, false, false]
+            x = random(80, width - 80)
+            y = hopY(i / 3)
+        }
+        targets.push(new Target(
+            x, y,
+            Math.max(30, size),
+            null,
+            ['#ffd700', '#87ceeb', '#dda0dd', '#ffa07a'][i],
+            xSpeed,
+            0,
+            bounds,
+            worth
+        ))
+
+<span class="cm">// Kaldt fra runHop som hitTargets(player). hitter er player.</span>
+function hitTargets(hitter, after) {
+    targets.map(function(t) {
+        t.update()
+        t.constrain()
+        <span class="cm">// hit? player.hit(t)</span>
+        if (hitter.hit(t)) {
+            var n = t.take()
+            <span class="cm">// n? take() gav worth. 0 betyder allerede taget, så vi springer over</span>
+            if (n) {
+                scorePoint(n)
+                recycle(t)
+                if (after) after()
+            }
+        }
+        t.show()
+    })
+}
+
+<span class="cm">// score += n</span>
+function scorePoint(n) {
+    score += n
+    select('#hud-score').html(score)
+    blip()
+}
+
+<span class="cm">// place(x, y) med en ny højde fra hopY</span>
+function recycle(t) {
+    if (game == 'hop') {
+        t.place(random(80, width - 80), hopY(random()))
+        return
+    }
+    t.place(random(width * 0.4, width - 80), random(80, height * 0.55))
+}
+
+<span class="cm">// minigame_helper/klasser.js — metoderne kaldene rammer</span>
+  take() {
+    if (this.taken) return 0
+    this.taken = true
+    return this.worth
+  }
+
+  place(x, y) {
+    this.position.set(x, y)
+    this.taken = false
+  }
+
+  show() {
+    if (this.taken) return
+    super.show()
+    fill(0)
+    noStroke()
+    textAlign(CENTER, CENTER)
+    textSize(this.diam * 0.28)
+    text(this.worth, this.position.x, this.position.y)
+  }</code></pre>
+            </aside>
+        </div>
         <div class="burger-icon">≡</div>
         <div class="sidebar">
         </div>
@@ -294,6 +757,10 @@
                     <button id="saveDemo">Gem</button>
                 </aside>
             </div>
+        </div>
+
+        <div class="page" id="page7" title="Spil eksempel">
+            <iframe id="hop-frame" class="game-frame" data-src="../../minigame_helper/index.html?spil=hop" title="Spil eksempel"></iframe>
         </div>
 
     </main>

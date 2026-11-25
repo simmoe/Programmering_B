@@ -46,6 +46,7 @@ canvas {
 
 .sidebar {
     position: relative;
+    z-index: 2;
     left: -100%;
     top: 0;
     width: 16rem;
@@ -71,6 +72,15 @@ canvas {
 }
 
 .sidebar a:hover {
+    opacity: 1;
+}
+
+.sidebar a.sub {
+    margin: -0.15rem 0 0.45rem 1.15rem;
+    font-size: 1.15rem;
+}
+
+.sidebar a.on {
     opacity: 1;
 }
 
@@ -160,6 +170,92 @@ canvas {
     display: grid;
     justify-items: stretch;
     align-content: start;
+}
+
+.life-col {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100%;
+    background: #111;
+    transform: translateX(calc(-100% + 16rem));
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
+.life-col.open {
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.life-col .flowchart-canvas {
+    display: none;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.life-col .flowchart-canvas.on {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 16rem;
+    width: min(44rem, 46vw);
+    height: 100%;
+    overflow: auto;
+}
+
+.code-col {
+    display: none;
+    color: #ececec;
+}
+
+.life-col .code-col.on {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: calc(16rem + min(44rem, 46vw));
+    width: calc(100vw - 16rem - min(44rem, 46vw));
+    height: 100%;
+    overflow: auto;
+    background: #111;
+}
+
+.code-col,
+.code-col * {
+    font-family: ui-monospace, "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+.code-col pre,
+.code-col code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    margin: 0;
+    padding: 1.6rem 1.8rem 3rem;
+    background: #111;
+    border: 0;
+    border-radius: 0;
+    color: #ececec;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre;
+    box-shadow: none;
+}
+
+.code-col .kw { color: #c792ea; }
+.code-col .str { color: #c3e88d; }
+.code-col .cm { color: #8aa0b4; }
+
+.game-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #111;
 }
 
 .panel {

@@ -56,7 +56,13 @@ function setup() {
         fb.listen(showScores, 50, 'points')
     }
     currentPage = '#splash'
-    armSplash()
+    var auto = new URLSearchParams(location.search).get('spil')
+    if(auto == 'hop' || auto == 'skyd' || auto == 'traek'){
+        splashToken = 0
+        startGame(auto)
+    }else{
+        armSplash()
+    }
 }
 
 function draw() {
